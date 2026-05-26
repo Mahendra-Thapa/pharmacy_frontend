@@ -37,7 +37,7 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
-        <Card className="rounded-[3rem] border-transparent shadow-xl xl:col-span-2 overflow-hidden bg-white">
+        <Card className="rounded-xl border-transparent shadow-xl xl:col-span-2 overflow-hidden bg-white">
           <CardHeader className="p-10 pb-6">
             <CardTitle className="text-xl font-black text-slate-900 tracking-tight italic">Revenue Graph</CardTitle>
             <CardDescription className="text-[10px] font-black uppercase tracking-widest text-slate-400">Monthly Performance Overview</CardDescription>
@@ -62,7 +62,7 @@ export default function AdminDashboard() {
         </Card>
 
         <div className="space-y-8">
-          <Card className="rounded-[3rem] bg-slate-950 border-transparent shadow-2xl text-white p-10 relative overflow-hidden group">
+          <Card className="rounded-xl bg-slate-950 border-transparent shadow-2xl text-white p-10 relative overflow-hidden group">
             <div className="relative z-10">
                <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
                   <Package size={24} className="text-pharma-blue" />
@@ -77,7 +77,7 @@ export default function AdminDashboard() {
             </div>
           </Card>
 
-          <Card className="rounded-[3rem] border-transparent shadow-xl p-10 bg-white">
+          <Card className="rounded-xl border-transparent shadow-xl p-10 bg-white">
             <h3 className="font-black text-slate-900 tracking-tight mb-8 flex items-center gap-2 italic">
                <CreditCard size={18} className="text-indigo-500" /> Recent Activity
             </h3>
@@ -113,7 +113,7 @@ function KPIItem({ title, value, icon: Icon, color }: any) {
   };
 
   return (
-    <Card className="rounded-[2.5rem] border-transparent shadow-lg p-8 flex items-center gap-6 bg-white group hover:shadow-2xl transition-all">
+    <Card className="rounded-xl border-transparent shadow-lg p-8 flex items-center gap-6 bg-white group hover:shadow-2xl transition-all">
       <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${colorMap[color] || 'bg-slate-50'}`}>
         <Icon size={24} />
       </div>

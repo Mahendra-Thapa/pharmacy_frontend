@@ -78,7 +78,7 @@ export default function UsersManagementPage() {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
-       <Card className="rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden bg-white">
+       <Card className="rounded-xl shadow-2xl border border-slate-100 overflow-hidden bg-white">
           <div className="p-10 bg-slate-50/50 border-b border-white flex flex-wrap justify-between items-center gap-6">
             <div className="flex items-center gap-4">
                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">

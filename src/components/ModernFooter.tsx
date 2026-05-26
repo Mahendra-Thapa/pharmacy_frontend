@@ -18,13 +18,13 @@ export function ModernFooter() {
             <div className="flex items-center gap-3">
                <img src="/logo.png" alt="Pharmalogic" className="h-16 w-auto object-contain drop-shadow-sm brightness-200 contrast-100" style={{filter: 'brightness(0) invert(1)'}} />
             </div>
-            <p className="text-slate-400 text-sm leading-relaxed max-w-xs font-medium">
+            <p className="text-white text-sm leading-relaxed max-w-xs font-medium">
               Revolutionizing health security through precision pharmaceuticals and machine learning diagnostics. 
               Certified by global standards for your health assurance.
             </p>
             <div className="flex gap-4">
               {[FaInstagram, FaTwitter, FaFacebookF].map((Icon, i) => (
-                <div key={i} className="p-3 bg-slate-800 text-slate-400 hover:bg-pharma-blue hover:text-white rounded-2xl transition cursor-pointer shadow-lg active:scale-90">
+                <div key={i} className="p-3 bg-slate-800 text-white/80 hover:bg-pharma-blue hover:text-white rounded-2xl transition cursor-pointer shadow-lg active:scale-90">
                   <Icon size={18} />
                 </div>
               ))}
@@ -39,7 +39,7 @@ export function ModernFooter() {
             <ul className="space-y-4">
                {['Emergency 24/7', 'Health Checkups', 'Home Delivery', 'Consultation'].map((link) => (
                  <li key={link}>
-                    <a href="#" className="text-slate-400 hover:text-pharma-orange text-sm font-bold transition group/link flex items-center gap-2">
+                    <a href="#" className="text-white/80 hover:text-pharma-orange text-sm font-bold transition group/link flex items-center gap-2">
                        <div className="w-0 group-hover/link:w-2 h-0.5 bg-pharma-orange transition-all rounded-full opacity-0 group-hover/link:opacity-100"></div>
                        {link}
                     </a>
@@ -56,7 +56,7 @@ export function ModernFooter() {
             <ul className="space-y-4">
                {['Help Center', 'Track Order', 'Return Policy', 'Safety Portal'].map((link) => (
                  <li key={link}>
-                    <a href="#" className="text-slate-400 hover:text-pharma-orange text-sm font-bold transition group/link flex items-center gap-2">
+                    <a href="#" className="text-white/80 hover:text-pharma-orange text-sm font-bold transition group/link flex items-center gap-2">
                        <div className="w-0 group-hover/link:w-2 h-0.5 bg-pharma-orange transition-all rounded-full opacity-0 group-hover/link:opacity-100"></div>
                        {link}
                     </a>
@@ -104,24 +104,24 @@ export function ModernFooter() {
 
         {/* Footer Bottom */}
         <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-slate-500 text-xs font-bold uppercase tracking-widest">
-               © 2026 Pharmalogic Systems INC. All Rights Reserved.
+            <p className="text-white/80 text-xs font-bold uppercase tracking-widest">
+               © {new Date().getFullYear()} Pharmalogic Systems INC. All Rights Reserved.
             </p>
             
             <div className="flex items-center gap-8">
                 <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/5 rounded-2xl">
                    <ShieldCheck size={16} className="text-pharma-green" />
-                   <span className="text-slate-400 text-[10px] font-black uppercase tracking-widest">Secured Payment Gateway</span>
+                   <span className="text-white/80 text-[10px] font-black uppercase tracking-widest">Secured Payment Gateway</span>
                 </div>
                  <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/5 rounded-2xl">
                    <Heart size={16} className="text-rose-500 fill-rose-500/20" />
-                   <span className="text-slate-400 text-[10px] font-black uppercase tracking-widest">Patient Focus First</span>
+                   <span className="text-white/80 text-[10px] font-black uppercase tracking-widest">Patient Focus First</span>
                 </div>
             </div>
             
             <div className="flex gap-6">
-               <a href="#" className="text-slate-500 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition">Privacy</a>
-               <a href="#" className="text-slate-500 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition">Terms</a>
+               <a href="#" className="text-white/80 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition">Privacy</a>
+               <a href="#" className="text-white/80 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition">Terms</a>
             </div>
         </div>
       </div>

@@ -96,7 +96,7 @@ export default function CategoriesPage() {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
-       <Card className="rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden bg-white">
+       <Card className="rounded-xl shadow-2xl border border-slate-100 overflow-hidden bg-white">
           <div className="p-10 bg-slate-50/50 border-b border-white flex flex-wrap justify-between items-center gap-6">
             <div className="flex items-center gap-4">
                <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
@@ -118,7 +118,7 @@ export default function CategoriesPage() {
                     onChange={(e) => { setSearch(e.target.value); setPage(1); }}
                   />
                </div>
-               <Button onClick={openAdd} className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-2xl h-11 px-8 text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+               <Button onClick={openAdd} className="bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl h-11 px-8 text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
                   <PlusCircle size={14} /> Add Category
                </Button>
             </div>

@@ -149,7 +149,7 @@ export default function CategoryPage() {
             ))}
           </div>
         ) : error ? (
-          <div className="py-24 flex flex-col items-center justify-center bg-white rounded-[4rem] border border-rose-100 shadow-2xl shadow-rose-500/5">
+          <div className="py-24 flex flex-col items-center justify-center bg-white rounded-xl border border-rose-100 shadow-2xl shadow-rose-500/5">
              <div className="w-24 h-24 bg-rose-50 rounded-[2rem] flex items-center justify-center mb-8 text-rose-500">
                 <AlertCircle size={40} />
              </div>
@@ -193,7 +193,7 @@ export default function CategoryPage() {
              ))}
           </motion.div>
         ) : (
-          <div className="py-32 flex flex-col items-center justify-center bg-white rounded-[4rem] border border-slate-100 shadow-sm relative overflow-hidden group">
+          <div className="py-32 flex flex-col items-center justify-center bg-white rounded-xl border border-slate-100 shadow-sm relative overflow-hidden group">
              <div className="absolute top-0 right-0 w-64 h-64 bg-slate-50 rounded-full blur-3xl group-hover:bg-pharma-blue/5 transition duration-1000"></div>
              <div className="w-24 h-24 bg-slate-50 rounded-[2rem] flex items-center justify-center mb-8 relative z-10">
                 <LayoutGrid size={40} className="text-slate-200" />

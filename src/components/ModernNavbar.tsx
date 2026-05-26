@@ -78,7 +78,7 @@ export function ModernNavbar({
 
         {/* Brand/Logo */}
         <Link href="/" className="flex items-center gap-2 group shrink-0">
-          <div className="relative w-32  overflow-hidden  flex items-center justify-center   group-hover:rotate-6 transition-transform duration-500">
+          <div className="relative w-32  overflow-hidden  flex items-center justify-center  ">
              <Image src="/logo.png" alt="Logo" width={50} height={50} className="object-cover w-32" />
           </div>
           {/* <div className="flex flex-col">
@@ -95,19 +95,13 @@ export function ModernNavbar({
 
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center gap-6 shrink-0">
-            <Link href="/chat" className="flex flex-col items-center gap-1.5 text-slate-400 hover:text-pharma-green transition-all group">
-               <div className="p-2.5 bg-slate-50 rounded-xl group-hover:bg-pharma-green/10 group-active:scale-90 transition-all">
-                  <Bot size={20} className="group-hover:text-pharma-green transition-colors" />
-               </div>
-               <span className="text-[9px] font-black uppercase tracking-widest">AI Core</span>
-            </Link>
-
+{/* 
             <Link href="/offers" className="flex flex-col items-center gap-1.5 text-slate-400 hover:text-pharma-orange transition-all group">
                <div className="p-2.5 bg-slate-50 rounded-xl group-hover:bg-pharma-orange/10 group-active:scale-90 transition-all">
                   <Percent size={20} className="group-hover:text-pharma-orange transition-colors" />
                </div>
                <span className="text-[9px] font-black uppercase tracking-widest">Offers</span>
-            </Link>
+            </Link> */}
 
             <Link href="/cart" className="relative group flex flex-col items-center gap-1.5 text-slate-400 hover:text-pharma-blue transition-all">
                <div className="p-2.5 bg-slate-50 rounded-xl group-hover:bg-pharma-blue/10 group-active:scale-90 transition-all">

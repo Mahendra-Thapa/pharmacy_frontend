@@ -236,13 +236,13 @@ export default function POSPage() {
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
-          className="bg-white/5 backdrop-blur-3xl border border-white/10 p-12 rounded-[40px] shadow-2xl w-full max-w-md relative z-10"
+          className="bg-white/5 backdrop-blur-2xl border border-white/10 p-12 rounded-[40px] shadow-2xl w-full max-w-md relative z-10"
         >
           <div className="text-center mb-10">
-            <div className="inline-flex p-5 bg-pharma-green text-white rounded-3xl shadow-2xl shadow-pharma-green/20 mb-6">
+            <div className="inline-flex p-5 bg-pharma-green text-white rounded-2xl shadow-2xl shadow-pharma-green/20 mb-6">
               <QrCode size={40} className="stroke-[2.5px]" />
             </div>
-            <h1 className="text-3xl font-black text-white tracking-widest uppercase mb-1">
+            <h1 className="text-2xl font-black text-white tracking-widest uppercase mb-1">
               POS Terminal
             </h1>
             <p className="text-pharma-blue/60 text-xs font-bold uppercase tracking-widest px-8">
@@ -281,7 +281,7 @@ export default function POSPage() {
             </div>
             <button
               type="submit"
-              className="w-full h-14 bg-pharma-green hover:bg-pharma-green/90 text-white font-black uppercase tracking-widest rounded-3xl transition-all duration-500 shadow-2xl shadow-pharma-green/20 active:scale-95 flex items-center justify-center gap-3"
+              className="w-full h-14 bg-pharma-green hover:bg-pharma-green/90 text-white font-black uppercase tracking-widest rounded-2xl transition-all duration-500 shadow-2xl shadow-pharma-green/20 active:scale-95 flex items-center justify-center gap-3"
             >
               Unlock Terminal <Activity size={18} />
             </button>
@@ -434,7 +434,7 @@ export default function POSPage() {
 
         {/* Agent Settings Dialog */}
         <Dialog open={showSettings} onOpenChange={(o) => { setShowSettings(o); if (!o) setAgentPass({ current: "", new: "", confirm: "" }); }}>
-          <DialogContent className="sm:max-w-md rounded-[2.5rem] p-0 border-none shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] overflow-hidden bg-white">
+          <DialogContent className="sm:max-w-md rounded-xl p-0 border-none shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] overflow-hidden bg-white">
             {/* Header */}
             <div className="p-8 bg-slate-950 text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-green/10 blur-3xl rounded-full" />
@@ -533,12 +533,12 @@ export default function POSPage() {
               <input
                 type="text"
                 placeholder="Search inventory or scan barcode..."
-                className="w-full pl-12 pr-6 py-4 bg-white border border-slate-200 rounded-3xl outline-none focus:border-pharma-blue/20 focus:ring-4 focus:ring-pharma-blue/5 transition shadow-sm text-sm font-medium"
+                className="w-full pl-12 pr-6 py-4 bg-white border border-slate-200 rounded-2xl outline-none focus:border-pharma-blue/20 focus:ring-4 focus:ring-pharma-blue/5 transition shadow-sm text-sm font-medium"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="bg-white border border-slate-200 px-6 py-4 rounded-3xl shadow-sm flex items-center gap-3">
+            <div className="bg-white border border-slate-200 px-6 py-4 rounded-2xl shadow-sm flex items-center gap-3">
               <div className="w-2 h-2 rounded-full bg-pharma-green animate-pulse"></div>
               <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
                 Database: {inventory.length} SKUs
@@ -581,7 +581,7 @@ export default function POSPage() {
 
                 {/* Content Section */}
                 <div className="p-6 flex flex-col justify-between flex-1 relative z-10">
-                  <div className="absolute top-0 right-0 p-8 bg-pharma-green/5 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+                  <div className="absolute top-0 right-0 p-8 bg-pharma-green/5 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
                   
                   <div>
                     <h3 className="font-black text-slate-900 group-hover:text-pharma-green transition tracking-tight text-lg leading-tight mb-2">
@@ -614,7 +614,7 @@ export default function POSPage() {
 
         {/* Right Panel: Cart & Checkout */}
         <section className="flex-[1.2] flex flex-col gap-6 h-full lg:h-full relative min-h-[500px]  ">
-          <div className="bg-white/80 backdrop-blur-3xl border border-slate-200 rounded-[40px] shadow-2xl flex flex-col h-full overflow-hidden relative overflow-y-scroll sidebar-thin">
+          <div className="bg-white/80 backdrop-blur-2xl border border-slate-200 rounded-[40px] shadow-2xl flex flex-col h-full overflow-hidden relative overflow-y-scroll sidebar-thin">
             <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50">
               <div>
                 <h2 className="font-black text-slate-950 text-2xl tracking-tighter">
@@ -656,7 +656,7 @@ export default function POSPage() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, scale: 0.9 }}
-                    className="flex items-center gap-4 p-4 bg-white rounded-3xl border border-slate-200 hover:border-pharma-blue/40 transition duration-300 shadow-sm"
+                    className="flex items-center gap-4 p-4 bg-white rounded-2xl border border-slate-200 hover:border-pharma-blue/40 transition duration-300 shadow-sm"
                   >
                     <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center border border-slate-100 overflow-hidden relative shrink-0">
                       {item.med.image_url ? (
@@ -824,7 +824,7 @@ export default function POSPage() {
                 <span className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">
                   Net Total
                 </span>
-                <span className="text-3xl font-black text-pharma-green tracking-tighter">
+                <span className="text-2xl font-black text-pharma-green tracking-tighter">
                   <span className="text-pharma-green/70 text-lg mr-1 serif">
                     Rs.
                   </span>
@@ -868,8 +868,8 @@ export default function POSPage() {
                     className="overflow-hidden"
                   >
                     <div className="bg-slate-950 text-white p-6 rounded-[32px] flex flex-col items-center text-center gap-4 relative overflow-hidden group">
-                      <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-green/20 blur-3xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-                      <div className="bg-white p-3 rounded-3xl shadow-2xl relative z-10 w-44 h-44 flex items-center justify-center">
+                      <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-green/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
+                      <div className="bg-white p-3 rounded-2xl shadow-2xl relative z-10 w-44 h-44 flex items-center justify-center">
                         {pharmacySettings?.qr_code_url ? (
                            <Image src={pharmacySettings.qr_code_url} alt="Payment QR" fill className="object-contain p-2" />
                         ) : (
@@ -1029,7 +1029,7 @@ export default function POSPage() {
                           Rs.{parseFloat(receiptData.total_amount).toFixed(2)}
                         </span>
                       </div>
-                      <div className="p-4 bg-slate-950 text-white rounded-3xl flex items-center justify-center gap-3">
+                      <div className="p-4 bg-slate-950 text-white rounded-2xl flex items-center justify-center gap-3">
                         <CheckCircle className="text-pharma-green" size={20} />
                         <span className="font-black text-xs uppercase tracking-widest text-pharma-green">
                           Financial Log Committed

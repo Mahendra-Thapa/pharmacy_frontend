@@ -33,7 +33,7 @@ export default function QRManagerPage() {
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
        <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
-          <Card className="rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden bg-white p-12 flex flex-col items-center justify-center text-center relative">
+          <Card className="rounded-xl shadow-2xl border border-slate-100 overflow-hidden bg-white p-12 flex flex-col items-center justify-center text-center relative">
              <div className="absolute top-0 right-0 w-64 h-64 bg-pharma-blue/5 blur-[80px] rounded-full"></div>
              
              <div className="w-20 h-20 bg-slate-900 rounded-3xl flex items-center justify-center mb-10 shadow-2xl relative z-10">

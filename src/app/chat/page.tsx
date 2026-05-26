@@ -359,7 +359,7 @@ export default function ChatTerminalPage() {
                   className="relative"
                 >
                    <div className="absolute inset-0 bg-pharma-green/10 blur-[80px] animate-pulse rounded-full" />
-                   <div className="w-32 h-32 bg-slate-950 rounded-[3.5rem] flex items-center justify-center shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] relative z-10 border-[6px] border-white ring-1 ring-slate-100">
+                   <div className="w-32 h-32 bg-slate-950 rounded-xl flex items-center justify-center shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] relative z-10 border-[6px] border-white ring-1 ring-slate-100">
                      <Cpu size={64} className="text-pharma-green" />
                    </div>
                    <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-pharma-green rounded-3xl flex items-center justify-center text-white border-4 border-white shadow-xl z-20">

@@ -91,7 +91,7 @@ export default function SettingsPage() {
        </div>
 
        {/* Pharmacy Settings */}
-       <Card className="rounded-[4rem] shadow-3xl border border-slate-100 overflow-hidden bg-white/80 backdrop-blur-3xl p-12 relative">
+       <Card className="rounded-xl shadow-3xl border border-slate-100 overflow-hidden bg-white/80 backdrop-blur-3xl p-12 relative">
           <div className="absolute top-0 right-0 w-64 h-64 bg-pharma-blue/5 blur-[100px] rounded-full"></div>
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-10 relative z-10">
              <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -142,7 +142,7 @@ export default function SettingsPage() {
        </Card>
 
        {/* Change Password Card */}
-       <Card className="rounded-[4rem] shadow-3xl border border-slate-100 overflow-hidden bg-white p-0">
+       <Card className="rounded-xl shadow-3xl border border-slate-100 overflow-hidden bg-white p-0">
           <div className="p-8 bg-slate-950 relative overflow-hidden rounded-t-[4rem]">
             <div className="absolute top-0 right-0 w-40 h-40 bg-pharma-green/10 blur-[60px] rounded-full" />
             <div className="relative z-10 flex items-center gap-4">

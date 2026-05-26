@@ -4,7 +4,7 @@ import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
 import { CartProvider } from "@/lib/cart-context";
 import { Toaster } from "react-hot-toast";
-import AIChatbot from "@/components/AIChatbot";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +36,7 @@ export default function RootLayout({
           <CartProvider>
             {children}
             <Toaster position="bottom-right" />
-            <AIChatbot />
+
           </CartProvider>
         </AuthProvider>
       </body>

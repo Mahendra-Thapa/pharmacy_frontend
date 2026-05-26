@@ -145,7 +145,7 @@ export default function InventoryPage() {
       animate={{ opacity: 1 }}
       className="space-y-8"
     >
-      <Card className="rounded-[4rem] shadow-2xl border border-slate-100 overflow-hidden bg-white">
+      <Card className="rounded-xl shadow-2xl border border-slate-100 overflow-hidden bg-white">
         <div className="p-10 bg-slate-50/50 border-b border-white flex flex-wrap justify-between items-center gap-6">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
@@ -179,7 +179,7 @@ export default function InventoryPage() {
             </div>
             <Button
               onClick={openAdd}
-              className="bg-slate-950 hover:bg-pharma-green text-white rounded-2xl h-11 px-8 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-900/10"
+              className="bg-slate-950 hover:bg-pharma-green text-white rounded-xl h-11 px-8 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-900/10"
             >
               <PlusCircle size={14} /> Add Medicine
             </Button>
@@ -317,7 +317,7 @@ export default function InventoryPage() {
 
       {/* ADD/EDIT DIALOG */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-scroll rounded-[3.5rem] p-0  border-none shadow-3xl bg-white flex flex-col">
+        <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-scroll rounded-xl p-0  border-none shadow-3xl bg-white flex flex-col">
           <form onSubmit={handleSubmit} className="flex flex-col h-full ">
             {/* Fixed Diagnostic Header */}
             <div className="p-8 bg-slate-950 text-white relative shrink-0">

@@ -42,7 +42,6 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
     { id: "transactions", name: "Transactions", icon: CreditCard, href: "/admin/transactions" },
     { id: "qr-manager", name: "QR Manager", icon: QrCode, href: "/admin/qr-manager" },
     { id: "delivery", name: "Delivery", icon: Truck, href: "/admin/delivery" },
-    { id: "chat-history", name: "AI Archive", icon: History, href: "/admin/chat-history" },
     { id: "settings", name: "Settings", icon: SettingsIcon, href: "/admin/settings" },
   ];
 

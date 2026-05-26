@@ -63,7 +63,7 @@ export default function OffersPage() {
             <motion.div 
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="p-16 rounded-[4rem] bg-slate-950 text-white relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)]"
+              className="p-16 rounded-xl bg-slate-950 text-white relative overflow-hidden flex flex-col lg:flex-row items-center justify-between gap-16 shadow-[0_50px_100px_-20px_rgba(0,0,0,0.3)]"
             >
                <div className="absolute -top-20 -right-20 w-[500px] h-[500px] bg-pharma-orange/10 blur-[120px] rounded-full animate-pulse"></div>
                <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] bg-pharma-blue/10 blur-[100px] rounded-full"></div>
@@ -94,8 +94,8 @@ export default function OffersPage() {
                   </div>
                </div>
 
-               <div className="relative z-10 w-full max-w-sm aspect-square bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-3xl rounded-[4rem] border border-white/10 flex flex-col items-center justify-center p-12 text-center group/card">
-                  <div className="absolute inset-0 bg-pharma-orange/5 opacity-0 group-hover/card:opacity-100 transition-opacity duration-1000 rounded-[4rem]"></div>
+               <div className="relative z-10 w-full max-w-sm aspect-square bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-3xl rounded-xl border border-white/10 flex flex-col items-center justify-center p-12 text-center group/card">
+                  <div className="absolute inset-0 bg-pharma-orange/5 opacity-0 group-hover/card:opacity-100 transition-opacity duration-1000 rounded-xl"></div>
                   <div className="text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pharma-orange to-orange-400 mb-4 tracking-tighter">25<span className="text-4xl -translate-y-6 inline-block">%</span></div>
                   <div className="text-sm font-black uppercase tracking-[0.3em] text-slate-300 mb-10 leading-tight">Elite Tier <br/> Rebate Cap</div>
                   <button className="w-full py-5 bg-white text-slate-950 rounded-3xl font-black text-xs uppercase tracking-[0.2em] shadow-2xl hover:bg-pharma-orange hover:text-white transition-all duration-500 active:scale-95 group/btn">

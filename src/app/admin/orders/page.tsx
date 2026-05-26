@@ -136,7 +136,7 @@ export default function OrdersPage() {
       animate={{ opacity: 1 }}
       className="space-y-8"
     >
-      <Card className="rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden bg-white">
+      <Card className="rounded-xl shadow-2xl border border-slate-100 overflow-hidden bg-white">
         <div className="p-10 bg-slate-50/50 border-b border-white flex flex-wrap justify-between items-center gap-6">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
@@ -404,7 +404,7 @@ export default function OrdersPage() {
 
       {/* DELETE CONFIRM DIALOG - FIXED NOMENCLATURE */}
       <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-        <DialogContent className="max-w-[400px] rounded-[3.5rem] p-10 border-none shadow-3xl bg-white text-center">
+        <DialogContent className="max-w-[400px] rounded-xl p-10 border-none shadow-3xl bg-white text-center">
           <div className="w-20 h-20 bg-rose-50 text-rose-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 border border-rose-100">
             <AlertTriangle size={40} className="animate-pulse" />
           </div>
@@ -444,7 +444,7 @@ export default function OrdersPage() {
         open={!!orderToUpdateStatus}
         onOpenChange={open => !open && setOrderToUpdateStatus(null)}
       >
-        <DialogContent className="max-w-[425px] rounded-[3.5rem] p-10 border-none shadow-3xl bg-white">
+        <DialogContent className="max-w-[425px] rounded-xl p-10 border-none shadow-3xl bg-white">
           <DialogHeader className="mb-6">
             <div className="w-16 h-16 bg-orange-50 text-orange-500 rounded-[2rem] flex items-center justify-center mb-4 border border-orange-100">
               <RefreshCcw size={32} />
