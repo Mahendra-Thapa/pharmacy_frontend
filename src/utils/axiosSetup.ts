@@ -4,6 +4,11 @@ import { getTokenFromCookies } from "./cookies";
 
 let cachedToken: string | null = null;
 
+// Clear cached token (call after login/logout to force re-read from cookies)
+export const clearCachedToken = () => {
+  cachedToken = null;
+};
+
 // Fetch token from cookies or cache
 const fetchToken = async (): Promise<string | null> => {
   if (cachedToken) return cachedToken;
@@ -41,7 +46,7 @@ const addAuthInterceptor = (instance: AxiosInstance) => {
       }
 
       if (token) {
-        config.headers.set("Authorization", `Bearer ${token}`);
+        config.headers.set("Authorization", `Token ${token}`);
       }
 
       // DEBUG: log headers before request is sent
@@ -53,6 +58,10 @@ const addAuthInterceptor = (instance: AxiosInstance) => {
   );
 };
 
-// Attach interceptor to both instances
+// Attach interceptor to all instances
+addAuthInterceptor(axiosInstance);
 addAuthInterceptor(axiosAuthInstance);
 addAuthInterceptor(axiosMultipartInstance);
+
+export default axiosAuthInstance;
+

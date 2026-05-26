@@ -1,194 +1,126 @@
 'use client'
 
-import React, { useState, useEffect } from 'react';
-import { LayoutDashboard, PackageSearch, Activity, LockIcon, LogOut, Search, PlusCircle, AlertTriangle, TrendingUp } from 'lucide-react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import { TrendingUp, AlertTriangle, ShoppingCart, Users, CreditCard, Check, Activity, Package } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, Tooltip, CartesianGrid } from 'recharts';
+import { useAdmin } from '@/lib/admin-context';
+import Link from 'next/link';
 
-// Mock inventory data for Admin Management
-const INITIAL_INVENTORY = [
-    { id: 1, name: 'Paracetamol 500mg', category: 'Pain Relief', stock: 50, price: 10.0 },
-    { id: 2, name: 'Amoxicillin 250mg', category: 'Antibiotic', stock: 20, price: 45.5 },
-    { id: 3, name: 'Cough Syrup', category: 'Cold & Flu', stock: 15, price: 120.0 },
-    { id: 4, name: 'Vitamin C 1000mg', category: 'Supplement', stock: 100, price: 80.0 },
-];
+export default function AdminDashboard() {
+  const { inventory, orders, users, transactions, loading } = useAdmin();
 
-export default function AdminPanel() {
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [inventory, setInventory] = useState(INITIAL_INVENTORY);
-    const [aiReport, setAiReport] = useState<any[]>([]);
-    const [loadingAi, setLoadingAi] = useState(false);
+  const totalRevenue = orders.reduce((acc: number, curr: any) => acc + (parseFloat(curr.total_amount) || 0), 0);
+  const lowStockCount = inventory.filter((m: any) => m.stock < (m.reorder_level || 10)).length;
 
-    // Simulated login handler
-    const handleLogin = (e: React.FormEvent) => {
-        e.preventDefault();
-        // Mock authentication
-        setIsLoggedIn(true);
-        fetchAiReport();
-    };
+  const salesData = [
+    { name: 'Jan', amount: 4000 },
+    { name: 'Feb', amount: 3000 },
+    { name: 'Mar', amount: 5000 },
+    { name: 'Apr', amount: 4500 },
+    { name: 'May', amount: 6000 },
+    { name: 'Jun', amount: 5500 },
+    { name: 'Today', amount: totalRevenue },
+  ];
 
-    const fetchAiReport = async () => {
-        setLoadingAi(true);
-        try {
-            // Try fetching from real Flask backend
-            const res = await fetch('http://localhost:5001/api/ai/predict-demand');
-            if(res.ok) {
-                const data = await res.json();
-                setAiReport(data.data);
-            } else {
-                throw new Error("Fallback to mock");
-            }
-        } catch (error) {
-            // Fallback mock AI response if Flask is down
-            setAiReport([
-                { medicine_id: 1, name: "Paracetamol 500mg", current_stock: 50, predicted_demand_next_30_days: 65, restock_alert: True, recommended_order_quantity: 25 },
-                { medicine_id: 2, name: "Amoxicillin 250mg", current_stock: 20, predicted_demand_next_30_days: 15, restock_alert: False, recommended_order_quantity: 0 },
-                { medicine_id: 3, name: "Cough Syrup", current_stock: 15, predicted_demand_next_30_days: 25, restock_alert: True, recommended_order_quantity: 20 },
-            ]);
-        }
-        setLoadingAi(false);
-    };
+  if (loading) return <div className="flex items-center justify-center h-64"><Activity className="animate-spin text-pharma-blue" /></div>;
 
-    if (!isLoggedIn) {
-        return (
-            <div className="min-h-screen bg-slate-100 flex items-center justify-center font-sans">
-                <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md">
-                    <div className="flex justify-center mb-6">
-                        <div className="p-4 bg-indigo-50 text-indigo-600 rounded-full">
-                            <LockIcon size={32} />
-                        </div>
-                    </div>
-                    <h1 className="text-2xl text-center font-bold text-slate-800 mb-2">Admin Portal</h1>
-                    <p className="text-center text-slate-500 mb-6">Sign in to manage stock and view AI insights.</p>
-                    <form onSubmit={handleLogin} className="space-y-4">
-                        <input type="text" placeholder="Username" required defaultValue="admin" className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none"/>
-                        <input type="password" placeholder="Password" required defaultValue="admin123" className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none"/>
-                        <button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-lg transition shadow-md">
-                            Secure Login
-                        </button>
-                    </form>
-                </motion.div>
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <KPIItem title="Daily Income" value={`Rs. ${totalRevenue.toLocaleString()}`} icon={TrendingUp} color="emerald" />
+        <KPIItem title="Low Stock" value={lowStockCount} icon={AlertTriangle} color="orange" />
+        <KPIItem title="New Orders" value={orders.length} icon={ShoppingCart} color="blue" />
+        <KPIItem title="Total Users" value={users.length} icon={Users} color="indigo" />
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
+        <Card className="rounded-[3rem] border-transparent shadow-xl xl:col-span-2 overflow-hidden bg-white">
+          <CardHeader className="p-10 pb-6">
+            <CardTitle className="text-xl font-black text-slate-900 tracking-tight italic">Revenue Graph</CardTitle>
+            <CardDescription className="text-[10px] font-black uppercase tracking-widest text-slate-400">Monthly Performance Overview</CardDescription>
+          </CardHeader>
+          <CardContent className="p-0 px-10 pb-10 h-[400px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={salesData}>
+                <defs>
+                  <linearGradient id="colorAmount" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.1}/>
+                    <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
+                  </linearGradient>
+                </defs>
+                <XAxis dataKey="name" tick={{ fontSize: 10, fontWeight: 900, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
+                <YAxis tick={{ fontSize: 10, fontWeight: 900, fill: "#94a3b8" }} axisLine={false} tickLine={false} />
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                <Tooltip contentStyle={{ borderRadius: "20px", border: "none", boxShadow: "0 20px 50px -12px rgb(0 0 0 / 0.1)", fontWeight: 800 }} />
+                <Area type="monotone" dataKey="amount" stroke="#3b82f6" strokeWidth={4} fillOpacity={1} fill="url(#colorAmount)" />
+              </AreaChart>
+            </ResponsiveContainer>
+          </CardContent>
+        </Card>
+
+        <div className="space-y-8">
+          <Card className="rounded-[3rem] bg-slate-950 border-transparent shadow-2xl text-white p-10 relative overflow-hidden group">
+            <div className="relative z-10">
+               <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
+                  <Package size={24} className="text-pharma-blue" />
+               </div>
+               <h3 className="text-xl font-black tracking-tight mb-2 italic">Add New Stock</h3>
+               <p className="text-xs text-slate-400 font-bold leading-relaxed mb-8">Quickly update your medicine inventory to ensure availability for your customers.</p>
+               <Link href="/admin/inventory">
+                 <Button className="w-full h-12 bg-pharma-blue hover:bg-white hover:text-slate-950 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
+                    Go to Inventory
+                 </Button>
+               </Link>
             </div>
-        );
-    }
+          </Card>
 
-    return (
-        <div className="min-h-screen bg-slate-50 font-sans flex">
-            {/* Sidebar */}
-            <aside className="w-64 bg-indigo-900 text-white flex flex-col">
-                <div className="p-6 border-b border-indigo-800 flex items-center gap-3">
-                    <LayoutDashboard />
-                    <span className="font-bold text-lg tracking-wide">PharmaAdmin</span>
+          <Card className="rounded-[3rem] border-transparent shadow-xl p-10 bg-white">
+            <h3 className="font-black text-slate-900 tracking-tight mb-8 flex items-center gap-2 italic">
+               <CreditCard size={18} className="text-indigo-500" /> Recent Activity
+            </h3>
+            <div className="space-y-5">
+              {transactions.slice(0, 4).map((tx: any) => (
+                <div key={tx.id} className="flex justify-between items-center group">
+                  <div className="flex items-center gap-4">
+                     <div className="w-10 h-10 rounded-xl bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-emerald-50 group-hover:text-emerald-500 transition-all">
+                        <Check size={18} />
+                     </div>
+                     <div className="flex flex-col">
+                        <span className="text-xs font-black text-slate-900 tracking-tight">Rs. {tx.amount}</span>
+                        <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{tx.method} Payment</span>
+                     </div>
+                  </div>
+                  <span className="text-[10px] font-black text-slate-300">#{tx.id}</span>
                 </div>
-                <nav className="flex-1 p-4 space-y-2">
-                    <a href="#" className="flex items-center gap-3 bg-indigo-800 px-4 py-3 rounded-lg font-medium shadow-inner"><PackageSearch size={20}/> Stock Manager</a>
-                    <a href="/pos" className="flex items-center gap-3 hover:bg-indigo-800/50 px-4 py-3 rounded-lg font-medium transition text-indigo-200"><TrendingUp size={20}/> POS terminal</a>
-                </nav>
-                <div className="p-4 border-t border-indigo-800">
-                    <button onClick={() => setIsLoggedIn(false)} className="flex items-center gap-3 w-full hover:bg-indigo-800/50 px-4 py-3 rounded-lg transition text-indigo-200">
-                        <LogOut size={20}/> Log Out
-                    </button>
-                </div>
-            </aside>
-
-            {/* Main Content */}
-            <main className="flex-1 p-8 overflow-y-auto">
-                <div className="flex justify-between items-center mb-8">
-                    <h2 className="text-3xl font-bold text-slate-800">Dashboard & AI Insights</h2>
-                    <div className="text-sm text-slate-500">Welcome back, Admin</div>
-                </div>
-
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    {/* Stock Management Box */}
-                    <div className="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
-                        <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50">
-                            <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2"><PackageSearch size={20} className="text-indigo-600"/> Current Inventory</h3>
-                            <button className="text-indigo-600 hover:text-indigo-800 flex items-center gap-1 text-sm font-medium"><PlusCircle size={16}/> Add New</button>
-                        </div>
-                        <div className="p-6 overflow-y-auto max-h-[500px]">
-                            <table className="w-full text-left">
-                                <thead>
-                                    <tr className="text-slate-500 text-sm border-b">
-                                        <th className="pb-3 font-medium">Medicine</th>
-                                        <th className="pb-3 font-medium">Stock</th>
-                                        <th className="pb-3 font-medium">Price</th>
-                                        <th className="pb-3 font-medium text-right">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {inventory.map(item => (
-                                        <tr key={item.id} className="border-b last:border-0 hover:bg-slate-50 transition">
-                                            <td className="py-4">
-                                                <p className="font-semibold text-slate-800">{item.name}</p>
-                                                <p className="text-xs text-slate-500">{item.category}</p>
-                                            </td>
-                                            <td className="py-4">
-                                                <span className={`px-2.5 py-1 rounded-full text-xs font-bold ${item.stock < 20 ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
-                                                    {item.stock} units
-                                                </span>
-                                            </td>
-                                            <td className="py-4 text-slate-600">Rs. {item.price.toFixed(2)}</td>
-                                            <td className="py-4 text-right">
-                                                <button className="text-indigo-600 font-medium text-sm hover:underline">Edit</button>
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    {/* AI Demand Predictor Box */}
-                    <div className="bg-gradient-to-br from-indigo-50 to-white rounded-2xl shadow-sm border border-indigo-100 overflow-hidden flex flex-col relative">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-indigo-200 rounded-bl-full opacity-20 pointer-events-none"></div>
-                        <div className="p-6 border-b border-indigo-100 flex justify-between items-center z-10 bg-white/50 backdrop-blur-sm">
-                            <h3 className="font-bold text-lg text-indigo-900 flex items-center gap-2">
-                                <Activity size={20} className="text-indigo-600"/> AI Demand Predictor
-                            </h3>
-                            <button onClick={fetchAiReport} className="text-xs font-bold bg-indigo-600 text-white px-3 py-1.5 rounded-lg hover:bg-indigo-700 transition">
-                                {loadingAi ? 'Analyzing...' : 'Run Analysis'}
-                            </button>
-                        </div>
-                        <div className="p-6 overflow-y-auto max-h-[500px] z-10 space-y-4">
-                            <p className="text-sm text-slate-600 mb-2">Our AI model analyzes historical sales velocity to predict next month's stock requirements and generates automated restock alerts.</p>
-                            
-                            {loadingAi ? (
-                                <div className="py-12 flex justify-center items-center">
-                                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-                                </div>
-                            ) : (
-                                aiReport.map((report, idx) => (
-                                    <motion.div initial={{ x: 20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: idx * 0.1 }} key={idx} className={`p-4 rounded-xl border ${report.restock_alert ? 'border-orange-200 bg-orange-50/50' : 'border-indigo-100 bg-white shadow-sm'}`}>
-                                        <div className="flex justify-between items-start mb-2">
-                                            <h4 className="font-bold text-slate-800">{report.name}</h4>
-                                            {report.restock_alert && (
-                                                <span className="flex items-center gap-1 text-xs font-bold text-orange-700 bg-orange-100 px-2 py-1 rounded-md">
-                                                    <AlertTriangle size={14}/> LOW STOCK ALERT
-                                                </span>
-                                            )}
-                                        </div>
-                                        <div className="grid grid-cols-2 gap-4 text-sm mt-3">
-                                            <div>
-                                                <p className="text-slate-500 text-xs uppercase tracking-wider">Current Stock</p>
-                                                <p className="font-semibold text-slate-700">{report.current_stock} units</p>
-                                            </div>
-                                            <div>
-                                                <p className="text-slate-500 text-xs uppercase tracking-wider">30-Day APD (AI)</p>
-                                                <p className="font-semibold text-indigo-700">{report.predicted_demand_next_30_days} units req.</p>
-                                            </div>
-                                        </div>
-                                        {report.restock_alert && (
-                                            <div className="mt-4 pt-3 border-t border-orange-200flex items-center justify-between">
-                                                <span className="text-sm text-orange-800 font-medium">Recommended Restock: <b>{report.recommended_order_quantity} units</b></span>
-                                                <button className="text-xs font-bold bg-orange-600 text-white px-3 py-1.5 rounded-lg hover:bg-orange-700 transition ml-auto block">Order Now</button>
-                                            </div>
-                                        )}
-                                    </motion.div>
-                                ))
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </main>
+              ))}
+            </div>
+          </Card>
         </div>
-    );
+      </div>
+    </motion.div>
+  );
+}
+
+function KPIItem({ title, value, icon: Icon, color }: any) {
+  const colorMap: any = {
+    emerald: "text-emerald-500 bg-emerald-50",
+    orange: "text-orange-500 bg-orange-50",
+    blue: "text-blue-500 bg-blue-50",
+    indigo: "text-indigo-500 bg-indigo-50"
+  };
+
+  return (
+    <Card className="rounded-[2.5rem] border-transparent shadow-lg p-8 flex items-center gap-6 bg-white group hover:shadow-2xl transition-all">
+      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${colorMap[color] || 'bg-slate-50'}`}>
+        <Icon size={24} />
+      </div>
+      <div>
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{title}</p>
+        <h3 className="text-2xl font-black text-slate-900 tracking-tight">{value}</h3>
+      </div>
+    </Card>
+  );
 }
