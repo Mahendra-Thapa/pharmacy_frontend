@@ -23,16 +23,16 @@ export function WelcomeAlert() {
   return (
     <AnimatePresence>
       {isVisible && (
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, scale: 0.9, y: 100 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           className="fixed bottom-8 left-8 z-50 max-w-sm w-full"
         >
-          <div className="bg-slate-950 text-white p-6 rounded-[2.5rem] shadow-3xl shadow-slate-950/40 border border-white/10 relative overflow-hidden group">
+          <div className="bg-slate-950 text-white p-6 rounded-xl shadow-3xl shadow-slate-950/40 border border-white/10 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-green/20 blur-3xl rounded-full"></div>
-            
-            <button 
+
+            <button
               onClick={closeAlert}
               className="absolute top-4 right-4 text-slate-500 hover:text-white transition"
             >
@@ -45,8 +45,8 @@ export function WelcomeAlert() {
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                   <h4 className="font-black text-sm uppercase tracking-tight">Welcome to Pharmacy</h4>
-                   <Sparkles size={12} className="text-pharma-green" />
+                  <h4 className="font-black text-sm uppercase tracking-tight">Welcome to Pharmacy</h4>
+                  <Sparkles size={12} className="text-pharma-green" />
                 </div>
                 <p className="text-[10px] font-bold text-slate-400 leading-relaxed uppercase tracking-wider">
                   You are now connected to our AI-enhanced pharmaceutical grid. Real-time stock tracking and medical guidance active.
@@ -55,16 +55,16 @@ export function WelcomeAlert() {
             </div>
 
             <div className="mt-6 flex items-center justify-between relative z-10 pl-1">
-               <div className="flex items-center gap-2">
-                  <ShieldCheck size={14} className="text-pharma-green" />
-                  <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Secured Node</span>
-               </div>
-               <button 
+              <div className="flex items-center gap-2">
+                <ShieldCheck size={14} className="text-pharma-green" />
+                <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Secured Node</span>
+              </div>
+              <button
                 onClick={closeAlert}
                 className="bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border border-white/10 transition"
-               >
-                 Acknowledge
-               </button>
+              >
+                Acknowledge
+              </button>
             </div>
           </div>
         </motion.div>

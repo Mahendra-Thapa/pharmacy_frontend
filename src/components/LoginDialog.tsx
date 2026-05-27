@@ -24,12 +24,12 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
   const { login, signup } = useAuth()
   const [isSignup, setIsSignup] = useState(false)
   const [showPassword, setShowPassword] = useState(false)
-  const [credentials, setCredentials] = useState({ 
-    username: '', 
+  const [credentials, setCredentials] = useState({
+    username: '',
     password: '',
     email: '',
     first_name: '',
-    last_name: '' 
+    last_name: ''
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState('')
@@ -68,13 +68,13 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
             <Activity size={24} className="stroke-[2.5px]" />
           </div>
           <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
-            {isSignup ? 'Create Account' : 'Login Portal'}
+            {isSignup ? 'Create Account' : 'Login'}
           </DialogTitle>
           <DialogDescription className="text-xs font-bold uppercase tracking-widest text-slate-400">
-            {isSignup ? 'Join the healthcare revolution' : 'Authenticate to manage your healthcare journey'}
+            {isSignup ? 'Enter your details to sign up' : 'Enter your credentials to login'}
           </DialogDescription>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
             <div className="p-3 bg-rose-50 text-rose-600 rounded-xl text-xs font-bold border border-rose-100">
@@ -104,7 +104,7 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
                 </div>
               </div>
             )}
-            
+
             {isSignup && (
               <div className="space-y-2">
                 <Label className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 ml-1">Email Address</Label>
@@ -127,7 +127,7 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
                 required
               />
             </div>
-            
+
             <div className="space-y-2 relative pb-2">
               <Label className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 ml-1">Password</Label>
               <div className="relative">
@@ -143,28 +143,28 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
                   onClick={() => setShowPassword(!showPassword)}
                   className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition"
                 >
-                   {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
             </div>
           </div>
-          
-          <Button 
-            type="submit" 
+
+          <Button
+            type="submit"
             disabled={isSubmitting}
             className="w-full h-14 bg-slate-900 hover:bg-pharma-green text-white font-black uppercase tracking-[0.15em] rounded-2xl shadow-xl shadow-slate-900/20 transition-all active:scale-[0.98]"
           >
-            {isSubmitting ? 'Processing...' : (isSignup ? 'Initialize Account' : 'Secure Login')}
+            {isSubmitting ? 'Processing...' : (isSignup ? 'Sign up' : 'Login')}
           </Button>
 
           <p className="text-center text-[10px] font-black uppercase tracking-widest text-slate-400">
-            {isSignup ? "Already registered?" : "New to the system?"}{' '}
-            <button 
-              type="button" 
+            {isSignup ? "Already registered?" : "Don't have any Account?"}{' '}
+            <button
+              type="button"
               onClick={() => setIsSignup(!isSignup)}
               className="text-pharma-blue hover:text-pharma-green transition"
             >
-              {isSignup ? 'Login Portal' : 'Register Now'}
+              {isSignup ? 'Login' : 'Register Now'}
             </button>
           </p>
         </form>

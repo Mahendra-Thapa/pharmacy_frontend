@@ -5,21 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { QRCodeSVG } from "qrcode.react";
 import { motion, AnimatePresence } from "framer-motion";
-import { 
-  Search, 
-  Plus, 
-  Trash2, 
-  Printer, 
-  UserCircle, 
-  QrCode, 
-  Banknote, 
-  CheckCircle, 
-  ChevronLeft, 
-  AlertTriangle, 
-  Activity, 
-  ShoppingBag, 
-  LockIcon, 
-  TrendingUp, 
+import {
+  Search,
+  Plus,
+  Trash2,
+  Printer,
+  UserCircle,
+  QrCode,
+  Banknote,
+  CheckCircle,
+  ChevronLeft,
+  AlertTriangle,
+  Activity,
+  ShoppingBag,
+  LockIcon,
+  TrendingUp,
   ChevronRightCircle,
   Settings,
   LogOut
@@ -403,7 +403,7 @@ export default function POSPage() {
           >
             <Activity size={16} /> Logs
           </button>
-          
+
           <div className="w-px h-8 bg-slate-200 mx-2"></div>
 
           <button
@@ -416,9 +416,9 @@ export default function POSPage() {
             onClick={() => setShowLogoutConfirm(true)}
             className="bg-rose-50 hover:bg-rose-500 text-rose-500 hover:text-white w-10 h-10 rounded-xl transition flex items-center justify-center shadow-lg shadow-rose-500/10"
           >
-             <LogOut size={18} />
+            <LogOut size={18} />
           </button>
-          
+
           <div className="text-right flex flex-col items-end">
             <span className="text-xs font-black text-slate-900">
               {user.first_name} {user.last_name || "Agent"}
@@ -482,11 +482,10 @@ export default function POSPage() {
               </div>
               {/* Confirm Password */}
               <div className="space-y-2">
-                <Label className={`text-[10px] font-black uppercase tracking-widest ${
-                  agentPass.confirm && agentPass.new !== agentPass.confirm
+                <Label className={`text-[10px] font-black uppercase tracking-widest ${agentPass.confirm && agentPass.new !== agentPass.confirm
                     ? "text-rose-500"
                     : "text-slate-400"
-                }`}>
+                  }`}>
                   Confirm Password
                 </Label>
                 <PasswordInput
@@ -495,11 +494,10 @@ export default function POSPage() {
                     setAgentPass({ ...agentPass, confirm: e.target.value })
                   }
                   placeholder="Re-enter new password"
-                  className={`h-12 rounded-2xl font-bold ${
-                    agentPass.confirm && agentPass.new !== agentPass.confirm
+                  className={`h-12 rounded-2xl font-bold ${agentPass.confirm && agentPass.new !== agentPass.confirm
                       ? "border-rose-300 bg-rose-50"
                       : "bg-slate-50 border-slate-100"
-                  }`}
+                    }`}
                   required
                 />
                 {agentPass.confirm && agentPass.new !== agentPass.confirm && (
@@ -553,7 +551,7 @@ export default function POSPage() {
                 whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(22, 163, 74, 0.2)" }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => addToCart(med)}
-                className={`p-0 rounded-[2.5rem] border bg-white shadow-xl hover:shadow-2xl hover:border-pharma-green/40 transition-all duration-500 group flex flex-col h-[320px] relative overflow-hidden ${med.stock <= 0 ? "opacity-50 grayscale" : "border-slate-100"}`}
+                className={`p-0 rounded-xl border bg-white shadow-xl hover:shadow-2xl hover:border-pharma-green/40 transition-all duration-500 group flex flex-col h-[320px] relative overflow-hidden ${med.stock <= 0 ? "opacity-50 grayscale" : "border-slate-100"}`}
               >
                 {/* Image Section */}
                 <div className="h-40 relative bg-slate-50 overflow-hidden border-b border-slate-100">
@@ -561,8 +559,8 @@ export default function POSPage() {
                     <Image src={med.image_url} alt={med.name} fill className="object-cover group-hover:scale-110 transition-transform duration-700" />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-slate-300 gap-2">
-                       <Activity size={32} />
-                       <span className="text-[10px] font-black uppercase tracking-widest">No Visual</span>
+                      <Activity size={32} />
+                      <span className="text-[10px] font-black uppercase tracking-widest">No Visual</span>
                     </div>
                   )}
                   <div className="absolute top-4 right-4 z-10">
@@ -582,23 +580,23 @@ export default function POSPage() {
                 {/* Content Section */}
                 <div className="p-6 flex flex-col justify-between flex-1 relative z-10">
                   <div className="absolute top-0 right-0 p-8 bg-pharma-green/5 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-                  
+
                   <div>
                     <h3 className="font-black text-slate-900 group-hover:text-pharma-green transition tracking-tight text-lg leading-tight mb-2">
                       {med.name}
                     </h3>
                     <p className="text-[10px] font-bold text-slate-400 line-clamp-2 uppercase tracking-widest">
-                       {med.manufacturer}
+                      {med.manufacturer}
                     </p>
                   </div>
 
                   <div className="flex justify-between items-end mt-4">
                     <div className="flex flex-col">
-                       <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Retail Price</span>
-                       <span className="text-2xl font-black text-slate-950 tracking-tighter">
-                         <span className="text-pharma-green text-sm mr-1">Rs.</span>
-                         {parseFloat(med.price).toFixed(2)}
-                       </span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Retail Price</span>
+                      <span className="text-2xl font-black text-slate-950 tracking-tighter">
+                        <span className="text-pharma-green text-sm mr-1">Rs.</span>
+                        {parseFloat(med.price).toFixed(2)}
+                      </span>
                     </div>
                     {med.stock > 0 && (
                       <div className="w-12 h-12 bg-slate-950 text-white rounded-2xl flex items-center justify-center group-hover:bg-pharma-green transition-all shadow-xl shadow-slate-900/10 group-active:scale-90">
@@ -778,7 +776,7 @@ export default function POSPage() {
                 open={isCreatingCustomer}
                 onOpenChange={setIsCreatingCustomer}
               >
-                <DialogContent className="rounded-[2.5rem] border-transparent shadow-2xl bg-white p-8 max-w-sm">
+                <DialogContent className="rounded-xl border-transparent shadow-2xl bg-white p-8 max-w-sm">
                   <DialogHeader>
                     <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
                       Register Agent
@@ -843,7 +841,7 @@ export default function POSPage() {
                       paymentMode === "CASH" ? "text-white" : "text-slate-300"
                     }
                   />
-                   Cash
+                  Cash
                 </button>
                 <button
                   onClick={() => setPaymentMode("QR")}
@@ -871,11 +869,11 @@ export default function POSPage() {
                       <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-green/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
                       <div className="bg-white p-3 rounded-2xl shadow-2xl relative z-10 w-44 h-44 flex items-center justify-center">
                         {pharmacySettings?.qr_code_url ? (
-                           <Image src={pharmacySettings.qr_code_url} alt="Payment QR" fill className="object-contain p-2" />
+                          <Image src={pharmacySettings.qr_code_url} alt="Payment QR" fill className="object-contain p-2" />
                         ) : (
                           <div className="flex flex-col items-center">
                             <QrCode className="text-slate-200 mb-2" size={48} />
-                            <span className="text-slate-400 font-bold text-[8px] uppercase tracking-widest text-center">Admin QR Not Set<br/>Using Multi-Gateway</span>
+                            <span className="text-slate-400 font-bold text-[8px] uppercase tracking-widest text-center">Admin QR Not Set<br />Using Multi-Gateway</span>
                           </div>
                         )}
                       </div>
@@ -1183,8 +1181,8 @@ export default function POSPage() {
         </section>
       </main>
       {/* Logout Confirmation */}
-      <LogoutDialog 
-        open={showLogoutConfirm} 
+      <LogoutDialog
+        open={showLogoutConfirm}
         onOpenChange={setShowLogoutConfirm}
         onConfirm={() => {
           logout?.();

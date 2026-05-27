@@ -580,7 +580,7 @@ export default function POSOrdersPage() {
         open={!!orderToUpdateStatus}
         onOpenChange={open => !open && setOrderToUpdateStatus(null)}
       >
-        <DialogContent className="sm:max-w-[480px] rounded-[2.5rem] p-0 border-none shadow-[0_40px_80px_-20px_rgba(0,0,0,0.25)] bg-white overflow-hidden">
+        <DialogContent className="sm:max-w-[480px] rounded-xl p-0 border-none shadow-[0_40px_80px_-20px_rgba(0,0,0,0.25)] bg-white overflow-hidden">
           {/* Dark Header */}
           <div className="p-8 bg-slate-950 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-40 h-40 bg-pharma-blue/20 blur-[60px] rounded-full" />
