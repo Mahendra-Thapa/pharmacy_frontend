@@ -18,11 +18,21 @@ import { useAdmin } from '@/lib/admin-context';
 
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
+import { axiosInstance } from '@/utils/axiosSetup';
+import { Input } from '@/components/ui/input';
 
 export default function QRManagerPage() {
   const { pharmacySettings, loading, refresh } = useAdmin();
 
   const [refreshing, setRefreshing] = useState(false);
+  const [updating, setUpdating] = useState(false);
+  const [qrInput, setQrInput] = useState('');
+
+  React.useEffect(() => {
+    if (pharmacySettings) {
+      setQrInput(pharmacySettings.qr_code_url || '');
+    }
+  }, [pharmacySettings]);
 
   const handleSync = async () => {
     setRefreshing(true);
@@ -62,6 +72,34 @@ export default function QRManagerPage() {
       toast.success('QR downloaded');
     } catch {
       toast.error('Download failed');
+    }
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setQrInput(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleUpdate = async () => {
+    setUpdating(true);
+    try {
+      if (pharmacySettings?.id) {
+        await axiosInstance.patch(`/pharmacy-settings/${pharmacySettings.id}/`, { qr_code_url: qrInput });
+      } else {
+        await axiosInstance.post(`/pharmacy-settings/`, { qr_code_url: qrInput });
+      }
+      toast.success("QR Code Updated Successfully");
+      await refresh();
+    } catch (err) {
+      toast.error("Failed to update QR Code");
+    } finally {
+      setUpdating(false);
     }
   };
 
@@ -175,8 +213,22 @@ export default function QRManagerPage() {
               </div>
             </div>
 
-            {/* QR Display */}
+              {/* QR Display */}
             <div className="mx-auto flex w-full max-w-md flex-col items-center">
+              <div className="w-full mb-6 space-y-4">
+                <div>
+                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Upload QR Code Image</label>
+                  <Input 
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileUpload}
+                    className="w-full h-14 rounded-2xl bg-slate-50 border-slate-200 focus:bg-white text-sm font-bold transition-all file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-[10px] file:font-black file:uppercase file:bg-slate-900 file:text-white hover:file:bg-pharma-green pt-2"
+                  />
+                </div>
+                
+               
+              </div>
+
               <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-[2.5rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6 shadow-inner">
                 {refreshing ? (
                   <div className="flex flex-col items-center gap-4">
@@ -185,7 +237,7 @@ export default function QRManagerPage() {
                       Synchronizing QR...
                     </p>
                   </div>
-                ) : qrCode ? (
+                ) : qrInput || qrCode ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.92 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -193,7 +245,7 @@ export default function QRManagerPage() {
                     className="relative h-full w-full"
                   >
                     <Image
-                      src={qrCode}
+                      src={qrInput || qrCode}
                       alt="QR Code"
                       fill
                       priority
@@ -222,19 +274,19 @@ export default function QRManagerPage() {
               {/* Actions */}
               <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row">
                 <Button
-                  onClick={handleSync}
-                  disabled={refreshing}
-                  className="h-12 flex-1 rounded-2xl bg-slate-950 text-sm font-bold shadow-lg hover:bg-blue-600"
+                  onClick={handleUpdate}
+                  disabled={updating}
+                  className="h-12 flex-1 rounded-2xl bg-pharma-green text-sm font-bold shadow-lg hover:bg-emerald-600 text-white"
                 >
-                  {refreshing ? (
+                  {updating ? (
                     <>
                       <RefreshCcw className="mr-2 h-4 w-4 animate-spin" />
-                      Refreshing
+                      Saving...
                     </>
                   ) : (
                     <>
-                      <RefreshCcw className="mr-2 h-4 w-4" />
-                      Update QR
+                      <Sparkles className="mr-2 h-4 w-4" />
+                      Save QR Code
                     </>
                   )}
                 </Button>

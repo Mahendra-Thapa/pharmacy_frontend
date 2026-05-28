@@ -1,15 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
 import axios from "axios";
-import { ShieldCheck, LockKeyhole, ChevronLeft, LogOut } from "lucide-react";
+import { LockKeyhole, ShieldCheck } from "lucide-react";
+import React, { useState } from "react";
 
+import { PasswordInput } from "@/components/PasswordInput";
+import { PosNavbar } from "@/components/PosNavbar";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
-import { PasswordInput } from "@/components/PasswordInput";
-import Image from "next/image";
-import Link from "next/link";
-import { PosNavbar } from "@/components/PosNavbar";
 
 const Page = () => {
   const [updatingAgentPass, setUpdatingAgentPass] =
