@@ -1,108 +1,351 @@
-'use client'
+'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { QrCode, RefreshCcw, Download, ShieldCheck, Database } from 'lucide-react';
+import {
+  QrCode,
+  RefreshCcw,
+  Download,
+  ShieldCheck,
+  Database,
+  ScanLine,
+  Sparkles,
+} from 'lucide-react';
+
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { useAdmin } from '@/lib/admin-context';
+
 import Image from 'next/image';
 import { toast } from 'react-hot-toast';
 
 export default function QRManagerPage() {
   const { pharmacySettings, loading, refresh } = useAdmin();
+
   const [refreshing, setRefreshing] = useState(false);
 
   const handleSync = async () => {
     setRefreshing(true);
+
     try {
       await refresh();
-      toast.success("Security Node Synchronized");
+      toast.success('QR synchronized successfully');
     } catch (err) {
-      toast.error("Node Synchronization Fail");
+      toast.error('Failed to synchronize QR');
     } finally {
       setRefreshing(false);
     }
   };
 
-  // The QR code is part of the pharmacy settings
+  const handleDownload = async () => {
+    if (!pharmacySettings?.qr_code_url) {
+      toast.error('QR code not available');
+      return;
+    }
+
+    try {
+      const response = await fetch(pharmacySettings.qr_code_url);
+      const blob = await response.blob();
+
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'pharmacy-qr.png';
+
+      document.body.appendChild(link);
+      link.click();
+
+      link.remove();
+      window.URL.revokeObjectURL(url);
+
+      toast.success('QR downloaded');
+    } catch {
+      toast.error('Download failed');
+    }
+  };
+
   const qrCode = pharmacySettings?.qr_code_url;
 
-  if (loading) return <div className="h-64 flex items-center justify-center">Transmitting Encryption Matrix...</div>;
+  if (loading) {
+    return (
+      <div className="flex h-[60vh] items-center justify-center px-4">
+        <div className="flex flex-col items-center gap-5">
+          <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-900 shadow-xl">
+            <RefreshCcw className="h-7 w-7 animate-spin text-white" />
+          </div>
+
+          <div className="space-y-1 text-center">
+            <h3 className="text-lg font-bold text-slate-900">
+              Loading QR Manager
+            </h3>
+            <p className="text-sm text-slate-500">
+              Synchronizing pharmacy configuration...
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
-       <div className="grid grid-cols-1 xl:grid-cols-2 gap-10">
-          <Card className="rounded-xl shadow-2xl border border-slate-100 overflow-hidden bg-white p-12 flex flex-col items-center justify-center text-center relative">
-             <div className="absolute top-0 right-0 w-64 h-64 bg-pharma-blue/5 blur-[80px] rounded-full"></div>
-             
-             <div className="w-20 h-20 bg-slate-900 rounded-3xl flex items-center justify-center mb-10 shadow-2xl relative z-10">
-                <QrCode size={36} className="text-pharma-blue" />
-             </div>
-             
-             <div className="relative z-10 space-y-4 mb-12">
-                <h3 className="text-3xl font-black text-slate-900 tracking-tighter">System Access Node</h3>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest max-w-[300px] leading-relaxed">
-                   Encrypted QR protocol for mobile fulfillment and client authentication.
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      className="space-y-6 px-4 pb-10 sm:px-6 lg:px-8"
+    >
+      {/* Header */}
+      <div className="flex flex-col gap-4 rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex items-start gap-4">
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-950 shadow-lg">
+            <QrCode className="h-7 w-7 text-white" />
+          </div>
+
+          <div>
+            <div className="mb-2 flex items-center gap-2">
+              <span className="rounded-full bg-blue-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-blue-600">
+                Secure Access
+              </span>
+
+              <span className="rounded-full bg-emerald-50 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-emerald-600">
+                Active
+              </span>
+            </div>
+
+            <h1 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+              QR Management
+            </h1>
+
+            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-slate-500">
+              Manage secure pharmacy QR authentication and mobile verification
+              protocols from a single dashboard.
+            </p>
+          </div>
+        </div>
+
+        <Button
+          onClick={handleSync}
+          disabled={refreshing}
+          className="h-12 rounded-2xl bg-slate-950 px-6 text-sm font-bold shadow-lg transition-all hover:scale-[1.02] hover:bg-blue-600 active:scale-95"
+        >
+          {refreshing ? (
+            <>
+              <RefreshCcw className="mr-2 h-4 w-4 animate-spin" />
+              Synchronizing...
+            </>
+          ) : (
+            <>
+              <RefreshCcw className="mr-2 h-4 w-4" />
+              Refresh QR
+            </>
+          )}
+        </Button>
+      </div>
+
+      {/* Main Grid */}
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1.2fr_0.8fr]">
+        {/* QR Card */}
+        <Card className="relative overflow-hidden rounded-[2rem] border border-slate-200 bg-white p-5 shadow-sm sm:p-8">
+          {/* Background Effects */}
+          <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-blue-100 blur-3xl" />
+          <div className="absolute bottom-0 left-0 h-32 w-32 rounded-full bg-slate-100 blur-3xl" />
+
+          <div className="relative z-10">
+            <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <div className="mb-3 flex items-center gap-2">
+                  <Sparkles className="h-4 w-4 text-blue-600" />
+                  <span className="text-xs font-bold uppercase tracking-[0.25em] text-blue-600">
+                    Authentication System
+                  </span>
+                </div>
+
+                <h2 className="text-2xl font-black tracking-tight text-slate-900">
+                  Secure QR Access
+                </h2>
+
+                <p className="mt-2 text-sm leading-relaxed text-slate-500">
+                  This QR is used for mobile authentication, pharmacy
+                  verification, and secure customer fulfillment.
                 </p>
-             </div>
+              </div>
 
-             <div className="relative z-10 w-72 h-72 bg-slate-50 rounded-[3rem] border-2 border-dashed border-slate-200 p-8 flex items-center justify-center group flex-col">
+              <div className="hidden h-16 w-16 items-center justify-center rounded-3xl bg-slate-950 shadow-xl sm:flex">
+                <ScanLine className="h-7 w-7 text-white" />
+              </div>
+            </div>
+
+            {/* QR Display */}
+            <div className="mx-auto flex w-full max-w-md flex-col items-center">
+              <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden rounded-[2.5rem] border border-slate-200 bg-gradient-to-br from-slate-50 to-white p-6 shadow-inner">
                 {refreshing ? (
-                   <RefreshCcw className="animate-spin text-slate-300" size={40} />
+                  <div className="flex flex-col items-center gap-4">
+                    <RefreshCcw className="h-12 w-12 animate-spin text-slate-400" />
+                    <p className="text-sm font-semibold text-slate-500">
+                      Synchronizing QR...
+                    </p>
+                  </div>
                 ) : qrCode ? (
-                   <div className="relative w-full h-full">
-                      <Image src={qrCode} alt="QR Code" fill className="object-contain" priority />
-                   </div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.92 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                    className="relative h-full w-full"
+                  >
+                    <Image
+                      src={qrCode}
+                      alt="QR Code"
+                      fill
+                      priority
+                      className="object-contain"
+                    />
+                  </motion.div>
                 ) : (
-                   <div className="flex flex-col items-center gap-4 opacity-30">
-                      <Database size={40} />
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Node Data Offline</p>
-                   </div>
-                )}
-             </div>
+                  <div className="flex flex-col items-center gap-4 text-center">
+                    <div className="flex h-20 w-20 items-center justify-center rounded-3xl bg-slate-100">
+                      <Database className="h-10 w-10 text-slate-400" />
+                    </div>
 
-             <div className="flex gap-4 mt-12 relative z-10">
-                <Button onClick={handleSync} disabled={refreshing} className="bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl h-14 px-8 text-[11px] font-black uppercase tracking-widest transition-all active:scale-95 shadow-xl shadow-slate-900/20">
-                   {refreshing ? 'Synchronizing...' : 'Regenerate Protocol'}
+                    <div>
+                      <h3 className="font-bold text-slate-700">
+                        QR Not Available
+                      </h3>
+
+                      <p className="mt-1 text-sm text-slate-500">
+                        No QR configuration found for this pharmacy.
+                      </p>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Actions */}
+              <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row">
+                <Button
+                  onClick={handleSync}
+                  disabled={refreshing}
+                  className="h-12 flex-1 rounded-2xl bg-slate-950 text-sm font-bold shadow-lg hover:bg-blue-600"
+                >
+                  {refreshing ? (
+                    <>
+                      <RefreshCcw className="mr-2 h-4 w-4 animate-spin" />
+                      Refreshing
+                    </>
+                  ) : (
+                    <>
+                      <RefreshCcw className="mr-2 h-4 w-4" />
+                      Update QR
+                    </>
+                  )}
                 </Button>
-                <Button variant="outline" className="rounded-2xl h-14 w-14 border-slate-100 text-slate-400 hover:text-pharma-blue hover:bg-slate-50">
-                   <Download size={20} />
+
+                <Button
+                  variant="outline"
+                  onClick={handleDownload}
+                  className="h-12 rounded-2xl border-slate-200 px-5 font-semibold hover:bg-slate-50"
+                >
+                  <Download className="mr-2 h-4 w-4" />
+                  Download
                 </Button>
-             </div>
+              </div>
+            </div>
+          </div>
+        </Card>
+
+        {/* Side Cards */}
+        <div className="space-y-6">
+          {/* Security */}
+          <Card className="relative overflow-hidden rounded-[2rem] border-0 bg-slate-950 p-6 text-white shadow-2xl sm:p-8">
+            <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-blue-500/20 blur-3xl" />
+
+            <div className="relative z-10">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-3xl border border-white/10 bg-white/5">
+                <ShieldCheck className="h-8 w-8 text-blue-400" />
+              </div>
+
+              <h3 className="text-2xl font-black tracking-tight">
+                Security Layer
+              </h3>
+
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                Your pharmacy authentication system is protected with encrypted
+                QR verification protocols for secure dispensing and access
+                control.
+              </p>
+
+              <div className="mt-6 grid grid-cols-2 gap-4">
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                    Encryption
+                  </p>
+                  <h4 className="mt-2 font-bold">AES-256</h4>
+                </div>
+
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+                  <p className="text-xs uppercase tracking-[0.2em] text-slate-400">
+                    Status
+                  </p>
+                  <h4 className="mt-2 font-bold text-emerald-400">Protected</h4>
+                </div>
+              </div>
+            </div>
           </Card>
 
-          <div className="space-y-8">
-             <Card className="rounded-[3rem] p-10 border-transparent shadow-xl bg-slate-950 text-white relative overflow-hidden group">
-                <div className="absolute top-0 left-0 w-32 h-32 bg-pharma-blue/20 blur-3xl opacity-50"></div>
-                <div className="relative z-10 flex items-start gap-6">
-                   <div className="w-14 h-14 bg-white/5 rounded-2xl flex items-center justify-center border border-white/10 shrink-0">
-                      <ShieldCheck size={28} className="text-pharma-blue" />
-                   </div>
-                   <div>
-                      <h4 className="text-xl font-black tracking-tight mb-2">Fulfillment Security</h4>
-                      <p className="text-xs text-slate-400 font-bold leading-relaxed">This QR code acts as the master authentication key for on-site medicine dispensing and mobile verifying protocols.</p>
-                   </div>
-                </div>
-             </Card>
+          {/* Configuration */}
+          <Card className="rounded-[2rem] border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+            <div className="mb-6 flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-100">
+                <Database className="h-5 w-5 text-slate-700" />
+              </div>
 
-             <Card className="rounded-[3rem] p-10 border-slate-100 shadow-sm bg-white">
-                <h4 className="text-sm font-black text-slate-950 uppercase tracking-widest mb-6 flex items-center gap-3">
-                   <Database size={18} className="text-pharma-blue" /> Node Configuration
+              <div>
+                <h3 className="text-lg font-black tracking-tight text-slate-900">
+                  Node Configuration
+                </h3>
+
+                <p className="text-sm text-slate-500">
+                  Active pharmacy system details
+                </p>
+              </div>
+            </div>
+
+            <div className="space-y-4">
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+                  Active Store
+                </p>
+
+                <h4 className="mt-2 text-sm font-bold text-slate-900">
+                  {pharmacySettings?.name || 'Main PharmaOS'}
                 </h4>
-                <div className="space-y-6">
-                   <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between">
-                      <span className="text-xs font-black text-slate-500 uppercase tracking-widest">Active Store Node</span>
-                      <span className="text-xs font-black text-slate-900">{pharmacySettings?.name || 'Main PhamaOS'}</span>
-                   </div>
-                   <div className="p-5 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between">
-                      <span className="text-xs font-black text-slate-500 uppercase tracking-widest">Encrypted Payload</span>
-                      <span className="text-[10px] font-mono text-slate-400">AES-256-GCM_v4</span>
-                   </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+                  QR Status
+                </p>
+
+                <div className="mt-2 flex items-center gap-2">
+                  <div className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
+                  <span className="text-sm font-semibold text-slate-800">
+                    Operational
+                  </span>
                 </div>
-             </Card>
-          </div>
-       </div>
+              </div>
+
+              <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400">
+                  Protocol
+                </p>
+
+                <h4 className="mt-2 font-mono text-sm text-slate-700">
+                  AES-256-GCM_v4
+                </h4>
+              </div>
+            </div>
+          </Card>
+        </div>
+      </div>
     </motion.div>
   );
 }
