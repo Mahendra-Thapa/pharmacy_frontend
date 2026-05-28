@@ -14,16 +14,16 @@ import {
   QrCode,
   Banknote,
   CheckCircle,
-  ChevronLeft,
   AlertTriangle,
   Activity,
   ShoppingBag,
-  LockIcon,
-  TrendingUp,
   ChevronRightCircle,
   Settings,
-  LogOut
+  LogOut,
+  Menu,
+  Filter
 } from "lucide-react";
+import { POSSidebar } from "@/components/POSSidebar";
 
 import { useAuth } from "@/lib/auth-context";
 import axios from "@/utils/axiosSetup";
@@ -33,7 +33,6 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import {
   Table,
@@ -44,9 +43,18 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
-import { PasswordInput } from "@/components/PasswordInput";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { POSAuth } from "@/components/POSAuth";
+import { PosNavbar } from "@/components/PosNavbar";
 
 export default function POSPage() {
   const { user, login, logout } = useAuth();
@@ -72,11 +80,11 @@ export default function POSPage() {
 
   // Financial Logs State
   const [showLogs, setShowLogs] = useState(false);
-  const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
   const [transactions, setTransactions] = useState<any[]>([]);
   const [qrLoading, setQrLoading] = useState(false);
   const [qrData, setQrData] = useState("");
   const [showSettings, setShowSettings] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const [agentPass, setAgentPass] = useState({
     current: "",
     new: "",
@@ -94,6 +102,27 @@ export default function POSPage() {
   const [searchCustQuery, setSearchCustQuery] = useState("");
   const [isCreatingCustomer, setIsCreatingCustomer] = useState(false);
   const [pharmacySettings, setPharmacySettings] = useState<any>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  // Derive unique categories from inventory
+  const categories = React.useMemo(() => {
+    const cats = new Set<string>();
+    inventory.forEach(m => {
+      if (m.category_name) cats.add(m.category_name);
+    });
+    return ["All", ...Array.from(cats).sort()];
+  }, [inventory]);
+
+  const filteredMedicines = inventory.filter(m => {
+    const matchesSearch = m.name.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === "All" || m.category_name === selectedCategory;
+    return matchesSearch && matchesCategory;
+  });
+  const filteredCustomers = allCustomers.filter(
+    c =>
+      c.name?.toLowerCase().includes(searchCustQuery.toLowerCase()) ||
+      c.phone?.includes(searchCustQuery),
+  );
 
   const fetchPharmacySettings = async () => {
     try {
@@ -187,32 +216,7 @@ export default function POSPage() {
     }
   };
 
-  const handleAgentPasswordUpdate = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!agentPass.current.trim())
-      return showToast("Current password is required!", "error");
-    if (agentPass.new.length < 6)
-      return showToast("New password must be at least 6 characters!", "error");
-    if (agentPass.new !== agentPass.confirm)
-      return showToast("Passwords do not match!", "error");
-    setUpdatingAgentPass(true);
-    try {
-      await axios.patch("/users/me/", {
-        current_password: agentPass.current,
-        password: agentPass.new,
-      });
-      showToast("Password updated successfully", "success");
-      setShowSettings(false);
-      setAgentPass({ current: "", new: "", confirm: "" });
-    } catch (err: any) {
-      showToast(
-        err.response?.data?.error || "Password update failed",
-        "error",
-      );
-    } finally {
-      setUpdatingAgentPass(false);
-    }
-  };
+ 
 
   const generateDynamicQR = () => {
     setQrLoading(true);
@@ -228,68 +232,6 @@ export default function POSPage() {
       setQrLoading(false);
     }, 600);
   };
-
-  if (!user || (user.role !== "POS" && user.role !== "ADMIN")) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center font-sans overflow-hidden relative">
-        <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-pharma-green/20 via-slate-950 to-slate-950"></div>
-        <motion.div
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="bg-white/5 backdrop-blur-2xl border border-white/10 p-12 rounded-[40px] shadow-2xl w-full max-w-md relative z-10"
-        >
-          <div className="text-center mb-10">
-            <div className="inline-flex p-5 bg-pharma-green text-white rounded-2xl shadow-2xl shadow-pharma-green/20 mb-6">
-              <QrCode size={40} className="stroke-[2.5px]" />
-            </div>
-            <h1 className="text-2xl font-black text-white tracking-widest uppercase mb-1">
-              POS Terminal
-            </h1>
-            <p className="text-pharma-blue/60 text-xs font-bold uppercase tracking-widest px-8">
-              Agent Authentication Required
-            </p>
-          </div>
-
-          <form onSubmit={handleLogin} className="space-y-5">
-            {loginError && (
-              <p className="text-xs font-bold text-rose-500 bg-rose-500/10 p-3 rounded-xl text-center border border-rose-500/20">
-                {loginError}
-              </p>
-            )}
-            <div className="space-y-4">
-              <input
-                type="text"
-                placeholder="Agent ID"
-                value={credentials.username}
-                onChange={e =>
-                  setCredentials({ ...credentials, username: e.target.value })
-                }
-                required
-                className="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white focus:bg-white/10 focus:ring-2 focus:ring-pharma-blue/50 outline-none transition-all placeholder:text-slate-600 font-bold text-sm"
-              />
-              <div className="relative group">
-                <PasswordInput
-                  placeholder="Passcode"
-                  value={credentials.password}
-                  onChange={e =>
-                    setCredentials({ ...credentials, password: e.target.value })
-                  }
-                  required
-                  className="w-full h-14 rounded-2xl bg-white/5 border-white/10 text-white focus:bg-white/10"
-                />
-              </div>
-            </div>
-            <button
-              type="submit"
-              className="w-full h-14 bg-pharma-green hover:bg-pharma-green/90 text-white font-black uppercase tracking-widest rounded-2xl transition-all duration-500 shadow-2xl shadow-pharma-green/20 active:scale-95 flex items-center justify-center gap-3"
-            >
-              Unlock Terminal <Activity size={18} />
-            </button>
-          </form>
-        </motion.div>
-      </div>
-    );
-  }
 
   const addToCart = (medicine: any) => {
     if (medicine.stock <= 0)
@@ -349,181 +291,34 @@ export default function POSPage() {
     }
   };
 
-  const filteredMedicines = inventory.filter(m =>
-    m.name.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
-  const filteredCustomers = allCustomers.filter(
-    c =>
-      c.name?.toLowerCase().includes(searchCustQuery.toLowerCase()) ||
-      c.phone?.includes(searchCustQuery),
-  );
+  if (!user || (user.role !== "POS" && user.role !== "ADMIN")) {
+    return (
+      <POSAuth
+        handleLogin={handleLogin}
+        credentials={credentials}
+        setCredentials={setCredentials}
+        loginError={loginError}
+      />
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans selection:bg-pharma-blue/10">
+      {/* POS Sidebar */}
+      <POSSidebar
+        isOpen={sidebarOpen}
+        onClose={() => setSidebarOpen(false)}
+        onOpenLogs={() => fetchTransactions(true)}
+        onOpenSettings={() => setShowSettings(true)}
+      />
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 h-20 bg-white/80 backdrop-blur-2xl border-b border-slate-200 flex items-center justify-between px-8 shadow-sm">
-        <div className="flex items-center gap-6">
-          <Link
-            href="/"
-            className="w-10 h-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center hover:bg-pharma-green transition shadow-lg active:scale-90"
-          >
-            <ChevronLeft size={20} />
-          </Link>
-          <div className="flex items-center gap-3 group">
-            <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg group-hover:rotate-6 transition duration-500 overflow-hidden shrink-0 border border-slate-100">
-              <Image
-                src="/logo.png"
-                alt="Logo"
-                width={40}
-                height={40}
-                className="object-contain"
-              />
-            </div>
-            <div>
-              <h1 className="text-xl font-black text-slate-900 tracking-tight leading-none">
-                Pharma<span className="text-pharma-blue">POS</span>
-              </h1>
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                Medical Terminal Alpha
-              </span>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-4">
-          <Link
-            href="/pos/orders"
-            className="bg-slate-100 hover:bg-pharma-green hover:text-white text-slate-700 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest transition flex items-center gap-2"
-          >
-            <ShoppingBag size={16} /> Orders
-          </Link>
-          <button
-            onClick={() => fetchTransactions(true)}
-            className="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest transition flex items-center gap-2"
-          >
-            <Activity size={16} /> Logs
-          </button>
-
-          <div className="w-px h-8 bg-slate-200 mx-2"></div>
-
-          <button
-            onClick={() => setShowSettings(true)}
-            className="bg-slate-100 hover:bg-slate-200 text-slate-700 w-10 h-10 rounded-xl transition flex items-center justify-center"
-          >
-            <Settings size={18} />
-          </button>
-          <button
-            onClick={() => setShowLogoutConfirm(true)}
-            className="bg-rose-50 hover:bg-rose-500 text-rose-500 hover:text-white w-10 h-10 rounded-xl transition flex items-center justify-center shadow-lg shadow-rose-500/10"
-          >
-            <LogOut size={18} />
-          </button>
-
-          <div className="text-right flex flex-col items-end">
-            <span className="text-xs font-black text-slate-900">
-              {user.first_name} {user.last_name || "Agent"}
-            </span>
-            <span className="text-[9px] font-bold text-pharma-blue uppercase tracking-widest bg-pharma-blue/5 px-2 py-0.5 rounded-full border border-pharma-blue/20">
-              Role: {user.role}
-            </span>
-          </div>
-          <div className="w-10 h-10 rounded-2xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-500 hover:text-pharma-green transition cursor-pointer">
-            <UserCircle size={22} />
-          </div>
-        </div>
-
-        {/* Agent Settings Dialog */}
-        <Dialog open={showSettings} onOpenChange={(o) => { setShowSettings(o); if (!o) setAgentPass({ current: "", new: "", confirm: "" }); }}>
-          <DialogContent className="sm:max-w-md rounded-xl p-0 border-none shadow-[0_40px_80px_-20px_rgba(0,0,0,0.2)] overflow-hidden bg-white">
-            {/* Header */}
-            <div className="p-8 bg-slate-950 text-white relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-green/10 blur-3xl rounded-full" />
-              <DialogTitle className="text-xl font-black uppercase tracking-tighter text-white relative z-10">
-                Update Password
-              </DialogTitle>
-              <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mt-1 relative z-10">
-                POS Terminal · Security Settings
-              </p>
-            </div>
-            <form
-              onSubmit={handleAgentPasswordUpdate}
-              className="p-8 space-y-5"
-            >
-              {/* Current Password */}
-              <div className="space-y-2">
-                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                  Current Password
-                </Label>
-                <PasswordInput
-                  value={agentPass.current}
-                  onChange={e =>
-                    setAgentPass({ ...agentPass, current: e.target.value })
-                  }
-                  placeholder="Enter current password"
-                  className="h-12 bg-slate-50 border-slate-100 rounded-2xl font-bold"
-                  required
-                />
-              </div>
-              <div className="h-px bg-slate-100" />
-              {/* New Password */}
-              <div className="space-y-2">
-                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                  New Password
-                </Label>
-                <PasswordInput
-                  value={agentPass.new}
-                  onChange={e =>
-                    setAgentPass({ ...agentPass, new: e.target.value })
-                  }
-                  placeholder="Enter new password (min. 6 chars)"
-                  className="h-12 bg-slate-50 border-slate-100 rounded-2xl font-bold"
-                  required
-                />
-              </div>
-              {/* Confirm Password */}
-              <div className="space-y-2">
-                <Label className={`text-[10px] font-black uppercase tracking-widest ${agentPass.confirm && agentPass.new !== agentPass.confirm
-                    ? "text-rose-500"
-                    : "text-slate-400"
-                  }`}>
-                  Confirm Password
-                </Label>
-                <PasswordInput
-                  value={agentPass.confirm}
-                  onChange={e =>
-                    setAgentPass({ ...agentPass, confirm: e.target.value })
-                  }
-                  placeholder="Re-enter new password"
-                  className={`h-12 rounded-2xl font-bold ${agentPass.confirm && agentPass.new !== agentPass.confirm
-                      ? "border-rose-300 bg-rose-50"
-                      : "bg-slate-50 border-slate-100"
-                    }`}
-                  required
-                />
-                {agentPass.confirm && agentPass.new !== agentPass.confirm && (
-                  <p className="text-[10px] font-black text-rose-500 uppercase tracking-widest">Passwords do not match</p>
-                )}
-                {agentPass.confirm && agentPass.new === agentPass.confirm && agentPass.new && (
-                  <p className="text-[10px] font-black text-pharma-green uppercase tracking-widest">✓ Passwords match</p>
-                )}
-              </div>
-              <Button
-                disabled={updatingAgentPass}
-                type="submit"
-                className="w-full h-14 bg-pharma-green text-white font-black uppercase tracking-widest rounded-2xl shadow-xl shadow-pharma-green/20 mt-2 transition active:scale-95"
-              >
-                {updatingAgentPass ? "Updating..." : "Update Password"}
-              </Button>
-            </form>
-          </DialogContent>
-        </Dialog>
-      </header>
+      <PosNavbar />
 
       <main className="mt-20 flex-grow flex flex-col lg:flex-row p-4 lg:p-8 gap-6 lg:gap-8 overflow-y-auto lg:overflow-hidden h-auto lg:h-[calc(100vh-80px)]">
         {/* Left Panel: Inventory & Search */}
         <section className="flex-[3] flex flex-col gap-6 lg:gap-8 overflow-visible lg:overflow-hidden">
           <div className="flex gap-4 items-center">
-            <div className="flex-1 relative group">
+            <div className="flex relative group">
               <Search
                 className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-pharma-green transition-colors"
                 size={20}
@@ -531,19 +326,32 @@ export default function POSPage() {
               <input
                 type="text"
                 placeholder="Search inventory or scan barcode..."
-                className="w-full pl-12 pr-6 py-4 bg-white border border-slate-200 rounded-2xl outline-none focus:border-pharma-blue/20 focus:ring-4 focus:ring-pharma-blue/5 transition shadow-sm text-sm font-medium"
+                className="w-[800px] pl-12 pr-6 py-4 bg-white border border-slate-200 rounded-xl outline-none focus:border-pharma-blue/20 focus:ring-4 focus:ring-pharma-blue/5 transition shadow-sm text-sm font-medium"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
               />
             </div>
-            <div className="bg-white border border-slate-200 px-6 py-4 rounded-2xl shadow-sm flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-pharma-green animate-pulse"></div>
-              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
-                Database: {inventory.length} SKUs
-              </span>
+            <div className="flex items-center gap-3 shrink-0">
+            <div className="flex items-center gap-2 text-slate-400 shrink-0">
+              <Filter size={14} />
+              <span className="text-[10px] font-black uppercase tracking-widest hidden sm:inline">Category</span>
+            </div>
+            <div className="flex-1">
+              <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+                <SelectTrigger className="w-full bg-white border-slate-200 rounded-xl shadow-sm text-sm font-medium">
+                  <SelectValue placeholder="Select a category" />
+                </SelectTrigger>
+                <SelectContent>
+                  {categories.map(cat => (
+                    <SelectItem key={cat} value={cat}>
+                      {cat}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
-
+          </div>      
           <div className="flex-grow overflow-y-auto pr-4 scrollbar-hide grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-max pb-8">
             {filteredMedicines.map(med => (
               <motion.div
@@ -1180,15 +988,7 @@ export default function POSPage() {
           </AnimatePresence>
         </section>
       </main>
-      {/* Logout Confirmation */}
-      <LogoutDialog
-        open={showLogoutConfirm}
-        onOpenChange={setShowLogoutConfirm}
-        onConfirm={() => {
-          logout?.();
-          setShowLogoutConfirm(false);
-        }}
-      />
+     
     </div>
   );
 }

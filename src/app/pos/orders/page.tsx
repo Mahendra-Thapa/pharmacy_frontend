@@ -42,6 +42,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { PosNavbar } from "@/components/PosNavbar";
 
 const STATUS_CONFIG: Record<
   string,
@@ -189,53 +190,7 @@ export default function POSOrdersPage() {
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 h-20 bg-white/80 backdrop-blur-2xl border-b border-slate-200 flex items-center justify-between px-8 shadow-sm">
-        <div className="flex items-center gap-6">
-          <Link
-            href="/pos"
-            className="w-10 h-10 rounded-2xl bg-slate-900 text-white flex items-center justify-center hover:bg-pharma-green transition shadow-lg active:scale-90"
-          >
-            <ChevronLeft size={20} />
-          </Link>
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-lg overflow-hidden border border-slate-100 shrink-0">
-              <Image
-                src="/logo.png"
-                alt="Logo"
-                width={40}
-                height={40}
-                className="object-contain"
-              />
-            </div>
-            <div>
-              <h1 className="text-xl font-black text-slate-900 tracking-tight leading-none">
-                POS <span className="text-pharma-blue">Orders</span>
-              </h1>
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                Order Management
-              </span>
-            </div>
-          </div>
-        </div>
-        <div className="flex items-center gap-4">
-          <button
-            onClick={() => setShowLogoutConfirm(true)}
-            className="bg-rose-50 hover:bg-rose-500 text-rose-500 hover:text-white px-4 py-2 rounded-xl text-[11px] font-black uppercase tracking-widest transition flex items-center gap-2"
-          >
-            <LogOut size={16} /> Logout
-          </button>
-          <div className="text-right">
-            <span className="text-xs font-black text-slate-900">
-              {user.first_name} {user.last_name || "Agent"}
-            </span>
-            <br />
-            <span className="text-[9px] font-bold text-pharma-blue uppercase tracking-widest">
-              {user.role}
-            </span>
-          </div>
-        </div>
-      </header>
-
+     <PosNavbar  />
       <main className="pt-28 pb-16 px-8 max-w-7xl mx-auto">
         {/* Search & header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">

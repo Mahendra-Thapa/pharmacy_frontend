@@ -44,7 +44,7 @@ export default function SecurityPage() {
         <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="space-y-8">
             <header>
                 <h1 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">Security</h1>
-                <p className="text-slate-400 font-bold text-xs uppercase tracking-widest">Credentials Management</p>
+                <p className="text-slate-600 font-bold text-xs uppercase tracking-widest">Credentials Management</p>
             </header>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
@@ -52,7 +52,7 @@ export default function SecurityPage() {
                     <form onSubmit={handleSubmit(onUpdate)} className="space-y-8">
                         <div className="space-y-4">
                             <div className="space-y-2">
-                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Current Password</Label>
+                                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-600 ml-1">Current Password</Label>
                                 <PasswordInput
                                     placeholder="Enter current password"
                                     {...register("current")}
@@ -62,7 +62,7 @@ export default function SecurityPage() {
                             </div>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">New Password</Label>
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-600 ml-1">New Password</Label>
                                     <PasswordInput
                                         placeholder="New password"
                                         {...register("new")}
@@ -71,7 +71,7 @@ export default function SecurityPage() {
                                     {errors.new && <p className="text-[10px] font-bold text-rose-500 uppercase tracking-widest ml-1">{errors.new.message}</p>}
                                 </div>
                                 <div className="space-y-2">
-                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Confirm Password</Label>
+                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-600 ml-1">Confirm Password</Label>
                                     <PasswordInput
                                         placeholder="Confirm password"
                                         {...register("confirm")}

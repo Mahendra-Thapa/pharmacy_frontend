@@ -76,7 +76,7 @@ export function UserNavbar({ onToggleSidebar }: { onToggleSidebar: () => void })
                      <UserIcon size={18} />
                   </div>
                   <div className="hidden md:flex flex-col text-left">
-                     <span className="text-[9px] font-black uppercase text-slate-400 leading-none mb-0.5">Authenticated</span>
+                     <span className="text-[9px] font-black uppercase text-slate-400 leading-none mb-0.5">{user.first_name}</span>
                      <span className="text-xs font-black text-slate-950 flex items-center gap-1">
                        Account 
                        <ChevronDown size={12} className={`transition-transform duration-300 ${showUserMenu ? 'rotate-180' : ''}`} />
@@ -99,10 +99,9 @@ export function UserNavbar({ onToggleSidebar }: { onToggleSidebar: () => void })
                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                        className="absolute top-full right-0 mt-3 w-56 bg-white rounded-3xl border border-slate-100 shadow-2xl z-50 overflow-hidden divide-y divide-slate-50"
+                        className="absolute top-full right-0 mt-3 w-[200px] bg-white rounded-sm border border-slate-100 shadow-2xl z-50 overflow-hidden divide-y divide-slate-50"
                       >
                          <div className="p-4 bg-slate-50/50 flex flex-col gap-0.5">
-                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest leading-none">Security Protocol</span>
                             <span className="text-xs font-bold text-slate-700 truncate">{user.first_name} {user.last_name}</span>
                          </div>
                          <div className="p-2">
@@ -113,7 +112,7 @@ export function UserNavbar({ onToggleSidebar }: { onToggleSidebar: () => void })
                               }} 
                               className="w-full flex items-center gap-3 p-3 rounded-2xl hover:bg-rose-50 text-slate-600 hover:text-rose-500 transition-all font-black text-[10px] uppercase tracking-widest cursor-pointer"
                             >
-                               <LogIn size={14} className="rotate-180" /> Logout Securely
+                               <LogIn size={14} className="rotate-180" /> Logout
                             </button>
                          </div>
                       </motion.div>
