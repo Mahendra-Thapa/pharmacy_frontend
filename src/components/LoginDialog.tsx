@@ -154,7 +154,7 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
             disabled={isSubmitting}
             className="w-full h-14 bg-slate-900 hover:bg-pharma-green text-white font-black uppercase tracking-[0.15em] rounded-2xl shadow-xl shadow-slate-900/20 transition-all active:scale-[0.98]"
           >
-            {isSubmitting ? 'Processing...' : (isSignup ? 'Sign up' : 'Login')}
+            {isSubmitting ? 'Signing...' : (isSignup ? 'Sign up' : 'Login')}
           </Button>
 
           <p className="text-center text-[10px] font-black uppercase tracking-widest text-slate-400">
