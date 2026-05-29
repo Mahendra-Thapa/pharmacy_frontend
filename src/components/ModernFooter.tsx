@@ -56,17 +56,17 @@ export function ModernFooter() {
 
             <div className="mt-5 flex flex-col gap-3">
               {[
-                'Home',
-                'Categories',
-                'About',
-                'Contact',
+                { name: 'Home', href: '/' },
+                { name: 'Categories', href: '/categories' },
+                { name: 'About', href: '/about' },
+                { name: 'Contact', href: '/contact' },
               ].map((item) => (
                 <Link
-                  key={item}
-                  href="#"
+                  key={item.name}
+                  href={item.href}
                   className="text-sm text-gray-500 transition hover:text-black"
                 >
-                  {item}
+                  {item.name}
                 </Link>
               ))}
             </div>
