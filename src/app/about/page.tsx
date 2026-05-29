@@ -17,8 +17,8 @@ export default function AboutUsPage() {
 
       <main className="max-w-6xl mx-auto px-6 lg:px-8 py-24 pt-28 lg:pt-36">
         {/* HERO */}
-        <div className="text-center mb-24">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight">
+        <div className="text-center mb-24 mt-6">
+          <h1 className="text-xl md:text-3xl font-extrabold tracking-tight leading-tight">
             About Our <span className="text-emerald-600">Pharmacy</span>
           </h1>
 
@@ -31,7 +31,7 @@ export default function AboutUsPage() {
         {/* STORY */}
         <div className="grid md:grid-cols-2 gap-14 items-center mb-28">
           <div>
-            <h2 className="text-3xl font-bold mb-5">Our Story</h2>
+            <h2 className="text-xl md:text-2xl font-bold mb-5">Our Story</h2>
 
             <p className="text-gray-600 leading-relaxed mb-4">
               Founded in 2010, we started with a simple belief — healthcare
@@ -90,7 +90,7 @@ export default function AboutUsPage() {
 
         {/* TEAM */}
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold">Meet Our Team</h2>
+          <h2 className="text-xl md:text-2xl font-bold">Meet Our Team</h2>
           <p className="text-gray-500 mt-2">
             People who care about your health
           </p>

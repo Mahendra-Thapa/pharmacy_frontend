@@ -20,8 +20,8 @@ export default function ContactUsPage() {
       <main className="max-w-6xl mx-auto px-5 sm:px-6 lg:px-8 py-16 pt-28 lg:pt-36">
 
         {/* HERO */}
-        <div className="text-center mb-14">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight">
+        <div className="text-center mb-14 pt-4">
+          <h1 className="text-2xl md:text-3xl font-extrabold tracking-tight">
             Get in Touch
           </h1>
           <p className="mt-4 text-gray-500 max-w-xl mx-auto text-base md:text-lg">
@@ -34,7 +34,7 @@ export default function ContactUsPage() {
 
           {/* CONTACT */}
           <div className="bg-white/70 backdrop-blur-xl border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition">
-            <h2 className="text-xl sm:text-2xl font-bold mb-6">
+            <h2 className="text-md sm:text-xl font-bold mb-6">
               Contact Information
             </h2>
 
@@ -58,7 +58,7 @@ export default function ContactUsPage() {
 
           {/* HOURS */}
           <div className="bg-white/70 backdrop-blur-xl border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition">
-            <h2 className="text-xl sm:text-2xl font-bold mb-6">
+            <h2 className="text-md sm:text-xl font-bold mb-6">
               Opening Hours
             </h2>
 
@@ -73,10 +73,10 @@ export default function ContactUsPage() {
                 <span>10:00 AM - 5:00 PM</span>
               </div>
 
-              <div className="flex items-center justify-between">
+              {/* <div className="flex items-center justify-between">
                 <span className="font-medium text-gray-800">Sunday</span>
                 <span className="text-red-500 font-semibold">Closed</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -86,7 +86,7 @@ export default function ContactUsPage() {
 
           {/* FORM */}
           <div className="bg-white/70 backdrop-blur-xl border border-gray-100 rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-md transition">
-            <h2 className="text-xl sm:text-2xl font-bold mb-6">
+            <h2 className="text-md sm:text-xl font-bold mb-6">
               Send Message
             </h2>
 
