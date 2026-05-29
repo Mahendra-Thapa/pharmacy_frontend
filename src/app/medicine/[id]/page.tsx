@@ -138,18 +138,18 @@ export default function MedicineDetailsPage() {
             className="flex flex-col"
           >
             <div className="mb-8">
-              <div className="flex items-center gap-2 text-yellow-500 mb-4 bg-yellow-50 w-fit px-3 py-1 rounded-full border border-yellow-100 shadow-sm">
+              {/* <div className="flex items-center gap-2 text-yellow-500 mb-4 bg-yellow-50 w-fit px-3 py-1 rounded-full border border-yellow-100 shadow-sm">
                 <Star size={14} className="fill-yellow-500" />
                 <span className="text-sm font-black tracking-tight">{medicine.rating || "4.5"} Rating</span>
                 <span className="text-xs text-yellow-600 font-bold ml-1">(120 Reviews)</span>
-              </div>
+              </div> */}
               
               <h1 className="text-5xl font-black text-slate-950 tracking-tighter leading-none mb-6">
                 {medicine.name}
               </h1>
               
               <div className="flex items-baseline gap-2 mb-8">
-                <span className="text-4xl font-black text-slate-900 tracking-tighter">Rs. {parseFloat(medicine.price).toFixed(2)}</span>
+                <span className="text-4xl font-black text-slate-900 tracking-tighter">Rs. {parseFloat(medicine.price)}</span>
                 <span className="text-slate-400 font-bold text-sm uppercase tracking-widest">Inc. Taxes</span>
               </div>
 
@@ -252,16 +252,7 @@ export default function MedicineDetailsPage() {
             </div>
 
             {/* CTA Help */}
-            <div className="mt-12 p-8 bg-emerald-600 rounded-[3rem] text-white flex items-center justify-between group overflow-hidden relative shadow-2xl shadow-emerald-600/20">
-               <div className="absolute -top-10 -right-10 w-40 h-40 bg-white/10 blur-[60px] rounded-full group-hover:scale-150 transition-transform duration-1000"></div>
-               <div className="relative z-10">
-                  <h4 className="text-xl font-black tracking-tight mb-1">Need specialized help?</h4>
-                  <p className="text-[10px] font-bold text-emerald-100 uppercase tracking-widest">AI Medical Assistant is available 24/7</p>
-               </div>
-               <Button className="relative z-10 bg-white text-emerald-600 hover:bg-slate-900 hover:text-white rounded-2xl font-black uppercase tracking-widest text-[9px] h-10 px-6 active:scale-95 transition-all flex items-center gap-2 shadow-xl">
-                  Consult AI <ArrowRight size={14} />
-               </Button>
-            </div>
+          
           </motion.div>
         </div>
       </main>

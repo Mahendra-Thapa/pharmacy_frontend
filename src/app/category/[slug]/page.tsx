@@ -108,7 +108,7 @@ export default function CategoryPage() {
                  </div>
                  <span className="text-[11px] font-black uppercase tracking-[0.3em] text-slate-400">Inventory Segment</span>
               </div>
-              <h1 className="text-5xl md:text-7xl font-black text-slate-950 tracking-tighter leading-[0.9] mb-6">
+              <h1 className="text-3xl md:text-4xl font-black text-slate-950 tracking-tighter leading-[0.9] mb-6">
                  {categoryName}
               </h1>
               <p className="text-slate-500 text-lg font-bold leading-relaxed">

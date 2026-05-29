@@ -79,7 +79,7 @@ export default function CartPage() {
 
    if (cart.length === 0) {
       return (
-         <div className="min-h-screen bg-slate-50 flex flex-col">
+         <div className="min-h-screen bg-slate-50 flex flex-col pt-[150px]">
             <ModernNavbar userLoggedIn={!!user} cartCount={0} onLogin={() => setShowLoginDialog(true)} onLogout={() => setShowLogoutDialog(true)} />
             <main className="flex-1 flex flex-col items-center justify-center p-6 text-center">
                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="space-y-8">
