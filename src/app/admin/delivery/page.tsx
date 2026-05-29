@@ -35,7 +35,7 @@ export default function DeliveryManagementPage() {
 
   const openAdd = () => {
     setSelectedZone(null);
-    setFormData({ name: '', price: 0, estimated_days: 1 });
+    setFormData({ name: '', base_charge: 0, per_km_charge: 0, estimated_days: 1 });
     setIsDialogOpen(true);
   };
 
@@ -111,7 +111,7 @@ export default function DeliveryManagementPage() {
                   />
                </div>
                <Button onClick={openAdd} className="bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl h-11 px-8 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-900/10">
-                  <PlusCircle size={14} /> Add Zone
+                  <PlusCircle size={14} /> Add Delivery
                </Button>
             </div>
           </div>
@@ -121,6 +121,7 @@ export default function DeliveryManagementPage() {
               <TableRow className="bg-slate-50/10 hover:bg-transparent">
                 <TableHead className="px-10 py-6 text-[10px] font-black uppercase text-slate-400">Zone Name</TableHead>
                 <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400">Delivery Price</TableHead>
+                <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400">Per KM Charge</TableHead>
                 <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400">Estimated Days</TableHead>
                 <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400 text-right px-10">Actions</TableHead>
               </TableRow>
@@ -135,7 +136,10 @@ export default function DeliveryManagementPage() {
                     </div>
                   </TableCell>
                   <TableCell>
-                    <span className="text-sm font-black text-emerald-600">Rs. {zone.price}</span>
+                    <span className="text-sm font-black text-emerald-600">Rs. {Math.round(Number(zone.base_charge))}</span>
+                  </TableCell>
+                  <TableCell>
+                    <span className="text-sm font-black text-emerald-600">Rs. {Math.round(Number(zone.per_km_charge))}</span>
                   </TableCell>
                   <TableCell>
                     <Badge variant="outline" className="text-[9px] font-black bg-slate-100 border-transparent px-3 py-1 uppercase tracking-widest text-slate-500">
@@ -164,25 +168,29 @@ export default function DeliveryManagementPage() {
 
        {/* ADD/EDIT DIALOG */}
        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="max-w-xl rounded-[3rem] p-0 overflow-hidden border-none shadow-3xl bg-white">
+          <DialogContent className="max-w-xl rounded-xl max-h-[570px] overflow-y-scroll p-0 border-none shadow-3xl bg-white">
              <form onSubmit={handleSubmit}>
                 <div className="p-8 bg-slate-950 text-white relative text-center">
                    <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-blue/20 blur-3xl"></div>
-                   <DialogTitle className="text-xl font-black italic tracking-tight">{selectedZone ? 'Edit Zone' : 'Add New Zone'}</DialogTitle>
+                   <DialogTitle className="text-xl font-black italic tracking-tight">{selectedZone ? 'Edit Option' : 'Add New Option'}</DialogTitle>
                 </div>
                 
                 <div className="p-10 space-y-6">
                    <div className="space-y-2">
-                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Location / Zone Name</label>
-                      <Input value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="e.g. Kathmandu Valley" className="h-12 rounded-2xl border-slate-100 font-bold" required />
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Delivery Option</label>
+                      <Input value={formData.name || ''} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="e.g. Kathmandu Valley" className="h-12 rounded-2xl border-slate-100 font-bold" required />
                    </div>
                    <div className="space-y-2">
                       <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Delivery Price (Rs.)</label>
-                      <Input type="number" value={formData.price} onChange={e => setFormData({...formData, price: parseFloat(e.target.value)})} className="h-12 rounded-2xl border-slate-100 font-bold" required />
+                      <Input type="number" value={formData.base_charge !== undefined ? formData.base_charge : ''} onChange={e => setFormData({...formData, base_charge: e.target.value === '' ? '' : parseFloat(e.target.value)})} className="h-12 rounded-2xl border-slate-100 font-bold" required />
                    </div>
+                    <div className="space-y-2">
+                       <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Per KM Charge (Rs.)</label>
+                       <Input type="number" value={formData.per_km_charge !== undefined ? formData.per_km_charge : ''} onChange={e => setFormData({...formData, per_km_charge: e.target.value === '' ? '' : parseFloat(e.target.value)})} className="h-12 rounded-2xl border-slate-100 font-bold" required />
+                    </div>
                    <div className="space-y-2">
-                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Estimated Days for Delivery</label>
-                      <Input type="number" value={formData.estimated_days} onChange={e => setFormData({...formData, estimated_days: parseInt(e.target.value)})} className="h-12 rounded-2xl border-slate-100 font-bold" required />
+                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Estimated Time (Days)</label>
+                      <Input type="number" value={formData.estimated_days !== undefined ? formData.estimated_days : ''} onChange={e => setFormData({...formData, estimated_days: e.target.value === '' ? '' : parseInt(e.target.value)})} className="h-12 rounded-2xl border-slate-100 font-bold" required />
                    </div>
                 </div>
 

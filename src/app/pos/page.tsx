@@ -57,7 +57,7 @@ import { POSAuth } from "@/components/POSAuth";
 import { PosNavbar } from "@/components/PosNavbar";
 
 export default function POSPage() {
-  const { user, login, logout } = useAuth();
+  const { user, loading: authLoading, login, logout } = useAuth();
   const [inventory, setInventory] = useState<any[]>([]);
   const [cart, setCart] = useState<{ med: any; qty: number }[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -291,6 +291,24 @@ export default function POSPage() {
     }
   };
 
+ if (authLoading) {
+  return (
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="flex flex-col items-center gap-3">
+        
+        {/* Spinner */}
+        <div className="w-10 h-10 border-4 border-slate-200 border-t-pharma-blue rounded-full animate-spin"></div>
+
+        {/* Text */}
+        <span className="text-pharma-blue text-sm font-semibold tracking-wide">
+          Loading...
+        </span>
+
+      </div>
+    </div>
+  );
+}
+
   if (!user || (user.role !== "POS" && user.role !== "ADMIN")) {
     return (
       <POSAuth
@@ -326,7 +344,7 @@ export default function POSPage() {
               <input
                 type="text"
                 placeholder="Search inventory or scan barcode..."
-                className="w-[800px] pl-12 pr-6 py-4 bg-white border border-slate-200 rounded-xl outline-none focus:border-pharma-blue/20 focus:ring-4 focus:ring-pharma-blue/5 transition shadow-sm text-sm font-medium"
+                className="w-[400px] pl-12 pr-6 py-4 bg-white border border-slate-200 rounded-xl outline-none focus:border-pharma-blue/20 focus:ring-4 focus:ring-pharma-blue/5 transition shadow-sm text-sm font-medium"
                 value={searchTerm}
                 onChange={e => setSearchTerm(e.target.value)}
               />

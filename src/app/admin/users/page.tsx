@@ -16,6 +16,7 @@ import { toast } from 'react-hot-toast';
 export default function UsersManagementPage() {
   const { users, loading, refresh } = useAdmin();
   const [search, setSearch] = useState("");
+  const [roleFilter, setRoleFilter] = useState("ALL");
   const [page, setPage] = useState(1);
   
   // Dialog States
@@ -25,10 +26,12 @@ export default function UsersManagementPage() {
   const [formData, setFormData] = useState<any>({});
   const [submitting, setSubmitting] = useState(false);
 
-  const filtered = users.filter((u: any) => 
-    (u.username || '').toLowerCase().includes(search.toLowerCase()) || 
-    (u.email || '').toLowerCase().includes(search.toLowerCase())
-  );
+  const filtered = users.filter((u: any) => {
+    const matchesSearch = (u.username || '').toLowerCase().includes(search.toLowerCase()) || 
+                          (u.email || '').toLowerCase().includes(search.toLowerCase());
+    const matchesRole = roleFilter === "ALL" || u.role === roleFilter;
+    return matchesSearch && matchesRole;
+  });
 
   const itemsPerPage = 10;
   const totalPages = Math.ceil(filtered.length / itemsPerPage);
@@ -91,6 +94,16 @@ export default function UsersManagementPage() {
             </div>
             
             <div className="flex gap-4">
+               <select 
+                 className="h-11 px-4 text-xs font-bold rounded-2xl border-white focus:ring-pharma-blue/20 bg-slate-50 text-slate-600 outline-none"
+                 value={roleFilter}
+                 onChange={(e) => { setRoleFilter(e.target.value); setPage(1); }}
+               >
+                 <option value="ALL">All Roles</option>
+                 <option value="ADMIN">Admin</option>
+                 <option value="POS">POS Agent</option>
+                 <option value="USER">User</option>
+               </select>
                <div className="relative">
                   <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
                   <Input 
@@ -169,8 +182,8 @@ export default function UsersManagementPage() {
                 <div className="p-10 space-y-8">
                    <div className="space-y-4">
                       <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Account Role</label>
-                      <div className="grid grid-cols-2 gap-4">
-                         {['USER', 'ADMIN'].map((role) => (
+                      <div className="grid grid-cols-3 gap-4">
+                         {['USER', 'POS', 'ADMIN'].map((role) => (
                             <button
                                type="button"
                                key={role}
