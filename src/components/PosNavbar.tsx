@@ -144,9 +144,9 @@ export function PosNavbar() {
                         Logout
                       </span>
 
-                      <span className="text-xs text-rose-400">
+                      {/* <span className="text-xs text-rose-400">
                         Sign out from account
-                      </span>
+                      </span> */}
                     </div>
                   </button>
                 </div>

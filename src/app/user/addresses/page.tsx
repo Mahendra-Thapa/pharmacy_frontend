@@ -218,7 +218,7 @@ export default function AddressesPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center justify-center py-24 gap-6"
                 >
-                    <div className="w-24 h-24 bg-white rounded-3xl  flex items-center justify-center border border-slate-100 text-slate-300">
+                    <div className="w-24 h-24 bg-white rounded-xl flex items-center justify-center border border-slate-100 text-slate-300">
                         <MapPinOff size={40} />
                     </div>
 
@@ -401,7 +401,7 @@ export default function AddressesPage() {
                                 stiffness: 400,
                                 damping: 30,
                             }}
-                            className="bg-white rounded-3xl  w-full max-w-lg overflow-hidden max-h-[90vh] flex flex-col"
+                            className="bg-white rounded-xl w-full max-w-lg overflow-hidden max-h-[90vh] flex flex-col"
                         >
                             {/* Header */}
                             <div className="flex items-center justify-between p-8 pb-0">
@@ -664,7 +664,7 @@ export default function AddressesPage() {
                                 stiffness: 400,
                                 damping: 30,
                             }}
-                            className="w-full max-w-md bg-white rounded-3xl  p-8"
+                            className="w-full max-w-md bg-white rounded-xl p-8"
                         >
                             <div className="flex items-center justify-between mb-6">
                                 <div>

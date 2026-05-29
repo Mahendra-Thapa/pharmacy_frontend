@@ -168,11 +168,11 @@ export default function DeliveryManagementPage() {
 
        {/* ADD/EDIT DIALOG */}
        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="max-w-xl rounded-xl max-h-[570px] overflow-y-scroll p-0 border-none shadow-3xl bg-white">
+          <DialogContent className="max-w-xl rounded-xl  overflow-y-scroll p-0 border-none shadow-3xl bg-white">
              <form onSubmit={handleSubmit}>
                 <div className="p-8 bg-slate-950 text-white relative text-center">
                    <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-blue/20 blur-3xl"></div>
-                   <DialogTitle className="text-xl font-bold italic tracking-tight">{selectedZone ? 'Edit Option' : 'Add New Option'}</DialogTitle>
+                   <DialogTitle className="text-xl font-bold italic tracking-tight">{selectedZone ? 'Edit Option' : 'Add New Delivery Option'}</DialogTitle>
                 </div>
                 
                 <div className="p-10 space-y-6">
