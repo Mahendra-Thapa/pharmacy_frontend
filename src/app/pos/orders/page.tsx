@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -89,6 +90,7 @@ const ITEMS_PER_PAGE = 10;
 
 export default function POSOrdersPage() {
   const { user, logout } = useAuth();
+  const router = useRouter();
   const [orders, setOrders] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
@@ -282,9 +284,7 @@ export default function POSOrdersPage() {
                     return (
                       <React.Fragment key={order.id}>
                         <TableRow
-                          onClick={() =>
-                            setSelectedOrder(isExpanded ? null : order)
-                          }
+                          onClick={() => router.push(`/pos/orders/${order.id}`)}
                           className={`transition-all cursor-pointer ${isExpanded ? "bg-pharma-blue/5" : "hover:bg-slate-50/60"}`}
                         >
                           <TableCell className="px-8 py-6">

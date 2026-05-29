@@ -64,9 +64,9 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="sm:max-w-[450px] rounded-xl  p-8 bg-white border-transparent ">
         <DialogHeader className="mb-6">
-          <div className="w-12 h-12 bg-pharma-green text-white rounded-2xl flex items-center justify-center shadow-lg shadow-pharma-green/20 mb-4">
+          {/* <div className="w-12 h-12 bg-pharma-green text-white rounded-2xl flex items-center justify-center shadow-lg shadow-pharma-green/20 mb-4">
             <Activity size={24} className="stroke-[2.5px]" />
-          </div>
+          </div> */}
           <DialogTitle className="text-2xl font-bold text-slate-900 tracking-tight">
             {isSignup ? 'Create Account' : 'Login'}
           </DialogTitle>

@@ -32,6 +32,7 @@ import {
 } from "@/components/ui/dialog";
 
 import { useAdmin } from "@/lib/admin-context";
+import { useRouter } from "next/navigation";
 import { axiosInstance } from "@/utils/axiosSetup";
 import { toast } from "react-hot-toast";
 
@@ -39,6 +40,7 @@ export default function OrdersPage() {
   const { orders, loading, refresh } = useAdmin();
 
   const [search, setSearch] = useState("");
+  const router = useRouter();
   const [expandedOrderId, setExpandedOrderId] = useState<number | null>(null);
 
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -195,7 +197,7 @@ export default function OrdersPage() {
                 <React.Fragment key={order.id}>
                   <TableRow
                     className="cursor-pointer hover:bg-slate-50"
-                    onClick={() => toggleExpand(order.id)}
+                    onClick={() => router.push(`/admin/orders/${order.id}`)}
                   >
                     <TableCell className="pl-6">
                       <div className="flex items-center gap-3">
