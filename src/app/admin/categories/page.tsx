@@ -23,8 +23,9 @@ import {
   TableBody,
   TableCell,
 } from '@/components/ui/table'
-import { TbPointFilled } from "react-icons/tb";
 
+import { TbPointFilled } from "react-icons/tb"
+import { IoIosArrowForward } from "react-icons/io";
 import {
   Dialog,
   DialogContent,
@@ -35,68 +36,49 @@ import {
 
 import { useAdmin } from '@/lib/admin-context'
 import { axiosInstance } from '@/utils/axiosSetup'
-
 import { toast } from 'react-hot-toast'
 
 export default function CategoriesPage() {
-  const { categories, inventory, loading, refresh } =
-    useAdmin()
+  const { categories, inventory, loading, refresh } = useAdmin()
 
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1)
 
-  const [isDialogOpen, setIsDialogOpen] =
-    useState(false)
+  const [expandedCat, setExpandedCat] = useState<number | null>(null)
 
-  const [isDeleteOpen, setIsDeleteOpen] =
-    useState(false)
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false)
 
-  const [selectedCat, setSelectedCat] =
-    useState<any>(null)
-
+  const [selectedCat, setSelectedCat] = useState<any>(null)
   const [formData, setFormData] = useState<any>({})
-
-  const [submitting, setSubmitting] =
-    useState(false)
+  const [submitting, setSubmitting] = useState(false)
 
   const filtered = categories.filter((c: any) =>
-    (c.name || '')
-      .toLowerCase()
-      .includes(search.toLowerCase())
+    (c.name || '').toLowerCase().includes(search.toLowerCase())
   )
 
-  const rootCats = filtered.filter(
-    (c: any) => !c.parent
-  )
-
+  const rootCats = filtered.filter((c: any) => !c.parent)
   const itemsPerPage = 8
+  const totalPages = Math.ceil(rootCats.length / itemsPerPage)
 
-  const totalPages = Math.ceil(
-    rootCats.length / itemsPerPage
-  )
+  const toggleCategory = (id: number) => {
+    setExpandedCat(prev => (prev === id ? null : id))
+  }
 
   const openAdd = () => {
     setSelectedCat(null)
-
-    setFormData({
-      name: '',
-      description: '',
-      parent: '',
-    })
-
+    setFormData({ name: '', description: '', parent: '' })
     setIsDialogOpen(true)
   }
 
   const openEdit = (cat: any) => {
     setSelectedCat(cat)
-
     setFormData({
       ...cat,
       parent: cat.parent || '',
       description: cat.description || '',
       name: cat.name || '',
     })
-
     setIsDialogOpen(true)
   }
 
@@ -105,44 +87,26 @@ export default function CategoriesPage() {
     setIsDeleteOpen(true)
   }
 
-  const handleSubmit = async (
-    e: React.FormEvent
-  ) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
     setSubmitting(true)
 
     try {
       const payload = { ...formData }
-
-      if (!payload.parent) {
-        delete payload.parent
-      }
+      if (!payload.parent) delete payload.parent
 
       if (selectedCat) {
-        await axiosInstance.patch(
-          `/categories/${selectedCat.id}/`,
-          payload
-        )
-
+        await axiosInstance.patch(`/categories/${selectedCat.id}/`, payload)
         toast.success('Category updated')
       } else {
-        await axiosInstance.post(
-          '/categories/',
-          payload
-        )
-
+        await axiosInstance.post('/categories/', payload)
         toast.success('Category added')
       }
 
       setIsDialogOpen(false)
-
       refresh()
     } catch (err: any) {
-      toast.error(
-        err.response?.data?.error ||
-          'Failed to save category'
-      )
+      toast.error(err.response?.data?.error || 'Failed to save category')
     } finally {
       setSubmitting(false)
     }
@@ -152,14 +116,9 @@ export default function CategoriesPage() {
     setSubmitting(true)
 
     try {
-      await axiosInstance.delete(
-        `/categories/${selectedCat.id}/`
-      )
-
+      await axiosInstance.delete(`/categories/${selectedCat.id}/`)
       toast.success('Category deleted')
-
       setIsDeleteOpen(false)
-
       refresh()
     } catch {
       toast.error('Failed to delete category')
@@ -177,39 +136,27 @@ export default function CategoriesPage() {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="space-y-6"
-    >
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-6">
+
       <Card className="overflow-hidden rounded-3xl border border-gray-100 shadow-none">
-        {/* Header */}
+
+        {/* HEADER */}
         <div className="flex flex-col gap-4 border-b border-gray-100 p-6 lg:flex-row lg:items-center lg:justify-between">
+
           <div className="flex items-center gap-3">
             <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-50">
-              <LayoutGrid
-                size={22}
-                className="text-emerald-600"
-              />
+              <LayoutGrid size={22} className="text-emerald-600" />
             </div>
 
             <div>
-              <h2 className="text-xl font-semibold text-gray-900">
-                Categories
-              </h2>
-
-              <p className="text-sm text-gray-500">
-                Manage medicine categories
-              </p>
+              <h2 className="text-xl font-semibold text-gray-900">Categories</h2>
+              <p className="text-sm text-gray-500">Manage medicine categories</p>
             </div>
           </div>
 
           <div className="flex flex-col gap-3 sm:flex-row">
             <div className="relative">
-              <Search
-                size={16}
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-              />
+              <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
 
               <Input
                 placeholder="Search category..."
@@ -222,32 +169,23 @@ export default function CategoriesPage() {
               />
             </div>
 
-            <Button
-              onClick={openAdd}
-              className="h-11 rounded-xl bg-emerald-600 hover:bg-emerald-700"
-            >
+            <Button onClick={openAdd} className="h-11 rounded-xl bg-emerald-600 hover:bg-emerald-700">
               <Plus size={16} className="mr-2" />
               Add Category
             </Button>
           </div>
+
         </div>
 
-        {/* Table */}
+        {/* TABLE */}
         <div className="overflow-x-auto">
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead className="pl-6">
-                  Name
-                </TableHead>
-
+                <TableHead className="pl-6">Name</TableHead>
                 <TableHead>Type</TableHead>
-
                 <TableHead>Products</TableHead>
-
-                <TableHead className="pr-6 text-right">
-                  Actions
-                </TableHead>
+                <TableHead className="pr-6 text-right">Actions</TableHead>
               </TableRow>
             </TableHeader>
 
@@ -258,16 +196,27 @@ export default function CategoriesPage() {
                   page * itemsPerPage
                 )
 
-                const children = categories.filter(
-                  (c: any) => c.parent
-                )
+                const children = categories.filter((c: any) => c.parent)
 
                 return paginatedRoots.map((root: any) => (
                   <React.Fragment key={root.id}>
-                    {/* Root */}
-                    <TableRow>
+
+                    {/* ROOT CATEGORY */}
+                    <TableRow
+                      className="cursor-pointer hover:bg-gray-50"
+                      onClick={() => toggleCategory(root.id)}
+                    >
                       <TableCell className="pl-6 font-medium text-gray-900">
-                        {root.name}
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`transition-transform ${
+                              expandedCat === root.id ? 'rotate-90' : ''
+                            }`}
+                          >
+                            <IoIosArrowForward />
+                          </span>
+                          {root.name}
+                        </div>
                       </TableCell>
 
                       <TableCell>
@@ -277,97 +226,57 @@ export default function CategoriesPage() {
                       </TableCell>
 
                       <TableCell>
-                        {
-                          inventory.filter(
-                            (i: any) =>
-                              i.category === root.id
-                          ).length
-                        }
+                        {inventory.filter((i: any) => i.category === root.id).length}
                       </TableCell>
 
-                      <TableCell className="pr-6">
+                      <TableCell className="pr-6 text-right">
                         <div className="flex justify-end gap-2">
-                          <Button
-                            size="icon"
-                            variant="ghost"
-                            onClick={() =>
-                              openEdit(root)
-                            }
-                            className="rounded-xl"
-                          >
+                          <Button size="icon" variant="ghost" onClick={() => openEdit(root)}>
                             <Edit size={16} />
                           </Button>
 
-                          <Button
-                            size="icon"
-                            variant="ghost"
-                            onClick={() =>
-                              openDelete(root)
-                            }
-                            className="rounded-xl text-red-500 hover:text-red-600"
-                          >
+                          <Button className="text-red-400 hover:text-red-600 cursor-pointer" size="icon" variant="ghost" onClick={() => openDelete(root)}>
                             <Trash2 size={16} />
                           </Button>
                         </div>
                       </TableCell>
                     </TableRow>
 
-                    {/* Children */}
-                    {children
-                      .filter(
-                        (child: any) =>
-                          child.parent === root.id
-                      )
-                      .map((child: any) => (
-                        <TableRow key={child.id}>
-                          <TableCell className="pl-12 text-gray-600 flex items-center gap-2">
-                            <TbPointFilled />
- {child.name}
-                          </TableCell>
+                    {/* CHILDREN (EXPANDABLE LIKE FAQ) */}
+                    {expandedCat === root.id &&
+                      children
+                        .filter((child: any) => child.parent === root.id)
+                        .map((child: any) => (
+                          <TableRow key={child.id}>
+                            <TableCell className="pl-12 text-gray-600 flex items-center gap-2">
+                              <TbPointFilled />
+                              {child.name}
+                            </TableCell>
 
-                          <TableCell>
-                            <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600">
-                              Sub
-                            </span>
-                          </TableCell>
+                            <TableCell>
+                              <span className="rounded-full bg-gray-100 px-3 py-1 text-xs text-gray-600">
+                                Sub
+                              </span>
+                            </TableCell>
 
-                          <TableCell>
-                            {
-                              inventory.filter(
-                                (i: any) =>
-                                  i.category ===
-                                  child.id
-                              ).length
-                            }
-                          </TableCell>
+                            <TableCell>
+                              {inventory.filter((i: any) => i.category === child.id).length}
+                            </TableCell>
 
-                          <TableCell className="pr-6">
-                            <div className="flex justify-end gap-2">
-                              <Button
-                                size="icon"
-                                variant="ghost"
-                                onClick={() =>
-                                  openEdit(child)
-                                }
-                                className="rounded-xl"
-                              >
-                                <Edit size={14} />
-                              </Button>
+                            <TableCell className="pr-6 text-right">
+                              <div className="flex justify-end gap-2">
+                                <Button size="icon" variant="ghost" onClick={() => openEdit(child)}>
+                                  <Edit size={14} />
+                                </Button>
 
-                              <Button
-                                size="icon"
-                                variant="ghost"
-                                onClick={() =>
-                                  openDelete(child)
-                                }
-                                className="rounded-xl text-red-500 hover:text-red-600"
-                              >
-                                <Trash2 size={14} />
-                              </Button>
-                            </div>
-                          </TableCell>
-                        </TableRow>
-                      ))}
+                                <Button className="text-red-400 hover:text-red-600 cursor-pointer" size="icon" variant="ghost" onClick={() => openDelete(child)}>
+                                  <Trash2 size={14} />
+                                </Button>
+                              </div>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+
                   </React.Fragment>
                 ))
               })()}
@@ -375,14 +284,12 @@ export default function CategoriesPage() {
           </Table>
         </div>
 
-        {/* Pagination */}
+        {/* PAGINATION */}
         {totalPages > 1 && (
           <div className="flex items-center justify-between border-t border-gray-100 p-5">
             <Button
               variant="outline"
-              onClick={() =>
-                setPage((p) => Math.max(1, p - 1))
-              }
+              onClick={() => setPage(p => Math.max(1, p - 1))}
               disabled={page === 1}
               className="rounded-xl"
             >
@@ -395,11 +302,7 @@ export default function CategoriesPage() {
 
             <Button
               variant="outline"
-              onClick={() =>
-                setPage((p) =>
-                  Math.min(totalPages, p + 1)
-                )
-              }
+              onClick={() => setPage(p => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
               className="rounded-xl"
             >
@@ -407,9 +310,10 @@ export default function CategoriesPage() {
             </Button>
           </div>
         )}
+
       </Card>
 
-      {/* Add/Edit Dialog */}
+       {/* Add/Edit Dialog */}
       <Dialog
         open={isDialogOpen}
         onOpenChange={setIsDialogOpen}

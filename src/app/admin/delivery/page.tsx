@@ -168,7 +168,7 @@ export default function DeliveryManagementPage() {
 
        {/* ADD/EDIT DIALOG */}
        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="max-w-xl rounded-xl max-h-[570px] overflow-y-scroll p-0 border-none  bg-white">
+          <DialogContent className="max-w-xl rounded-xl max-h-[570px] overflow-y-scroll p-0 border-none shadow-3xl bg-white">
              <form onSubmit={handleSubmit}>
                 <div className="p-8 bg-slate-950 text-white relative text-center">
                    <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-blue/20 blur-3xl"></div>
@@ -196,7 +196,7 @@ export default function DeliveryManagementPage() {
 
                 <div className="p-8 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
                    <Button type="button" variant="ghost" onClick={() => setIsDialogOpen(false)} className="rounded-2xl h-12 px-8 text-[10px] font-bold uppercase tracking-widest">Cancel</Button>
-                   <Button disabled={submitting} type="submit" className="bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl h-12 px-10 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2  shadow-slate-900/20">
+                   <Button disabled={submitting} type="submit" className="bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl h-12 px-10 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 shadow-2xl shadow-slate-900/20">
                       <Save size={16} /> {submitting ? 'Saving...' : 'Save Changes'}
                    </Button>
                 </div>
@@ -206,7 +206,7 @@ export default function DeliveryManagementPage() {
 
        {/* DELETE CONFIRM DIALOG */}
        <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-          <DialogContent className="max-w-[400px] rounded-[3rem] p-10 border-none  bg-white text-center">
+          <DialogContent className="max-w-[400px] rounded-[3rem] p-10 border-none shadow-3xl bg-white text-center">
              <div className="w-20 h-20 bg-rose-50 text-rose-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 border border-rose-100">
                 <AlertTriangle size={40} className="animate-pulse" />
              </div>
@@ -217,7 +217,7 @@ export default function DeliveryManagementPage() {
                 </DialogDescription>
              </DialogHeader>
              <div className="flex flex-col gap-3 mt-10">
-                <Button onClick={handleDelete} disabled={submitting} className="w-full h-14 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-bold uppercase tracking-widest  shadow-rose-200">
+                <Button onClick={handleDelete} disabled={submitting} className="w-full h-14 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-bold uppercase tracking-widest shadow-xl shadow-rose-200">
                    {submitting ? 'Deleting...' : 'Confirm Delete'}
                 </Button>
                 <Button variant="ghost" onClick={() => setIsDeleteOpen(false)} className="w-full h-14 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-slate-400">
