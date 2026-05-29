@@ -1,71 +1,113 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
-import { 
-  ChevronLeft, ShoppingCart, Star, ShieldCheck, 
-  Truck, Clock, Database, ArrowRight, Zap, Info
+import {
+  ChevronLeft,
+  ShoppingCart,
+  ShieldCheck,
+  Truck,
+  Database,
 } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+
+import { motion } from "framer-motion";
+
 import { ModernNavbar } from "@/components/ModernNavbar";
 import { ModernFooter } from "@/components/ModernFooter";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+
 import { useAuth } from "@/lib/auth-context";
 import { useCart } from "@/lib/cart-context";
 import { axiosInstance } from "@/utils/axiosSetup";
+
 import { LoginDialog } from "@/components/LoginDialog";
 import { LogoutDialog } from "@/components/LogoutDialog";
+
+const InfoItem = ({
+  icon,
+  label,
+}: {
+  icon: React.ReactNode;
+  label: string;
+}) => (
+  <div className="flex items-center gap-3 rounded-xl border border-gray-100 bg-gray-50 px-4 py-3">
+    <div className="text-emerald-600">{icon}</div>
+    <p className="text-sm text-gray-700">{label}</p>
+  </div>
+);
 
 export default function MedicineDetailsPage() {
   const { id } = useParams();
   const router = useRouter();
+
   const { user, logout } = useAuth();
   const { addToCart, cartCount } = useCart();
+
   const [medicine, setMedicine] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+
   const [showLoginDialog, setShowLoginDialog] = useState(false);
   const [showLogoutDialog, setShowLogoutDialog] = useState(false);
-  const [activeTab, setActiveTab] = useState("description");
 
   useEffect(() => {
+    if (!id) return;
+
     const fetchMedicine = async () => {
       try {
+        setLoading(true);
+
         const res = await axiosInstance.get(`/medicines/${id}/`);
         setMedicine(res.data);
-      } catch (err) {
-        console.error("Failed to fetch medicine");
+      } catch (error) {
+        console.error("Failed to fetch medicine:", error);
       } finally {
         setLoading(false);
       }
     };
+
     fetchMedicine();
   }, [id]);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-slate-50 flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="w-16 h-16 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin"></div>
-          <p className="font-black text-slate-400 uppercase tracking-widest text-xs">Pharma Intelligence Loading...</p>
-        </div>
+      <div className="flex min-h-screen items-center justify-center bg-white">
+        <div className="h-10 w-10 animate-spin rounded-full border-4 border-emerald-500 border-t-transparent" />
       </div>
     );
   }
 
   if (!medicine) {
     return (
-      <div className="min-h-screen bg-slate-50 flex flex-col items-center justify-center p-6 text-center">
-        <h1 className="text-4xl font-black text-slate-900 mb-4">Product Not Found</h1>
-        <p className="text-slate-500 mb-8 max-w-md">The medicine identification protocol failed to find this item in our decentralized database.</p>
-        <Button onClick={() => router.push("/")} className="bg-slate-900 rounded-2xl h-12 px-8 uppercase font-black tracking-widest text-xs">Return to Catalog</Button>
+      <div className="flex min-h-screen flex-col items-center justify-center bg-white px-4 text-center">
+        <h1 className="text-2xl font-semibold text-gray-900">
+          Product not found
+        </h1>
+
+        <p className="mt-2 text-sm text-gray-500">
+          The medicine you are looking for does not exist.
+        </p>
+
+        <Button
+          className="mt-6 rounded-xl"
+          onClick={() => router.push("/")}
+        >
+          Back to Home
+        </Button>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white font-sans selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="bg-white">
       <ModernNavbar
         userLoggedIn={!!user}
         cartCount={cartCount}
@@ -73,7 +115,11 @@ export default function MedicineDetailsPage() {
         onLogout={() => setShowLogoutDialog(true)}
       />
 
-      <LoginDialog open={showLoginDialog} onOpenChange={setShowLoginDialog} />
+      <LoginDialog
+        open={showLoginDialog}
+        onOpenChange={setShowLoginDialog}
+      />
+
       <LogoutDialog
         open={showLogoutDialog}
         onOpenChange={setShowLogoutDialog}
@@ -83,176 +129,161 @@ export default function MedicineDetailsPage() {
         }}
       />
 
-      <main className="max-w-7xl mx-auto px-6 pt-32 pb-24 lg:pt-40">
-        <Button 
-          variant="ghost" 
+      <main className="mx-auto max-w-6xl px-4 py-24 lg:px-8 mt-20">
+        {/* Back */}
+        <Button
+          variant="ghost"
           onClick={() => router.back()}
-          className="mb-8 p-0 hover:bg-transparent text-slate-400 hover:text-slate-900 transition-colors uppercase font-black tracking-widest text-[10px] flex items-center gap-2"
+          className="mb-2 gap-2 px-0 text-gray-500 hover:bg-transparent hover:text-black"
         >
-          <ChevronLeft size={16} /> Back to Catalog
+          <ChevronLeft size={18} />
+          Back
         </Button>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 xl:gap-24">
-          {/* Left: Product Visuals */}
-          <motion.div 
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            className="space-y-8"
+        <div className="grid grid-cols-1 gap-10 lg:grid-cols-2">
+          {/* Image */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
           >
-            <div className="aspect-square bg-slate-50 rounded-[3rem] border border-slate-100 flex items-center justify-center relative overflow-hidden group shadow-2xl shadow-slate-200/50">
-               {medicine.image_url ? (
-                 <Image src={medicine.image_url} alt={medicine.name} fill className="object-cover group-hover:scale-105 transition-transform duration-1000" />
-               ) : (
-                 <div className="flex flex-col items-center gap-4 text-slate-200">
-                    <Database size={100} strokeWidth={1} />
-                    <span className="font-black text-[10px] uppercase tracking-[0.3em]">No Visual Uplink</span>
-                 </div>
-               )}
-               <div className="absolute top-8 left-8">
-                  <Badge className="bg-white/90 backdrop-blur-md text-emerald-600 border-none shadow-sm px-4 py-1.5 rounded-full font-black text-[10px] tracking-widest uppercase">
-                    {medicine.category_name || medicine.category}
-                  </Badge>
-               </div>
-            </div>
-
-            <div className="grid grid-cols-3 gap-6">
-               <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100 text-center space-y-2">
-                  <ShieldCheck size={20} className="mx-auto text-emerald-600" />
-                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Verified</p>
-               </div>
-               <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100 text-center space-y-2">
-                  <Clock size={20} className="mx-auto text-emerald-600" />
-                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Fast Track</p>
-               </div>
-               <div className="p-6 bg-slate-50 rounded-3xl border border-slate-100 text-center space-y-2">
-                  <Truck size={20} className="mx-auto text-emerald-600" />
-                  <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Shipping</p>
-               </div>
-            </div>
+            <Card className="overflow-hidden rounded-2xl border border-gray-100 shadow-none">
+              <CardContent className="relative aspect-[4/4] bg-gray-50 p-6">
+                {medicine.image_url ? (
+                  <Image
+                    src={medicine.image_url}
+                    alt={medicine.name}
+                    fill
+                    className="object-contain p-6"
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center">
+                    <Database size={56} className="text-gray-300" />
+                  </div>
+                )}
+              </CardContent>
+            </Card>
           </motion.div>
 
-          {/* Right: Product Info */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            animate={{ opacity: 1, x: 0 }}
+          {/* Details */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.35 }}
             className="flex flex-col"
           >
-            <div className="mb-8">
-              {/* <div className="flex items-center gap-2 text-yellow-500 mb-4 bg-yellow-50 w-fit px-3 py-1 rounded-full border border-yellow-100 shadow-sm">
-                <Star size={14} className="fill-yellow-500" />
-                <span className="text-sm font-black tracking-tight">{medicine.rating || "4.5"} Rating</span>
-                <span className="text-xs text-yellow-600 font-bold ml-1">(120 Reviews)</span>
-              </div> */}
-              
-              <h1 className="text-5xl font-black text-slate-950 tracking-tighter leading-none mb-6">
-                {medicine.name}
-              </h1>
-              
-              <div className="flex items-baseline gap-2 mb-8">
-                <span className="text-4xl font-black text-slate-900 tracking-tighter">Rs. {parseFloat(medicine.price)}</span>
-                <span className="text-slate-400 font-bold text-sm uppercase tracking-widest">Inc. Taxes</span>
-              </div>
+            {/* Category */}
+            <Badge className="w-fit rounded-full bg-emerald-50 px-3 py-1 text-emerald-700 hover:bg-emerald-50">
+              {medicine.category_name || "Medicine"}
+            </Badge>
 
-              <div className="p-6 bg-slate-950 rounded-[2rem] text-white flex items-center justify-between shadow-2xl shadow-slate-900/40 group hover:scale-[1.02] transition-transform duration-500">
-                 <div className="flex flex-col">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Stock Status</span>
-                    <span className={`text-sm font-black uppercase tracking-tight ${medicine.stock > 0 ? 'text-emerald-400' : 'text-rose-400'}`}>
-                      {medicine.stock > 0 ? `${medicine.stock} Units Available` : 'Out of Stock'}
-                    </span>
-                 </div>
-                 <Button 
-                    disabled={medicine.stock <= 0}
-                    onClick={() => addToCart(medicine)}
-                    className="bg-white text-slate-950 hover:bg-emerald-500 hover:text-white rounded-2xl h-12 px-8 font-black uppercase tracking-widest text-[10px] transition-all flex items-center gap-3 overflow-hidden relative group/btn"
-                 >
-                    <ShoppingCart size={16} />
-                    Add to Basket
-                 </Button>
-              </div>
+            {/* Name */}
+            <h1 className="mt-4 text-2xl font-semibold tracking-tight text-gray-900">
+              {medicine.name}
+            </h1>
+
+            <p className="mt-2 text-sm text-gray-500">
+              {medicine.manufacturer || "Generic Pharma"}
+            </p>
+
+            {/* Price */}
+            <div className="mt-8">
+              <p className="text-2xl font-bold text-gray-900">
+                Rs. {parseFloat(medicine.price).toFixed(2)}
+              </p>
+
+              <p className="mt-1 text-sm text-gray-500">
+                Inclusive of all taxes
+              </p>
             </div>
 
-            {/* Tabs for Info */}
-            <div className="mt-4 flex-1">
-               <div className="flex gap-8 border-b border-slate-100 mb-8">
-                  {['description', 'uses', 'side effects'].map(tab => (
-                    <button 
-                       key={tab}
-                       onClick={() => setActiveTab(tab)}
-                       className={`pb-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all relative ${activeTab === tab ? 'text-emerald-600' : 'text-slate-400 hover:text-slate-600'}`}
-                    >
-                       {tab}
-                       {activeTab === tab && (
-                         <motion.div layoutId="details-tab" className="absolute bottom-0 left-0 right-0 h-0.5 bg-emerald-600 rounded-full" />
-                       )}
-                    </button>
-                  ))}
-               </div>
+            {/* Stock */}
+            <div className="mt-6 flex items-center gap-2">
+              <div
+                className={`h-2.5 w-2.5 rounded-full ${
+                  medicine.stock > 0 ? "bg-green-500" : "bg-red-500"
+                }`}
+              />
 
-               <div className="min-h-[200px]">
-                  <AnimatePresence mode="wait">
-                    {activeTab === 'description' && (
-                      <motion.div 
-                        key="desc"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="space-y-4"
-                      >
-                         <p className="text-slate-600 leading-relaxed text-sm font-medium">
-                            {medicine.description || "No detailed description provided by the manufacturer. This medicine is a professional-grade healthcare product verified by our pharmacological assessment team."}
-                         </p>
-                         <div className="grid grid-cols-2 gap-4">
-                            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                               <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1 font-sans">Manufacturer</p>
-                               <p className="font-black text-slate-900 text-xs">{medicine.manufacturer || "Generic Pharma Labs"}</p>
-                            </div>
-                            <div className="p-4 bg-slate-50 rounded-2xl border border-slate-100">
-                               <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1 font-sans">Expiry Protocol</p>
-                               <p className="font-black text-slate-900 text-xs">{medicine.expiry_date || "Validated"}</p>
-                            </div>
-                         </div>
-                      </motion.div>
-                    )}
-                    {activeTab === 'uses' && (
-                      <motion.div 
-                        key="uses"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="p-6 bg-emerald-50 rounded-[2rem] border border-emerald-100 shadow-inner"
-                      >
-                         <div className="flex items-center gap-3 mb-4">
-                            <Zap size={20} className="text-emerald-600" />
-                            <h4 className="font-black text-emerald-900 uppercase text-xs tracking-tight">Indicated Uses</h4>
-                         </div>
-                         <p className="text-emerald-800/80 leading-relaxed text-sm font-semibold italic">
-                            {medicine.uses || "Primary therapeutic usage for general physiological maintenance and symptom relief as per medical standards."}
-                         </p>
-                      </motion.div>
-                    )}
-                    {activeTab === 'side effects' && (
-                      <motion.div 
-                        key="side"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        className="p-6 bg-slate-100 rounded-[2rem] border border-slate-200"
-                      >
-                         <div className="flex items-center gap-3 mb-4 text-slate-700">
-                            <Info size={20} />
-                            <h4 className="font-black uppercase text-xs tracking-tight">Safety Profile</h4>
-                         </div>
-                         <p className="text-slate-500 leading-relaxed text-sm font-medium">
-                            {medicine.side_effects || "Low risk profile when administered under clinical guidance. Consult your healthcare provider for personalized contraindications."}
-                         </p>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-               </div>
+              <p className="text-sm font-medium text-gray-700">
+                {medicine.stock > 0
+                  ? `${medicine.stock} items available`
+                  : "Out of stock"}
+              </p>
             </div>
 
-            {/* CTA Help */}
-          
+            {/* Add to cart */}
+            <Button
+              size="lg"
+              disabled={medicine.stock <= 0}
+              onClick={() => addToCart(medicine)}
+              className="mt-8 h-12 rounded-2xl bg-emerald-600 text-base font-medium hover:bg-emerald-700"
+            >
+              <ShoppingCart size={18} className="mr-2" />
+              Add to Cart
+            </Button>
+
+            {/* Info */}
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
+              <InfoItem
+                icon={<ShieldCheck size={18} />}
+                label={`Expiry: ${medicine.expiry_date || "N/A"}`}
+              />
+
+              <InfoItem
+                icon={<Truck size={18} />}
+                label="Fast delivery available"
+              />
+            </div>
+
+            {/* Tabs */}
+            <Tabs defaultValue="description" className="mt-10">
+              <TabsList className="grid w-full grid-cols-3 rounded-2xl bg-gray-100 p-1">
+                <TabsTrigger
+                  value="description"
+                  className="rounded-xl data-[state=active]:bg-white"
+                >
+                  Description
+                </TabsTrigger>
+
+                <TabsTrigger
+                  value="uses"
+                  className="rounded-xl data-[state=active]:bg-white"
+                >
+                  Uses
+                </TabsTrigger>
+
+                <TabsTrigger
+                  value="side_effects"
+                  className="rounded-xl data-[state=active]:bg-white"
+                >
+                  Side Effects
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent
+                value="description"
+                className="mt-6 text-sm leading-7 text-gray-600"
+              >
+                {medicine.description ||
+                  "No detailed description available."}
+              </TabsContent>
+
+              <TabsContent
+                value="uses"
+                className="mt-6 text-sm leading-7 text-gray-600"
+              >
+                {medicine.uses || "No usage information available."}
+              </TabsContent>
+
+              <TabsContent
+                value="side_effects"
+                className="mt-6 text-sm leading-7 text-gray-600"
+              >
+                {medicine.side_effects ||
+                  "Consult your healthcare professional for side effects."}
+              </TabsContent>
+            </Tabs>
           </motion.div>
         </div>
       </main>

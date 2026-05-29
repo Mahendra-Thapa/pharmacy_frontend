@@ -352,7 +352,7 @@ export default function POSPage() {
             <div className="flex items-center gap-3 shrink-0">
             <div className="flex items-center gap-2 text-slate-400 shrink-0">
               <Filter size={14} />
-              <span className="text-[10px] font-black uppercase tracking-widest hidden sm:inline">Category</span>
+              <span className="text-[10px] font-bold uppercase tracking-widest hidden sm:inline">Category</span>
             </div>
             <div className="flex-1">
               <Select value={selectedCategory} onValueChange={setSelectedCategory}>
@@ -377,7 +377,7 @@ export default function POSPage() {
                 whileHover={{ y: -8, boxShadow: "0 25px 50px -12px rgba(22, 163, 74, 0.2)" }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => addToCart(med)}
-                className={`p-0 rounded-xl border bg-white shadow-xl hover:shadow-2xl hover:border-pharma-green/40 transition-all duration-500 group flex flex-col h-[320px] relative overflow-hidden ${med.stock <= 0 ? "opacity-50 grayscale" : "border-slate-100"}`}
+                className={`p-0 rounded-xl border bg-white  hover: hover:border-pharma-green/40 transition-all duration-500 group flex flex-col h-[320px] relative overflow-hidden ${med.stock <= 0 ? "opacity-50 grayscale" : "border-slate-100"}`}
               >
                 {/* Image Section */}
                 <div className="h-40 relative bg-slate-50 overflow-hidden border-b border-slate-100">
@@ -386,18 +386,18 @@ export default function POSPage() {
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center text-slate-300 gap-2">
                       <Activity size={32} />
-                      <span className="text-[10px] font-black uppercase tracking-widest">No Visual</span>
+                      <span className="text-[10px] font-bold uppercase tracking-widest">No Visual</span>
                     </div>
                   )}
                   <div className="absolute top-4 right-4 z-10">
                     <span
-                      className={`text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-md shadow-sm ${med.stock <= 0 ? "text-white bg-rose-500/80" : "text-white bg-slate-950/80"}`}
+                      className={`text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-xl border border-white/20 backdrop-blur-md shadow-sm ${med.stock <= 0 ? "text-white bg-rose-500/80" : "text-white bg-slate-950/80"}`}
                     >
                       {med.stock <= 0 ? "Out of Stock" : `${med.stock} In Shelf`}
                     </span>
                   </div>
                   <div className="absolute bottom-4 left-4 z-10">
-                    <span className="text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded-xl bg-white/90 text-pharma-blue border border-slate-100 shadow-sm">
+                    <span className="text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-xl bg-white/90 text-pharma-blue border border-slate-100 shadow-sm">
                       {med.category_name || "Pharma"}
                     </span>
                   </div>
@@ -408,7 +408,7 @@ export default function POSPage() {
                   <div className="absolute top-0 right-0 p-8 bg-pharma-green/5 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
 
                   <div>
-                    <h3 className="font-black text-slate-900 group-hover:text-pharma-green transition tracking-tight text-lg leading-tight mb-2">
+                    <h3 className="font-bold text-slate-900 group-hover:text-pharma-green transition tracking-tight text-lg leading-tight mb-2">
                       {med.name}
                     </h3>
                     <p className="text-[10px] font-bold text-slate-400 line-clamp-2 uppercase tracking-widest">
@@ -418,14 +418,14 @@ export default function POSPage() {
 
                   <div className="flex justify-between items-end mt-4">
                     <div className="flex flex-col">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-1">Retail Price</span>
-                      <span className="text-2xl font-black text-slate-950 tracking-tighter">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-1">Retail Price</span>
+                      <span className="text-2xl font-bold text-slate-950 tracking-tighter">
                         <span className="text-pharma-green text-sm mr-1">Rs.</span>
                         {parseFloat(med.price).toFixed(2)}
                       </span>
                     </div>
                     {med.stock > 0 && (
-                      <div className="w-12 h-12 bg-slate-950 text-white rounded-2xl flex items-center justify-center group-hover:bg-pharma-green transition-all shadow-xl shadow-slate-900/10 group-active:scale-90">
+                      <div className="w-12 h-12 bg-slate-950 text-white rounded-2xl flex items-center justify-center group-hover:bg-pharma-green transition-all  shadow-slate-900/10 group-active:scale-90">
                         <Plus size={22} className="stroke-[3px]" />
                       </div>
                     )}
@@ -438,10 +438,10 @@ export default function POSPage() {
 
         {/* Right Panel: Cart & Checkout */}
         <section className="flex-[1.2] flex flex-col gap-6 h-full lg:h-full relative min-h-[500px]  ">
-          <div className="bg-white/80 backdrop-blur-2xl border border-slate-200 rounded-[40px] shadow-2xl flex flex-col h-full overflow-hidden relative overflow-y-scroll sidebar-thin">
+          <div className="bg-white/80 backdrop-blur-2xl border border-slate-200 rounded-[40px]  flex flex-col h-full overflow-hidden relative overflow-y-scroll sidebar-thin">
             <div className="p-8 border-b border-slate-100 flex justify-between items-center bg-slate-50">
               <div>
-                <h2 className="font-black text-slate-950 text-2xl tracking-tighter">
+                <h2 className="font-bold text-slate-950 text-2xl tracking-tighter">
                   Current Register
                 </h2>
                 <p className="text-[10px] font-bold text-pharma-blue uppercase tracking-widest">
@@ -486,11 +486,11 @@ export default function POSPage() {
                       {item.med.image_url ? (
                         <Image src={item.med.image_url} alt={item.med.name} fill className="object-cover" />
                       ) : (
-                        <span className="text-pharma-green font-black text-xs">{item.qty}x</span>
+                        <span className="text-pharma-green font-bold text-xs">{item.qty}x</span>
                       )}
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="font-black text-slate-900 text-sm truncate leading-none mb-1">
+                      <h4 className="font-bold text-slate-900 text-sm truncate leading-none mb-1">
                         {item.med.name}
                       </h4>
                       <span className="text-[10px] text-slate-400 font-bold uppercase tracking-widest">
@@ -498,7 +498,7 @@ export default function POSPage() {
                       </span>
                     </div>
                     <div className="flex flex-col items-end gap-1">
-                      <span className="font-black text-slate-900 text-sm leading-none">
+                      <span className="font-bold text-slate-900 text-sm leading-none">
                         Rs.{(parseFloat(item.med.price) * item.qty).toFixed(2)}
                       </span>
                       <button
@@ -517,7 +517,7 @@ export default function POSPage() {
               <div className="space-y-3">
                 <div className="flex items-center gap-2 mb-2">
                   <UserCircle size={16} className="text-slate-400" />
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                     Customer Manifest
                   </span>
                 </div>
@@ -525,11 +525,11 @@ export default function POSPage() {
                 {selectedCustomer ? (
                   <div className="flex items-center justify-between p-4 bg-pharma-blue/5 border border-pharma-blue/20 rounded-2xl">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 bg-pharma-blue text-white rounded-xl flex items-center justify-center font-black">
+                      <div className="w-10 h-10 bg-pharma-blue text-white rounded-xl flex items-center justify-center font-bold">
                         {selectedCustomer.name[0]}
                       </div>
                       <div className="flex flex-col">
-                        <span className="text-xs font-black text-slate-900">
+                        <span className="text-xs font-bold text-slate-900">
                           {selectedCustomer.name}
                         </span>
                         <span className="text-[10px] font-bold text-slate-400">
@@ -539,7 +539,7 @@ export default function POSPage() {
                     </div>
                     <button
                       onClick={() => setSelectedCustomer(null)}
-                      className="text-[10px] font-black text-rose-500 uppercase"
+                      className="text-[10px] font-bold text-rose-500 uppercase"
                     >
                       Change
                     </button>
@@ -567,7 +567,7 @@ export default function POSPage() {
                     </div>
 
                     {searchCustQuery && filteredCustomers.length > 0 && (
-                      <div className="bg-white border border-slate-100 rounded-2xl shadow-xl overflow-hidden divide-y divide-slate-50 max-h-48 overflow-y-auto">
+                      <div className="bg-white border border-slate-100 rounded-2xl  overflow-hidden divide-y divide-slate-50 max-h-48 overflow-y-auto">
                         {filteredCustomers.map(cust => (
                           <button
                             key={cust.id}
@@ -578,7 +578,7 @@ export default function POSPage() {
                             className="w-full text-left p-3 hover:bg-slate-50 flex items-center justify-between"
                           >
                             <div className="flex flex-col">
-                              <span className="text-xs font-black text-slate-900">
+                              <span className="text-xs font-bold text-slate-900">
                                 {cust.name}
                               </span>
                               <span className="text-[10px] font-bold text-slate-400">
@@ -602,9 +602,9 @@ export default function POSPage() {
                 open={isCreatingCustomer}
                 onOpenChange={setIsCreatingCustomer}
               >
-                <DialogContent className="rounded-xl border-transparent shadow-2xl bg-white p-8 max-w-sm">
+                <DialogContent className="rounded-xl border-transparent  bg-white p-8 max-w-sm">
                   <DialogHeader>
-                    <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
+                    <DialogTitle className="text-2xl font-bold text-slate-900 tracking-tight">
                       Register Agent
                     </DialogTitle>
                     <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
@@ -613,7 +613,7 @@ export default function POSPage() {
                   </DialogHeader>
                   <div className="space-y-4 py-6">
                     <div className="space-y-2">
-                      <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">
+                      <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">
                         Full Identity
                       </Label>
                       <input
@@ -624,7 +624,7 @@ export default function POSPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">
+                      <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">
                         Contact String
                       </Label>
                       <input
@@ -637,7 +637,7 @@ export default function POSPage() {
                   </div>
                   <Button
                     onClick={handleRegisterCustomer}
-                    className="w-full h-14 bg-slate-950 text-white rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-slate-900/20 active:scale-95 transition-all"
+                    className="w-full h-14 bg-slate-950 text-white rounded-2xl font-bold uppercase tracking-widest  shadow-slate-900/20 active:scale-95 transition-all"
                   >
                     Commit Profile
                   </Button>
@@ -645,10 +645,10 @@ export default function POSPage() {
               </Dialog>
 
               <div className="flex justify-between items-center py-2 border-b border-dashed border-slate-200 pb-6">
-                <span className="text-slate-400 font-black uppercase tracking-[0.2em] text-[10px]">
+                <span className="text-slate-400 font-bold uppercase tracking-[0.2em] text-[10px]">
                   Net Total
                 </span>
-                <span className="text-2xl font-black text-pharma-green tracking-tighter">
+                <span className="text-2xl font-bold text-pharma-green tracking-tighter">
                   <span className="text-pharma-green/70 text-lg mr-1 serif">
                     Rs.
                   </span>
@@ -659,7 +659,7 @@ export default function POSPage() {
               <div className="grid grid-cols-2 gap-3">
                 <button
                   onClick={() => setPaymentMode("CASH")}
-                  className={`py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.15em] flex flex-col items-center justify-center gap-2 transition-all ${paymentMode === "CASH" ? "bg-slate-950 text-white shadow-xl shadow-slate-900/20 border-slate-950 scale-100" : "bg-white text-slate-400 border-2 border-slate-100 hover:border-slate-200 scale-[0.98]"}`}
+                  className={`py-4 rounded-2xl font-bold text-[10px] uppercase tracking-[0.15em] flex flex-col items-center justify-center gap-2 transition-all ${paymentMode === "CASH" ? "bg-slate-950 text-white  shadow-slate-900/20 border-slate-950 scale-100" : "bg-white text-slate-400 border-2 border-slate-100 hover:border-slate-200 scale-[0.98]"}`}
                 >
                   <Banknote
                     size={20}
@@ -671,7 +671,7 @@ export default function POSPage() {
                 </button>
                 <button
                   onClick={() => setPaymentMode("QR")}
-                  className={`py-4 rounded-2xl font-black text-[10px] uppercase tracking-[0.15em] flex flex-col items-center justify-center gap-2 transition-all ${paymentMode === "QR" ? "bg-pharma-green text-white shadow-xl shadow-pharma-green/30 border-pharma-green scale-100" : "bg-white text-slate-400 border-2 border-slate-100 hover:border-slate-200 scale-[0.98]"}`}
+                  className={`py-4 rounded-2xl font-bold text-[10px] uppercase tracking-[0.15em] flex flex-col items-center justify-center gap-2 transition-all ${paymentMode === "QR" ? "bg-pharma-green text-white  shadow-pharma-green/30 border-pharma-green scale-100" : "bg-white text-slate-400 border-2 border-slate-100 hover:border-slate-200 scale-[0.98]"}`}
                 >
                   <QrCode
                     size={20}
@@ -693,7 +693,7 @@ export default function POSPage() {
                   >
                     <div className="bg-slate-950 text-white p-6 rounded-[32px] flex flex-col items-center text-center gap-4 relative overflow-hidden group">
                       <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-green/20 blur-2xl rounded-full opacity-0 group-hover:opacity-100 transition duration-1000"></div>
-                      <div className="bg-white p-3 rounded-2xl shadow-2xl relative z-10 w-44 h-44 flex items-center justify-center">
+                      <div className="bg-white p-3 rounded-2xl  relative z-10 w-44 h-44 flex items-center justify-center">
                         {pharmacySettings?.qr_code_url ? (
                           <Image src={pharmacySettings.qr_code_url} alt="Payment QR" fill className="object-contain p-2" />
                         ) : (
@@ -704,7 +704,7 @@ export default function POSPage() {
                         )}
                       </div>
                       <div className="relative z-10">
-                        <p className="text-[10px] text-pharma-green font-black uppercase tracking-[0.2em] mb-1">
+                        <p className="text-[10px] text-pharma-green font-bold uppercase tracking-[0.2em] mb-1">
                           Scan to Pay Rs.{totalAmount.toFixed(2)}
                         </p>
                         <div className="flex items-center justify-center gap-1">
@@ -724,7 +724,7 @@ export default function POSPage() {
               <button
                 onClick={handleCheckout}
                 disabled={loading}
-                className="group relative w-full h-16 bg-pharma-green hover:bg-pharma-green/90 text-white font-black uppercase tracking-[0.15em] rounded-[2rem] transition-all duration-500 shadow-2xl shadow-pharma-green/30 active:scale-[0.98] overflow-hidden flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
+                className="group relative w-full h-16 bg-pharma-green hover:bg-pharma-green/90 text-white font-bold uppercase tracking-[0.15em] rounded-[2rem] transition-all duration-500  shadow-pharma-green/30 active:scale-[0.98] overflow-hidden flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_25%,rgba(255,255,255,0.2)_50%,transparent_75%)] bg-[length:250%] bg-left group-hover:block hidden motion-safe:animate-[shimmer_2s_infinite]"></div>
                 {loading ? (
@@ -766,7 +766,7 @@ export default function POSPage() {
                       </p>
                       <div className="mt-8 flex items-center justify-center gap-4">
                         <div className="h-px border-t border-dashed border-slate-200 flex-1"></div>
-                        <p className="text-[11px] font-black text-slate-400 uppercase tracking-widest">
+                        <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest">
                           {receiptData.order_number || `TX-${receiptData.id}`}
                         </p>
                         <div className="h-px border-t border-dashed border-slate-200 flex-1"></div>
@@ -781,7 +781,7 @@ export default function POSPage() {
                         <span className="text-slate-400 font-bold uppercase tracking-widest">
                           Patient
                         </span>
-                        <span className="text-slate-950 font-black">
+                        <span className="text-slate-950 font-bold">
                           {customerName || "Walk-in"}
                         </span>
                       </div>
@@ -789,7 +789,7 @@ export default function POSPage() {
                         <span className="text-slate-400 font-bold uppercase tracking-widest">
                           Handler
                         </span>
-                        <span className="text-slate-950 font-black">
+                        <span className="text-slate-950 font-bold">
                           {receiptData.handled_by_name || "Automated Terminal"}
                         </span>
                       </div>
@@ -798,10 +798,10 @@ export default function POSPage() {
                           Status / Modality
                         </span>
                         <div className="flex items-center gap-2">
-                          <span className="text-pharma-green font-black tracking-widest bg-pharma-blue/5 px-2 py-0.5 rounded-lg text-[10px]">
+                          <span className="text-pharma-green font-bold tracking-widest bg-pharma-blue/5 px-2 py-0.5 rounded-lg text-[10px]">
                             VERIFIED
                           </span>
-                          <span className="text-slate-950 font-black tracking-widest bg-slate-200 px-2 py-0.5 rounded-lg text-[10px]">
+                          <span className="text-slate-950 font-bold tracking-widest bg-slate-200 px-2 py-0.5 rounded-lg text-[10px]">
                             {paymentMode}
                           </span>
                         </div>
@@ -811,13 +811,13 @@ export default function POSPage() {
                     <table className="w-full text-xs mb-8">
                       <thead>
                         <tr className="text-left text-slate-400">
-                          <th className="pb-4 font-black uppercase tracking-widest text-[9px] w-[50%]">
+                          <th className="pb-4 font-bold uppercase tracking-widest text-[9px] w-[50%]">
                             Dispensation
                           </th>
-                          <th className="pb-4 text-center font-black uppercase tracking-widest text-[9px]">
+                          <th className="pb-4 text-center font-bold uppercase tracking-widest text-[9px]">
                             Vol
                           </th>
-                          <th className="pb-4 text-right font-black uppercase tracking-widest text-[9px]">
+                          <th className="pb-4 text-right font-bold uppercase tracking-widest text-[9px]">
                             Sum
                           </th>
                         </tr>
@@ -828,13 +828,13 @@ export default function POSPage() {
                             key={item.id}
                             className="border-b border-slate-50 last:border-0 hover:bg-slate-50/50"
                           >
-                            <td className="py-4 pr-2 text-slate-950 font-black tracking-tight leading-tight">
+                            <td className="py-4 pr-2 text-slate-950 font-bold tracking-tight leading-tight">
                               {item.medicine_name}
                             </td>
-                            <td className="py-4 text-center font-black text-slate-400">
+                            <td className="py-4 text-center font-bold text-slate-400">
                               {item.quantity}
                             </td>
-                            <td className="py-4 text-right font-black text-slate-950 text-sm">
+                            <td className="py-4 text-right font-bold text-slate-950 text-sm">
                               {(parseFloat(item.price) * item.quantity).toFixed(
                                 1,
                               )}
@@ -846,16 +846,16 @@ export default function POSPage() {
 
                     <div className="pt-6 border-t border-slate-950">
                       <div className="flex justify-between items-center mb-6">
-                        <span className="text-[12px] font-black text-slate-950 uppercase tracking-[0.2em] block">
+                        <span className="text-[12px] font-bold text-slate-950 uppercase tracking-[0.2em] block">
                           Grand Total
                         </span>
-                        <span className="text-4xl font-black text-pharma-green tracking-tighter">
+                        <span className="text-4xl font-bold text-pharma-green tracking-tighter">
                           Rs.{parseFloat(receiptData.total_amount).toFixed(2)}
                         </span>
                       </div>
                       <div className="p-4 bg-slate-950 text-white rounded-2xl flex items-center justify-center gap-3">
                         <CheckCircle className="text-pharma-green" size={20} />
-                        <span className="font-black text-xs uppercase tracking-widest text-pharma-green">
+                        <span className="font-bold text-xs uppercase tracking-widest text-pharma-green">
                           Financial Log Committed
                         </span>
                       </div>
@@ -872,7 +872,7 @@ export default function POSPage() {
                       <p className="mt-5 text-[9px] font-bold text-slate-400 uppercase tracking-[0.3em]">
                         Cryptographic Proof of Sequence
                       </p>
-                      <p className="mt-1 text-[9px] font-black text-slate-300 tracking-widest">
+                      <p className="mt-1 text-[9px] font-bold text-slate-300 tracking-widest">
                         {receiptData.payment?.transaction_id ||
                           `0x${Math.random().toString(16).slice(2, 10)}`}
                       </p>
@@ -895,7 +895,7 @@ export default function POSPage() {
                         setShowReceipt(false);
                         setReceiptData(null);
                       }}
-                      className="flex-1 h-16 bg-pharma-green hover:bg-pharma-green/90 text-white font-black uppercase tracking-[0.15em] rounded-[20px] flex justify-center items-center gap-3 transition-all shadow-xl shadow-pharma-green/20 active:scale-95"
+                      className="flex-1 h-16 bg-pharma-green hover:bg-pharma-green/90 text-white font-bold uppercase tracking-[0.15em] rounded-[20px] flex justify-center items-center gap-3 transition-all  shadow-pharma-green/20 active:scale-95"
                     >
                       <ShoppingBag size={20} />
                       Start New Cycle
@@ -908,10 +908,10 @@ export default function POSPage() {
 
           {/* Financial Logs Modal */}
           <Dialog open={showLogs} onOpenChange={setShowLogs}>
-            <DialogContent className="sm:max-w-[700px] rounded-[2rem] p-0 border-transparent shadow-2xl bg-white overflow-hidden max-h-[80vh] flex flex-col">
+            <DialogContent className="sm:max-w-[700px] rounded-[2rem] p-0 border-transparent  bg-white overflow-hidden max-h-[80vh] flex flex-col">
               <div className="p-8 border-b border-slate-50 bg-slate-50 flex items-center justify-between shrink-0">
                 <div>
-                  <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
+                  <DialogTitle className="text-2xl font-bold text-slate-900 tracking-tight">
                     Terminal Logs
                   </DialogTitle>
                   <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">
@@ -926,19 +926,19 @@ export default function POSPage() {
                 <Table>
                   <TableHeader>
                     <TableRow className="bg-slate-50">
-                      <TableHead className="px-8 py-5 text-[9px] font-black uppercase tracking-widest">
+                      <TableHead className="px-8 py-5 text-[9px] font-bold uppercase tracking-widest">
                         ID
                       </TableHead>
-                      <TableHead className="py-5 text-[9px] font-black uppercase tracking-widest">
+                      <TableHead className="py-5 text-[9px] font-bold uppercase tracking-widest">
                         Amount
                       </TableHead>
-                      <TableHead className="py-5 text-[9px] font-black uppercase tracking-widest">
+                      <TableHead className="py-5 text-[9px] font-bold uppercase tracking-widest">
                         Method
                       </TableHead>
-                      <TableHead className="py-5 text-[9px] font-black uppercase tracking-widest">
+                      <TableHead className="py-5 text-[9px] font-bold uppercase tracking-widest">
                         Status
                       </TableHead>
-                      <TableHead className="px-8 py-5 text-[9px] font-black uppercase tracking-widest text-right">
+                      <TableHead className="px-8 py-5 text-[9px] font-bold uppercase tracking-widest text-right">
                         Date
                       </TableHead>
                     </TableRow>
@@ -946,7 +946,7 @@ export default function POSPage() {
                   <TableBody>
                     {transactions.map(tx => (
                       <TableRow key={tx.id} className="hover:bg-slate-50">
-                        <TableCell className="px-8 py-4 font-black text-xs text-slate-900">
+                        <TableCell className="px-8 py-4 font-bold text-xs text-slate-900">
                           {tx.transaction_id || `TRX-${tx.id}`}
                         </TableCell>
                         <TableCell className="py-4 font-bold text-xs">
@@ -955,7 +955,7 @@ export default function POSPage() {
                         <TableCell className="py-4">
                           <Badge
                             variant="outline"
-                            className="text-[8px] font-black leading-none uppercase"
+                            className="text-[8px] font-bold leading-none uppercase"
                           >
                             {tx.method}
                           </Badge>
@@ -989,7 +989,7 @@ export default function POSPage() {
                 initial={{ opacity: 0, y: 50, scale: 0.9 }}
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
-                className={`fixed bottom-12 left-1/2 -translate-x-1/2 px-8 py-5 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] font-black uppercase tracking-[0.1em] text-[11px] flex items-center gap-4 z-[200] backdrop-blur-xl border border-white/20 ${toastType === "error" ? "bg-rose-600 text-white" : "bg-slate-900 text-white"}`}
+                className={`fixed bottom-12 left-1/2 -translate-x-1/2 px-8 py-5 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.15)] font-bold uppercase tracking-[0.1em] text-[11px] flex items-center gap-4 z-[200] backdrop-blur-xl border border-white/20 ${toastType === "error" ? "bg-rose-600 text-white" : "bg-slate-900 text-white"}`}
               >
                 <div
                   className={`w-8 h-8 rounded-xl flex items-center justify-center ${toastType === "error" ? "bg-white/20" : "bg-pharma-green"}`}

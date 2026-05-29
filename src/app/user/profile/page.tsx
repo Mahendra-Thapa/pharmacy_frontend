@@ -52,19 +52,19 @@ export default function ProfilePage() {
     return (
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
             <header>
-                <h1 className="text-2xl font-black text-slate-900 tracking-tighter mb-2">My Profile</h1>
+                <h1 className="text-2xl font-bold text-slate-900 tracking-tighter mb-2">My Profile</h1>
                 <p className="text-slate-400 font-bold text-xs uppercase tracking-widest">Personal Identification & Details</p>
             </header>
 
-            <Card className="rounded-xl border-transparent shadow-xl bg-white overflow-hidden p-8 lg:p-12">
+            <Card className="rounded-xl border-transparent  bg-white overflow-hidden p-8 lg:p-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                     <div className="space-y-6">
                         <div className="space-y-2">
-                            <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Username </Label>
+                            <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Username </Label>
                             <Input disabled value={user?.username || ''} className="h-14 rounded-2xl bg-slate-50 border-slate-100 font-bold text-slate-400" />
                         </div>
                         <div className="space-y-2">
-                            <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Email </Label>
+                            <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Email </Label>
                             <Input
                                 {...register("email")}
                                 disabled
@@ -75,7 +75,7 @@ export default function ProfilePage() {
                     </div>
                     <div className="space-y-6">
                         <div className="space-y-2">
-                            <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Full Name</Label>
+                            <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Full Name</Label>
                             <div className="flex gap-4">
                                 <div className="flex-1 space-y-1">
                                     <Input
@@ -96,7 +96,7 @@ export default function ProfilePage() {
                             </div>
                         </div>
                         <div className="space-y-2">
-                            <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">Mobile Number</Label>
+                            <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">Mobile Number</Label>
                             <Input
                                 {...register("phone")}
                                 placeholder="+XX XXXXXXXX"
@@ -111,7 +111,7 @@ export default function ProfilePage() {
                     <Button
                         onClick={handleSubmit(onUpdate)}
                         disabled={loading}
-                        className="h-14 px-10 bg-slate-900 hover:bg-pharma-blue text-white rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-slate-900/10 transition-all active:scale-95"
+                        className="h-14 px-10 bg-slate-900 hover:bg-pharma-blue text-white rounded-2xl font-bold uppercase tracking-widest  shadow-slate-900/10 transition-all active:scale-95"
                     >
                         {loading ? "Updating..." : "Update Profile"}
                     </Button>

@@ -56,12 +56,12 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
       <aside className={`fixed inset-y-0 left-0 z-50 w-80 bg-white border-r border-slate-100 transform transition-transform duration-500 lg:translate-x-0 ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
         <div className="h-full flex flex-col p-8 overflow-y-auto custom-scrollbar">
           <Link href="/" className="flex items-center gap-4 mb-14 shrink-0">
-            {/* <div className="w-12 h-12 bg-slate-950 rounded-2xl flex items-center justify-center shadow-xl">
+            {/* <div className="w-12 h-12 bg-slate-950 rounded-2xl flex items-center justify-center ">
                <Activity size={24} className="text-pharma-blue" />
             </div> */}
             <div>
-              {/* <h2 className="text-xl font-black text-slate-950 tracking-tighter uppercase leading-none">Admin<span className="text-pharma-blue">Panel</span></h2> */}
-              {/* <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-1">Management Hub</p> */}
+              {/* <h2 className="text-xl font-bold text-slate-950 tracking-tighter uppercase leading-none">Admin<span className="text-pharma-blue">Panel</span></h2> */}
+              {/* <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">Management Hub</p> */}
               <Image src="/logo.png" alt="Logo" width={1000} height={500} className='w-32' />
             </div>
           </Link>
@@ -77,16 +77,16 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
                   className={`flex items-center gap-4 px-6 py-4 rounded-2xl transition-all ${isActive ? 'bg-slate-950 text-white' : 'text-slate-500 hover:bg-slate-50 hover:text-pharma-blue'}`}
                 >
                   <item.icon size={18} className={isActive ? 'text-pharma-blue' : 'text-slate-400'} />
-                  <span className="text-[11px] font-black uppercase tracking-widest">{item.name}</span>
+                  <span className="text-[11px] font-bold uppercase tracking-widest">{item.name}</span>
                   {!isActive && <ChevronRight size={14} className="ml-auto opacity-0 group-hover:opacity-100" />}
                 </Link>
               );
             })}
           </nav>
 
-          <button onClick={() => setShowLogoutConfirm(true)} className="mt-8 flex items-center gap-4 px-6 py-4 rounded-2xl text-rose-500 hover:bg-rose-50 transition-all font-black shrink-0">
+          <button onClick={() => setShowLogoutConfirm(true)} className="mt-8 flex items-center gap-4 px-6 py-4 rounded-2xl text-rose-500 hover:bg-rose-50 transition-all font-bold shrink-0">
              <LogOut size={18} />
-             <span className="text-[11px] font-black uppercase tracking-widest">Logout</span>
+             <span className="text-[11px] font-bold uppercase tracking-widest">Logout</span>
           </button>
         </div>
       </aside>
@@ -97,7 +97,7 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
               <button onClick={() => setSidebarOpen(true)} className="lg:hidden p-3 bg-white border border-slate-100 rounded-xl">
                 <Menu size={20} />
               </button>
-              <h1 className="text-sm font-black text-slate-900 uppercase tracking-tight">{getBreadcrumb()}</h1>
+              <h1 className="text-sm font-bold text-slate-900 uppercase tracking-tight">{getBreadcrumb()}</h1>
            </div>
 
            <div className="flex items-center gap-4">
@@ -107,10 +107,10 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
               </button>
               <div className="hidden sm:flex items-center gap-3 pl-4 border-l border-slate-100">
                  <div className="text-right">
-                    <p className="text-[10px] font-black text-slate-400 uppercase leading-none mb-1">Session Active</p>
-                    <p className="text-xs font-black text-slate-950">{user?.username}</p>
+                    <p className="text-[10px] font-bold text-slate-400 uppercase leading-none mb-1">Session Active</p>
+                    <p className="text-xs font-bold text-slate-950">{user?.username}</p>
                  </div>
-                 <div className="w-10 h-10 rounded-full bg-slate-950 flex items-center justify-center text-white font-black">
+                 <div className="w-10 h-10 rounded-full bg-slate-950 flex items-center justify-center text-white font-bold">
                     {user?.username?.[0]?.toUpperCase()}
                  </div>
               </div>
@@ -133,19 +133,19 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
       </div>
 
       <Dialog open={notificationsOpen} onOpenChange={setNotificationsOpen}>
-        <DialogContent className="sm:max-w-[450px] rounded-[2rem] p-0 overflow-hidden bg-white border-none shadow-3xl text-left">
+        <DialogContent className="sm:max-w-[450px] rounded-[2rem] p-0 overflow-hidden bg-white border-none  text-left">
            <DialogHeader className="p-8 bg-slate-950 text-white relative">
-              <DialogTitle className="text-xl font-black tracking-tight flex items-center gap-3">
+              <DialogTitle className="text-xl font-bold tracking-tight flex items-center gap-3">
                  <Bell size={18} className="text-pharma-blue" /> Notifications
               </DialogTitle>
-              <DialogDescription className="text-[10px] font-black uppercase text-slate-400 mt-1">System Alerts & Updates</DialogDescription>
+              <DialogDescription className="text-[10px] font-bold uppercase text-slate-400 mt-1">System Alerts & Updates</DialogDescription>
            </DialogHeader>
            
            <div className="p-4 max-h-[400px] overflow-y-auto custom-scrollbar">
               {aiAlerts?.length === 0 ? (
                  <div className="py-20 flex flex-col items-center justify-center opacity-20">
                     <Mail size={40} className="mb-4 text-slate-300" />
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 text-center">No new notifications</p>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-slate-500 text-center">No new notifications</p>
                  </div>
               ) : (
                 <div className="space-y-3">
@@ -154,7 +154,7 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
                        <Zap size={16} className="text-rose-500 mt-1 shrink-0" />
                        <div className="flex-1">
                           <p className="text-xs font-bold text-slate-800 leading-relaxed">{alert.message}</p>
-                          <p className="text-[8px] font-black text-slate-400 uppercase mt-2 tracking-widest">{new Date().toLocaleTimeString()}</p>
+                          <p className="text-[8px] font-bold text-slate-400 uppercase mt-2 tracking-widest">{new Date().toLocaleTimeString()}</p>
                        </div>
                     </div>
                   ))}
@@ -162,7 +162,7 @@ function AdminLayoutInner({ children }: { children: React.ReactNode }) {
               )}
            </div>
            <div className="p-6 bg-slate-50 border-t border-slate-100 text-center">
-              <Button onClick={() => setNotificationsOpen(false)} className="rounded-xl h-12 px-8 bg-slate-950 text-white font-black text-[10px] uppercase tracking-widest">Close</Button>
+              <Button onClick={() => setNotificationsOpen(false)} className="rounded-xl h-12 px-8 bg-slate-950 text-white font-bold text-[10px] uppercase tracking-widest">Close</Button>
            </div>
         </DialogContent>
       </Dialog>

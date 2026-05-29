@@ -182,7 +182,7 @@ export default function POSOrdersPage() {
   if (!user || (user.role !== "POS" && user.role !== "ADMIN")) {
     return (
       <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <p className="text-white font-black">Access denied. POS/Admin only.</p>
+        <p className="text-white font-bold">Access denied. POS/Admin only.</p>
       </div>
     );
   }
@@ -195,7 +195,7 @@ export default function POSOrdersPage() {
         {/* Search & header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 mb-8">
           <div>
-            <h2 className="text-3xl font-black text-slate-900 tracking-tighter">
+            <h2 className="text-3xl font-bold text-slate-900 tracking-tighter">
               Order List
             </h2>
             <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">
@@ -229,7 +229,7 @@ export default function POSOrdersPage() {
         </div>
 
         {/* Orders Table */}
-        <div className="bg-white rounded-[3rem] shadow-xl border border-slate-100 overflow-hidden">
+        <div className="bg-white rounded-[3rem]  border border-slate-100 overflow-hidden">
           {loading ? (
             <div className="p-12 space-y-4">
               {[1, 2, 3, 4].map(i => (
@@ -243,22 +243,22 @@ export default function POSOrdersPage() {
             <Table>
               <TableHeader>
                 <TableRow className="bg-slate-50 hover:bg-slate-50">
-                  <TableHead className="px-8 py-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                  <TableHead className="px-8 py-6 text-[10px] font-bold uppercase tracking-widest text-slate-500">
                     Order #
                   </TableHead>
-                  <TableHead className="py-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                  <TableHead className="py-6 text-[10px] font-bold uppercase tracking-widest text-slate-500">
                     Customer
                   </TableHead>
-                  <TableHead className="py-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                  <TableHead className="py-6 text-[10px] font-bold uppercase tracking-widest text-slate-500">
                     Total
                   </TableHead>
-                  <TableHead className="py-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                  <TableHead className="py-6 text-[10px] font-bold uppercase tracking-widest text-slate-500">
                     Status
                   </TableHead>
-                  <TableHead className="py-6 text-[10px] font-black uppercase tracking-widest text-slate-500">
+                  <TableHead className="py-6 text-[10px] font-bold uppercase tracking-widest text-slate-500">
                     Date
                   </TableHead>
-                  <TableHead className="py-6 text-[10px] font-black uppercase tracking-widest text-slate-500 text-right px-8">
+                  <TableHead className="py-6 text-[10px] font-bold uppercase tracking-widest text-slate-500 text-right px-8">
                     Actions
                   </TableHead>
                 </TableRow>
@@ -301,7 +301,7 @@ export default function POSOrdersPage() {
                                   <ChevronDown size={14} />
                                 )}
                               </div>
-                              <span className="font-black text-slate-950 text-sm tracking-tighter">
+                              <span className="font-bold text-slate-950 text-sm tracking-tighter">
                                 {order.order_number ||
                                   `RX-${order.id.toString().padStart(5, "0")}`}
                               </span>
@@ -309,7 +309,7 @@ export default function POSOrdersPage() {
                           </TableCell>
                           <TableCell className="py-6">
                             <div>
-                              <p className="font-black text-slate-900 text-xs tracking-tight">
+                              <p className="font-bold text-slate-900 text-xs tracking-tight">
                                 {order.customer_name || "Walk-in Client"}
                               </p>
                               <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-0.5">
@@ -317,12 +317,12 @@ export default function POSOrdersPage() {
                               </p>
                             </div>
                           </TableCell>
-                          <TableCell className="py-6 font-black text-pharma-green">
+                          <TableCell className="py-6 font-bold text-pharma-green">
                             Rs. {parseFloat(order.total_amount).toFixed(2)}
                           </TableCell>
                           <TableCell className="py-6">
                             <Badge
-                              className={`text-[9px] font-black uppercase tracking-widest border px-3 py-1 rounded-lg ${statusCfg.bg} ${statusCfg.color}`}
+                              className={`text-[9px] font-bold uppercase tracking-widest border px-3 py-1 rounded-lg ${statusCfg.bg} ${statusCfg.color}`}
                             >
                               {statusCfg.label}
                             </Badge>
@@ -337,7 +337,7 @@ export default function POSOrdersPage() {
                             >
                               <Button
                                 size="sm"
-                                className="h-9 px-5 text-[10px] font-black uppercase tracking-widest bg-slate-900 text-white hover:bg-pharma-blue shadow-lg shadow-slate-900/10 transition-all active:scale-95"
+                                className="h-9 px-5 text-[10px] font-bold uppercase tracking-widest bg-slate-900 text-white hover:bg-pharma-blue shadow-lg shadow-slate-900/10 transition-all active:scale-95"
                                 onClick={() => openStatusDialog(order)}
                               >
                                 Transition Lifecycle
@@ -361,19 +361,19 @@ export default function POSOrdersPage() {
                                     {/* Fulfillment Context */}
                                     <div className="col-span-4 space-y-6">
                                       <div className="space-y-4">
-                                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                                        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
                                           <Activity
                                             size={12}
                                             className="text-pharma-blue"
                                           />{" "}
                                           Order Matrix
                                         </p>
-                                        <div className="p-6 bg-white rounded-[2rem] border border-slate-100 shadow-xl shadow-slate-200/40 space-y-5">
+                                        <div className="p-6 bg-white rounded-[2rem] border border-slate-100  shadow-slate-200/40 space-y-5">
                                           <div className="flex flex-col">
-                                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">
+                                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                                               Time Designation
                                             </span>
-                                            <span className="text-xs font-black text-slate-900 flex items-center gap-2">
+                                            <span className="text-xs font-bold text-slate-900 flex items-center gap-2">
                                               <Clock
                                                 size={12}
                                                 className="text-slate-300"
@@ -384,19 +384,19 @@ export default function POSOrdersPage() {
                                             </span>
                                           </div>
                                           <div className="flex flex-col">
-                                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">
+                                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                                               POS Agent
                                             </span>
-                                            <span className="text-xs font-black text-slate-900 uppercase tracking-tighter">
+                                            <span className="text-xs font-bold text-slate-900 uppercase tracking-tighter">
                                               {order.handled_by_name ||
                                                 "System Terminal"}
                                             </span>
                                           </div>
                                           <div className="flex flex-col">
-                                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">
+                                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                                               Fiscal ID
                                             </span>
-                                            <span className="text-xs font-black text-pharma-blue tracking-tighter">
+                                            <span className="text-xs font-bold text-pharma-blue tracking-tighter">
                                               #TXN-
                                               {order.id
                                                 .toString()
@@ -409,7 +409,7 @@ export default function POSOrdersPage() {
 
                                     {/* Itemized Audit */}
                                     <div className="col-span-8 space-y-4">
-                                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
                                         <ShoppingBag
                                           size={12}
                                           className="text-pharma-green"
@@ -423,11 +423,11 @@ export default function POSOrdersPage() {
                                             className="flex justify-between items-center p-5 bg-white rounded-3xl border border-slate-100 shadow-sm group/item hover:border-pharma-blue/20 transition-all"
                                           >
                                             <div className="flex items-center gap-4">
-                                              <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center font-black text-pharma-green text-xs border border-slate-100 group-hover/item:bg-pharma-blue/5 transition-colors">
+                                              <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center font-bold text-pharma-green text-xs border border-slate-100 group-hover/item:bg-pharma-blue/5 transition-colors">
                                                 {item.quantity}×
                                               </div>
                                               <div>
-                                                <p className="text-sm font-black text-slate-950 tracking-tight">
+                                                <p className="text-sm font-bold text-slate-950 tracking-tight">
                                                   {item.medicine_name}
                                                 </p>
                                                 <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mt-1">
@@ -439,7 +439,7 @@ export default function POSOrdersPage() {
                                               </div>
                                             </div>
                                             <div className="text-right">
-                                              <p className="text-sm font-black text-slate-950 tracking-tighter">
+                                              <p className="text-sm font-bold text-slate-950 tracking-tighter">
                                                 Rs.{" "}
                                                 {parseFloat(item.total).toFixed(
                                                   2,
@@ -452,16 +452,16 @@ export default function POSOrdersPage() {
                                           </div>
                                         ))}
 
-                                        <div className="mt-8 p-6 bg-slate-950 rounded-[2rem] flex justify-between items-center shadow-2xl shadow-slate-900/20">
+                                        <div className="mt-8 p-6 bg-slate-950 rounded-[2rem] flex justify-between items-center  shadow-slate-900/20">
                                           <div className="flex flex-col">
-                                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">
+                                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
                                               Aggregate Valuation
                                             </span>
                                             <span className="text-[10px] font-bold text-pharma-blue/60 uppercase">
                                               Including Medical Taxes
                                             </span>
                                           </div>
-                                          <span className="text-2xl font-black text-white italic tracking-tighter">
+                                          <span className="text-2xl font-bold text-white italic tracking-tighter">
                                             Rs.{" "}
                                             {parseFloat(
                                               order.total_amount,
@@ -509,7 +509,7 @@ export default function POSOrdersPage() {
                       variant={pg === page ? "default" : "outline"}
                       size="sm"
                       onClick={() => setPage(pg)}
-                      className={`rounded-xl h-9 w-9 p-0 text-xs font-black ${pg === page ? "bg-pharma-green text-white border-pharma-green" : ""}`}
+                      className={`rounded-xl h-9 w-9 p-0 text-xs font-bold ${pg === page ? "bg-pharma-green text-white border-pharma-green" : ""}`}
                     >
                       {pg}
                     </Button>
@@ -547,11 +547,11 @@ export default function POSOrdersPage() {
                     <Activity size={20} className="text-white" />
                   </div>
                   <div className="flex flex-col">
-                    <span className="text-[9px] font-black text-pharma-blue uppercase tracking-[0.3em]">POS Management</span>
+                    <span className="text-[9px] font-bold text-pharma-blue uppercase tracking-[0.3em]">POS Management</span>
                     <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Status Control</span>
                   </div>
                 </div>
-                <DialogTitle className="text-2xl font-black text-white tracking-tight italic leading-tight">
+                <DialogTitle className="text-2xl font-bold text-white tracking-tight italic leading-tight">
                   Order Transition
                 </DialogTitle>
                 <DialogDescription className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1.5 flex items-center gap-2">
@@ -560,8 +560,8 @@ export default function POSOrdersPage() {
                 </DialogDescription>
               </div>
               <div className="text-right">
-                <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Current</p>
-                <span className={`text-[10px] font-black uppercase tracking-widest mt-1 inline-block px-3 py-1 rounded-lg ${(STATUS_CONFIG[orderToUpdateStatus?.status] || STATUS_CONFIG["PENDING"]).bg} ${(STATUS_CONFIG[orderToUpdateStatus?.status] || STATUS_CONFIG["PENDING"]).color}`}>
+                <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Current</p>
+                <span className={`text-[10px] font-bold uppercase tracking-widest mt-1 inline-block px-3 py-1 rounded-lg ${(STATUS_CONFIG[orderToUpdateStatus?.status] || STATUS_CONFIG["PENDING"]).bg} ${(STATUS_CONFIG[orderToUpdateStatus?.status] || STATUS_CONFIG["PENDING"]).color}`}>
                   {orderToUpdateStatus?.status || "PENDING"}
                 </span>
               </div>
@@ -573,7 +573,7 @@ export default function POSOrdersPage() {
             {/* Fulfillment Status */}
             <div className="space-y-3">
               <div className="flex items-center gap-2 border-l-4 border-pharma-blue pl-3">
-                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                   Fulfillment Status
                 </Label>
               </div>
@@ -581,7 +581,7 @@ export default function POSOrdersPage() {
                 <select
                   value={newStatus}
                   onChange={e => setNewStatus(e.target.value)}
-                  className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 pr-10 text-sm font-black text-slate-900 focus:outline-none focus:border-pharma-blue/40 focus:bg-white transition-all uppercase tracking-wider appearance-none cursor-pointer shadow-sm"
+                  className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 pr-10 text-sm font-bold text-slate-900 focus:outline-none focus:border-pharma-blue/40 focus:bg-white transition-all uppercase tracking-wider appearance-none cursor-pointer shadow-sm"
                 >
                   {Object.entries(STATUS_CONFIG).map(([key, cfg]) => (
                     <option key={key} value={key}>
@@ -595,7 +595,7 @@ export default function POSOrdersPage() {
               {newStatus && (
                 <div className="flex items-center gap-2 pl-1">
                   <div className={`w-2 h-2 rounded-full ${newStatus === 'DELIVERED' ? 'bg-emerald-500' : newStatus === 'CANCELLED' ? 'bg-rose-500' : newStatus === 'CONFIRMED' ? 'bg-blue-500' : newStatus === 'PROCESSING' ? 'bg-purple-500' : newStatus === 'DISPATCHED' ? 'bg-indigo-500' : newStatus === 'READY' ? 'bg-teal-500' : 'bg-amber-500'}`} />
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{STATUS_CONFIG[newStatus]?.label} selected</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{STATUS_CONFIG[newStatus]?.label} selected</span>
                 </div>
               )}
             </div>
@@ -603,7 +603,7 @@ export default function POSOrdersPage() {
             {/* Financial State */}
             <div className="space-y-3">
               <div className="flex items-center gap-2 border-l-4 border-pharma-green pl-3">
-                <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                   Financial State
                 </Label>
               </div>
@@ -611,7 +611,7 @@ export default function POSOrdersPage() {
                 <select
                   value={newPaymentStatus}
                   onChange={e => setNewPaymentStatus(e.target.value)}
-                  className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 pr-10 text-sm font-black text-slate-900 focus:outline-none focus:border-pharma-green/40 focus:bg-white transition-all uppercase tracking-wider appearance-none cursor-pointer shadow-sm"
+                  className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 pr-10 text-sm font-bold text-slate-900 focus:outline-none focus:border-pharma-green/40 focus:bg-white transition-all uppercase tracking-wider appearance-none cursor-pointer shadow-sm"
                 >
                   <option value="PENDING">Pending</option>
                   <option value="COMPLETED">Completed</option>
@@ -623,7 +623,7 @@ export default function POSOrdersPage() {
               {newPaymentStatus && (
                 <div className="flex items-center gap-2 pl-1">
                   <div className={`w-2 h-2 rounded-full ${newPaymentStatus === 'COMPLETED' ? 'bg-pharma-green' : newPaymentStatus === 'FAILED' ? 'bg-rose-500' : newPaymentStatus === 'REFUNDED' ? 'bg-purple-500' : 'bg-amber-500'}`} />
-                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">{newPaymentStatus} state applied</span>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{newPaymentStatus} state applied</span>
                 </div>
               )}
             </div>
@@ -634,7 +634,7 @@ export default function POSOrdersPage() {
             <Button
               onClick={handleStatusUpdate}
               disabled={updating}
-              className="w-full h-14 bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-slate-900/20 active:scale-95 transition-all flex items-center justify-center gap-3 text-[11px]"
+              className="w-full h-14 bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl font-bold uppercase tracking-widest  shadow-slate-900/20 active:scale-95 transition-all flex items-center justify-center gap-3 text-[11px]"
             >
               {updating ? (
                 <><Activity size={16} className="animate-spin" /> Synchronizing...</>
@@ -645,7 +645,7 @@ export default function POSOrdersPage() {
             <Button
               variant="ghost"
               onClick={() => setOrderToUpdateStatus(null)}
-              className="w-full h-11 text-[10px] font-black uppercase tracking-widest text-slate-300 hover:text-slate-600 hover:bg-slate-50 rounded-2xl transition-all"
+              className="w-full h-11 text-[10px] font-bold uppercase tracking-widest text-slate-300 hover:text-slate-600 hover:bg-slate-50 rounded-2xl transition-all"
             >
               Cancel Operation
             </Button>
@@ -660,7 +660,7 @@ export default function POSOrdersPage() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className={`fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 rounded-[2rem] shadow-2xl font-black uppercase tracking-widest text-xs z-[200] ${toast.type === "error" ? "bg-rose-600 text-white" : "bg-slate-900 text-white"}`}
+            className={`fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 rounded-[2rem]  font-bold uppercase tracking-widest text-xs z-[200] ${toast.type === "error" ? "bg-rose-600 text-white" : "bg-slate-900 text-white"}`}
           >
             {toast.msg}
           </motion.div>

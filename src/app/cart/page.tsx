@@ -83,14 +83,14 @@ export default function CartPage() {
             <ModernNavbar userLoggedIn={!!user} cartCount={0} onLogin={() => setShowLoginDialog(true)} onLogout={() => setShowLogoutDialog(true)} />
             <main className="flex-1 flex flex-col items-center justify-center p-6 text-center">
                <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} className="space-y-8">
-                  <div className="w-24 h-24 bg-white rounded-xl shadow-xl flex items-center justify-center mx-auto border border-slate-100 text-slate-300">
+                  <div className="w-24 h-24 bg-white rounded-xl  flex items-center justify-center mx-auto border border-slate-100 text-slate-300">
                      <ShoppingBag size={48} />
                   </div>
                   <div>
-                     <h1 className="text-3xl font-black text-slate-900 tracking-tight">Your Medical Basket is Empty</h1>
+                     <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Your Medical Basket is Empty</h1>
                      <p className="text-slate-500 mt-2 font-medium">Browse our apothecary to find essential treatments.</p>
                   </div>
-                  <Button onClick={() => router.push('/')} className="bg-pharma-blue hover:bg-pharma-blue/90 text-white rounded-2xl h-14 px-10 font-black uppercase tracking-widest shadow-xl shadow-pharma-blue/20">
+                  <Button onClick={() => router.push('/')} className="bg-pharma-blue hover:bg-pharma-blue/90 text-white rounded-2xl h-14 px-10 font-bold uppercase tracking-widest  shadow-pharma-blue/20">
                      Return to Dispensary
                   </Button>
                </motion.div>
@@ -118,10 +118,10 @@ export default function CartPage() {
                {/* Left: Cart Items */}
                <div className="flex-1 w-full space-y-6">
                   <div className="flex items-center justify-between mb-8">
-                     <h1 className="text-3xl font-black text-slate-900 tracking-tight flex items-center gap-3">
+                     <h1 className="text-3xl font-bold text-slate-900 tracking-tight flex items-center gap-3">
                         Medical Basket <Badge className="bg-pharma-blue/10 text-pharma-blue border-transparent px-3">{cart.length} Unit Types</Badge>
                      </h1>
-                     <button onClick={clearCart} className="text-xs font-black uppercase tracking-widest text-slate-400 hover:text-rose-500 transition">Empty All</button>
+                     <button onClick={clearCart} className="text-xs font-bold uppercase tracking-widest text-slate-400 hover:text-rose-500 transition">Empty All</button>
                   </div>
 
                   <div className="space-y-4">
@@ -134,7 +134,7 @@ export default function CartPage() {
                               animate={{ opacity: 1, x: 0 }}
                               exit={{ opacity: 0, scale: 0.95 }}
                            >
-                              <Card className="rounded-xl border-transparent shadow-sm hover:shadow-md transition bg-white overflow-hidden p-6">
+                              <Card className="rounded-xl border-transparent shadow-sm hover: transition bg-white overflow-hidden p-6">
                                  <div className="flex flex-col sm:flex-row items-center gap-6">
                                     <div className="w-20 h-20 bg-slate-50 rounded-3xl flex items-center justify-center border border-slate-100 overflow-hidden relative">
                                        {item.image_url ? (
@@ -144,23 +144,23 @@ export default function CartPage() {
                                        )}
                                     </div>
                                     <div className="flex-1 text-center sm:text-left">
-                                       <span className="text-[10px] font-black uppercase tracking-widest text-pharma-blue mb-1 block">{item.category || 'General Pharma'}</span>
-                                       <h3 className="text-lg font-black text-slate-900 leading-none">{item.name}</h3>
-                                       <p className="text-sm font-black text-pharma-green mt-2">Rs. {parseFloat(item.price.toString()).toFixed(2)}</p>
+                                       <span className="text-[10px] font-bold uppercase tracking-widest text-pharma-blue mb-1 block">{item.category || 'General Pharma'}</span>
+                                       <h3 className="text-lg font-bold text-slate-900 leading-none">{item.name}</h3>
+                                       <p className="text-sm font-bold text-pharma-green mt-2">Rs. {parseFloat(item.price.toString()).toFixed(2)}</p>
                                     </div>
 
                                     <div className="flex items-center gap-4 bg-slate-50 p-2 rounded-2xl border border-slate-100">
                                        <button onClick={() => updateQty(item.id, item.qty - 1)} className="w-8 h-8 rounded-xl bg-white shadow-sm flex items-center justify-center text-slate-500 hover:text-pharma-blue active:scale-90 transition">
                                           <Minus size={14} />
                                        </button>
-                                       <span className="w-8 text-center font-black text-slate-900">{item.qty}</span>
+                                       <span className="w-8 text-center font-bold text-slate-900">{item.qty}</span>
                                        <button onClick={() => updateQty(item.id, item.qty + 1)} className="w-8 h-8 rounded-xl bg-white shadow-sm flex items-center justify-center text-slate-500 hover:text-pharma-blue active:scale-90 transition">
                                           <Plus size={14} />
                                        </button>
                                     </div>
 
                                     <div className="text-right flex flex-col items-center sm:items-end">
-                                       <p className="text-lg font-black text-slate-900">Rs. {(item.price * item.qty).toFixed(2)}</p>
+                                       <p className="text-lg font-bold text-slate-900">Rs. {(item.price * item.qty).toFixed(2)}</p>
                                        <button onClick={() => removeFromCart(item.id)} className="p-2 text-slate-300 hover:text-rose-500 transition">
                                           <Trash2 size={16} />
                                        </button>
@@ -175,15 +175,15 @@ export default function CartPage() {
 
                {/* Right: Summary & Logistics */}
                <div className="w-full lg:w-[420px] space-y-8 sticky top-32">
-                  <Card className="rounded-[3rem] border-transparent shadow-2xl shadow-slate-200/50 bg-white p-8">
-                     <h2 className="text-xl font-black text-slate-900 mb-8 uppercase tracking-tight">Supply Logistics</h2>
+                  <Card className="rounded-[3rem] border-transparent  shadow-slate-200/50 bg-white p-8">
+                     <h2 className="text-xl font-bold text-slate-900 mb-8 uppercase tracking-tight">Supply Logistics</h2>
 
                      <div className="space-y-8">
                         {/* Delivery Selection */}
                         <div className="space-y-4">
                            <div className="flex items-center gap-2 mb-2">
                               <Truck size={18} className="text-pharma-blue" />
-                              <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Select Mode</span>
+                              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Select Mode</span>
                            </div>
                            <div className="grid grid-cols-1 gap-3">
                               {deliveryOptions.map(opt => (
@@ -193,9 +193,9 @@ export default function CartPage() {
                                     className={`p-4 rounded-[2rem] border transition-all text-left group relative overflow-hidden ${selectedDelivery?.id === opt.id ? 'border-pharma-blue bg-pharma-blue/5 shadow-inner' : 'border-slate-100 hover:border-slate-200 bg-slate-50/30'}`}
                                  >
                                     {selectedDelivery?.id === opt.id && <div className="absolute top-0 right-0 p-3 bg-pharma-blue text-white rounded-bl-3xl"><CheckCircle2 size={14} /></div>}
-                                    <p className="text-xs font-black uppercase tracking-widest text-slate-900 mb-1">{opt.name}</p>
+                                    <p className="text-xs font-bold uppercase tracking-widest text-slate-900 mb-1">{opt.name}</p>
                                     <p className="text-[10px] text-slate-400 font-bold leading-tight">{opt.description}</p>
-                                    <p className="mt-3 text-[11px] font-black text-pharma-blue uppercase">Base: Rs. {opt.base_charge} <span className="text-slate-300 mx-1">/</span> +Rs. {opt.per_km_charge}/KM</p>
+                                    <p className="mt-3 text-[11px] font-bold text-pharma-blue uppercase">Base: Rs. {opt.base_charge} <span className="text-slate-300 mx-1">/</span> +Rs. {opt.per_km_charge}/KM</p>
                                  </button>
                               ))}
                            </div>
@@ -206,9 +206,9 @@ export default function CartPage() {
                            <div className="flex items-center justify-between mb-2">
                               <div className="flex items-center gap-2">
                                  <MapPin size={18} className="text-pharma-orange" />
-                                 <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">Distance Simulation</span>
+                                 <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Distance Simulation</span>
                               </div>
-                              <span className="text-xs font-black text-pharma-orange">{distance} KM</span>
+                              <span className="text-xs font-bold text-pharma-orange">{distance} KM</span>
                            </div>
                            <input
                               type="range"
@@ -224,19 +224,19 @@ export default function CartPage() {
                         <div className="pt-8 border-t border-slate-50 space-y-4">
                            <div className="flex justify-between items-center text-sm">
                               <span className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Medical Subtotal</span>
-                              <span className="font-black text-slate-900 uppercase tracking-tighter">Rs. {cartTotal.toFixed(2)}</span>
+                              <span className="font-bold text-slate-900 uppercase tracking-tighter">Rs. {cartTotal.toFixed(2)}</span>
                            </div>
                            <div className="flex justify-between items-center text-sm">
                               <div className="flex items-center gap-2">
                                  <span className="font-bold text-slate-400 uppercase tracking-widest text-[10px]">Logistic Surcharge</span>
                                  <AlertCircle size={14} className="text-slate-300" />
                               </div>
-                              <span className="font-black text-pharma-blue uppercase tracking-tighter">+ Rs. {deliveryCharge.toFixed(2)}</span>
+                              <span className="font-bold text-pharma-blue uppercase tracking-tighter">+ Rs. {deliveryCharge.toFixed(2)}</span>
                            </div>
                            <div className="pt-6 border-t border-pharma-blue/10 flex justify-between items-end">
                               <div>
-                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-1 leading-none">Total Protocol Cost</p>
-                                 <p className="text-4xl font-black text-slate-900 tracking-tighter leading-none">
+                                 <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-1 leading-none">Total Protocol Cost</p>
+                                 <p className="text-4xl font-bold text-slate-900 tracking-tighter leading-none">
                                     <span className="text-pharma-green text-sm mr-1">Rs.</span>
                                     {finalTotal.toFixed(2)}
                                  </p>
@@ -247,7 +247,7 @@ export default function CartPage() {
                         <Button
                            disabled={isCheckingOut || !selectedDelivery}
                            onClick={handleCheckout}
-                           className="w-full bg-slate-900 hover:bg-pharma-green text-white rounded-[2rem] h-16 font-black uppercase tracking-widest shadow-2xl shadow-slate-900/40 mt-4 group"
+                           className="w-full bg-slate-900 hover:bg-pharma-green text-white rounded-[2rem] h-16 font-bold uppercase tracking-widest  shadow-slate-900/40 mt-4 group"
                         >
                            {isCheckingOut ? (
                               <div className="flex items-center gap-3">
@@ -261,7 +261,7 @@ export default function CartPage() {
                            )}
                         </Button>
 
-                        <div className="flex items-center justify-center gap-2 text-[10px] font-black text-slate-300 uppercase tracking-widest">
+                        <div className="flex items-center justify-center gap-2 text-[10px] font-bold text-slate-300 uppercase tracking-widest">
                            <ShieldCheck size={14} /> Encrypted Settlement
                         </div>
                      </div>

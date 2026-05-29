@@ -94,7 +94,7 @@ const Page = () => {
             </span>
           </div>
 
-          <h1 className="mt-4 text-3xl font-black tracking-tight text-slate-900">
+          <h1 className="mt-4 text-3xl font-bold tracking-tight text-slate-900">
             Change Password
           </h1>
 
@@ -224,7 +224,7 @@ const Page = () => {
                 <LockKeyhole className="h-8 w-8 text-emerald-400" />
               </div>
 
-              <h2 className="mt-6 text-2xl font-black">
+              <h2 className="mt-6 text-2xl font-bold">
                 Password Tips
               </h2>
 

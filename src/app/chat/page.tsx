@@ -240,14 +240,14 @@ export default function ChatTerminalPage() {
 
         {/* Sidebar - History */}
         <aside className={`
-          fixed lg:relative inset-y-0 left-0 z-10 w-[320px] bg-white border-r border-slate-200 flex flex-col shadow-2xl lg:shadow-none transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1)
+          fixed lg:relative inset-y-0 left-0 z-10 w-[320px] bg-white border-r border-slate-200 flex flex-col  lg:shadow-none transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1)
           ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'}
         `}>
           {/* Sidebar Header (Mobile Only) */}
           <div className="flex items-center justify-between lg:hidden p-6 border-b border-slate-50 bg-red-300">
             <div className="flex flex-col">
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-pharma-green">PharmaLogic AI</span>
-              <span className="text-sm font-black text-slate-900 tracking-tighter">Diagnostic Archive</span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-pharma-green">PharmaLogic AI</span>
+              <span className="text-sm font-bold text-slate-900 tracking-tighter">Diagnostic Archive</span>
             </div>
             <button onClick={() => setIsSidebarOpen(false)} className="p-3 bg-slate-50 text-slate-400 hover:text-pharma-blue rounded-2xl transition-all active:scale-90">
               <X size={20} strokeWidth={3} />
@@ -257,7 +257,7 @@ export default function ChatTerminalPage() {
           <div className="p-4  flex flex-col h-full overflow-hidden">
             <button
               onClick={startNewChat}
-              className="w-full p-3 bg-slate-950 text-white hover:bg-pharma-green rounded-2xl flex items-center justify-center gap-4 text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-xl shadow-slate-900/10 active:scale-95 group"
+              className="w-full p-3 bg-slate-950 text-white hover:bg-pharma-green rounded-2xl flex items-center justify-center gap-4 text-[10px] font-bold uppercase tracking-[0.2em] transition-all  shadow-slate-900/10 active:scale-95 group"
             >
               <Plus size={18} strokeWidth={3} className="group-hover:rotate-180 transition-transform duration-700" />
               Initialise New Session
@@ -267,7 +267,7 @@ export default function ChatTerminalPage() {
               <div className="sticky top-0 bg-white/95 backdrop-blur-sm py-2 z-10 flex items-center justify-between px-3 mb-2">
                 <div className="flex items-center gap-3 ">
                   <History size={14} className="text-slate-400" />
-                  <span className="text-[10px] font-black uppercase text-slate-400 tracking-[0.3em]">Temporal Nodes</span>
+                  <span className="text-[10px] font-bold uppercase text-slate-400 tracking-[0.3em]">Temporal Nodes</span>
                 </div>
                 {historySessions.length > 0 && (
                   <button onClick={clearHistory} className="p-2 text-slate-300 hover:text-rose-500 transition-colors">
@@ -300,7 +300,7 @@ export default function ChatTerminalPage() {
                       <MessageSquare size={16} strokeWidth={2.5} />
                     </div>
                     <div className="flex-1 overflow-hidden">
-                      <p className={`text-[13px] font-black truncate leading-tight transition-colors ${session.sessionId === currentSessionId ? 'text-pharma-green' : 'text-slate-700'
+                      <p className={`text-[13px] font-bold truncate leading-tight transition-colors ${session.sessionId === currentSessionId ? 'text-pharma-green' : 'text-slate-700'
                         }`}>
                         {session.title}
                       </p>
@@ -318,9 +318,9 @@ export default function ChatTerminalPage() {
                 </div>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="w-2 h-2 bg-pharma-green rounded-full animate-ping" />
-                  <span className="text-[9px] font-black uppercase text-pharma-green tracking-widest">Neural Link Success</span>
+                  <span className="text-[9px] font-bold uppercase text-pharma-green tracking-widest">Neural Link Success</span>
                 </div>
-                <p className="text-[10px] font-black text-slate-900 uppercase tracking-widest mb-1 leading-none">
+                <p className="text-[10px] font-bold text-slate-900 uppercase tracking-widest mb-1 leading-none">
                   V4.0 QUANTUM RETRIEVAL
                 </p>
                 <p className="text-[8px] font-bold text-slate-400 uppercase tracking-[0.2em]">Medical Context Synced</p>
@@ -337,8 +337,8 @@ export default function ChatTerminalPage() {
               <Menu size={20} strokeWidth={3} />
             </button>
             <div className="flex flex-col items-center">
-              <span className="text-[9px] font-black tracking-[0.4em] text-pharma-green uppercase leading-none mb-1">HEALKART</span>
-              <span className="text-[11px] font-black text-slate-950 tracking-tighter">INTELLIGENCE</span>
+              <span className="text-[9px] font-bold tracking-[0.4em] text-pharma-green uppercase leading-none mb-1">HEALKART</span>
+              <span className="text-[11px] font-bold text-slate-950 tracking-tighter">INTELLIGENCE</span>
             </div>
             <button onClick={startNewChat} className="p-3 bg-slate-50 text-slate-900 rounded-2xl transition-all shadow-sm active:scale-95">
               <Plus size={20} strokeWidth={3} />
@@ -359,16 +359,16 @@ export default function ChatTerminalPage() {
                     <div className="w-32 h-32 bg-slate-950 rounded-xl flex items-center justify-center shadow-[0_40px_80px_-20px_rgba(0,0,0,0.3)] relative z-10 border-[6px] border-white ring-1 ring-slate-100">
                       <Cpu size={64} className="text-pharma-green" />
                     </div>
-                    <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-pharma-green rounded-3xl flex items-center justify-center text-white border-4 border-white shadow-xl z-20">
+                    <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-pharma-green rounded-3xl flex items-center justify-center text-white border-4 border-white  z-20">
                       <Sparkles size={20} />
                     </div>
                   </motion.div>
 
                   <div className="space-y-6 max-w-2xl">
-                    <h2 className="text-xl lg:text-2xl font-black text-slate-950 tracking-tighter uppercase italic leading-[0.9]">
+                    <h2 className="text-xl lg:text-2xl font-bold text-slate-950 tracking-tighter uppercase italic leading-[0.9]">
                       PHARMA<span className="text-pharma-green">GENESIS</span>
                     </h2>
-                    <p className="text-slate-400 text-sm font-black uppercase tracking-[0.2em] leading-relaxed max-w-lg mx-auto text-sm">
+                    <p className="text-slate-400 text-sm font-bold uppercase tracking-[0.2em] leading-relaxed max-w-lg mx-auto text-sm">
                       Advanced RAG protocol established. Secure access to our verified global pharmaceutical archives.
                     </p>
                   </div>
@@ -391,9 +391,9 @@ export default function ChatTerminalPage() {
                         <div className="absolute top-0 left-0 w-1.5 h-full bg-pharma-green translate-x-[-100%] group-hover:translate-x-0 transition-transform duration-500" />
                         <div className="flex items-center gap-3 mb-4">
                           <Bot size={14} className="text-slate-300 group-hover:text-pharma-green transition-colors" />
-                          <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest group-hover:text-slate-900">Logic Probe</span>
+                          <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest group-hover:text-slate-900">Logic Probe</span>
                         </div>
-                        <p className="text-[15px] font-black text-slate-900 tracking-tight leading-snug">"{q}"</p>
+                        <p className="text-[15px] font-bold text-slate-900 tracking-tight leading-snug">"{q}"</p>
                       </motion.button>
                     ))}
                   </div>
@@ -414,7 +414,7 @@ export default function ChatTerminalPage() {
                         }`}>
                         {m.role === "user" ? <User size={22} /> : <Bot size={22} />}
                       </div>
-                      <div className={`px-8 py-6 rounded-xl text-[16px] font-black leading-relaxed shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] relative ${m.role === "user"
+                      <div className={`px-8 py-6 rounded-xl text-[16px] font-bold leading-relaxed shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] relative ${m.role === "user"
                           ? "bg-slate-950 text-white rounded-tr-none shadow-slate-950/20"
                           : "bg-white text-slate-900 border border-slate-50 rounded-tl-none shadow-slate-200/40"
                         }`}
@@ -425,10 +425,10 @@ export default function ChatTerminalPage() {
                           <div className="mt-8 flex items-center gap-5 border-t border-slate-50 pt-5 opacity-40">
                             <div className="flex items-center gap-2">
                               <Globe size={12} className="text-pharma-green animate-pulse" />
-                              <span className="text-[9px] font-black uppercase tracking-[0.2em]">Verified Fragment</span>
+                              <span className="text-[9px] font-bold uppercase tracking-[0.2em]">Verified Fragment</span>
                             </div>
                             <div className="w-1.5 h-1.5 bg-slate-200 rounded-full" />
-                            <span className="text-[9px] font-black uppercase tracking-[0.2em]">RAG ALPHA v4</span>
+                            <span className="text-[9px] font-bold uppercase tracking-[0.2em]">RAG ALPHA v4</span>
                           </div>
                         )}
                       </div>
@@ -443,7 +443,7 @@ export default function ChatTerminalPage() {
                     <div className="w-12 h-12 rounded-[1.25rem] bg-white border border-slate-100 text-pharma-green flex items-center justify-center shadow-lg">
                       <Bot size={22} className="animate-spin-slow" />
                     </div>
-                    <div className="px-10 py-6 rounded-xl rounded-tl-none bg-white border border-slate-50 flex items-center gap-2.5 shadow-xl shadow-slate-200/40">
+                    <div className="px-10 py-6 rounded-xl rounded-tl-none bg-white border border-slate-50 flex items-center gap-2.5  shadow-slate-200/40">
                       <div className="w-2 h-2 bg-pharma-green rounded-full animate-bounce [animation-delay:-0.3s]" />
                       <div className="w-2 h-2 bg-pharma-green rounded-full animate-bounce [animation-delay:-0.15s]" />
                       <div className="w-2 h-2 bg-pharma-green rounded-full animate-bounce" />
@@ -470,21 +470,21 @@ export default function ChatTerminalPage() {
                       }
                     }}
                     placeholder="Transmit medical query or symptom log..."
-                    className="flex-1 bg-transparent border-none px-4 text-[16px] font-black text-slate-900 resize-none outline-none placeholder:text-slate-300 max-h-[50px] min-h-[34px] custom-scrollbar overflow-y-auto pt-1"
+                    className="flex-1 bg-transparent border-none px-4 text-[16px] font-bold text-slate-900 resize-none outline-none placeholder:text-slate-300 max-h-[50px] min-h-[34px] custom-scrollbar overflow-y-auto pt-1"
                     rows={input.split('\n').length > 5 ? 5 : Math.max(1, input.split('\n').length)}
                   />
                   <div className="">
                     <button
                       type="submit"
                       disabled={loading || !input.trim()}
-                      className="h-[30px] w-[30px] flex items-center justify-center bg-slate-950 text-white rounded-[2rem]  text-green-400 hover:bg-green-500 transition-all duration-500 shadow-2xl shadow-slate-900/10 active:scale-90 disabled:opacity-10 disabled:scale-95 disabled:grayscale"
+                      className="h-[30px] w-[30px] flex items-center justify-center bg-slate-950 text-white rounded-[2rem]  text-green-400 hover:bg-green-500 transition-all duration-500  shadow-slate-900/10 active:scale-90 disabled:opacity-10 disabled:scale-95 disabled:grayscale"
                     >
                       <Send size={24} strokeWidth={3} />
                     </button>
                   </div>
                 </div>
               </form>
-              <p className="text-center mt-7 text-[10px] font-black text-slate-400 uppercase tracking-[0.3em] hidden lg:block opacity-70">
+              <p className="text-center mt-7 text-[10px] font-bold text-slate-400 uppercase tracking-[0.3em] hidden lg:block opacity-70">
                 PHARMALOGIC AI ACTIVE <span className="mx-4 opacity-20">|</span> ALWAYS CONSULT DOCTORS FOR OFFICIAL DIAGNOSIS
               </p>
             </div>

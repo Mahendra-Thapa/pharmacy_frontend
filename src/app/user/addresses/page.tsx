@@ -177,7 +177,7 @@ export default function AddressesPage() {
             <div className="flex flex-col items-center justify-center py-32 gap-4">
                 <Loader2 size={32} className="animate-spin text-pharma-blue" />
 
-                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-400">
+                <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400">
                     Loading Addresses
                 </p>
             </div>
@@ -193,7 +193,7 @@ export default function AddressesPage() {
             {/* Header */}
             <header className="flex items-end justify-between">
                 <div>
-                    <h1 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">
+                    <h1 className="text-4xl font-bold text-slate-900 tracking-tighter mb-2">
                         My Addresses
                     </h1>
 
@@ -204,7 +204,7 @@ export default function AddressesPage() {
 
                 <Button
                     onClick={openAdd}
-                    className="h-12 px-6 bg-pharma-blue hover:bg-pharma-blue/90 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg shadow-pharma-blue/20 flex items-center gap-2"
+                    className="h-12 px-6 bg-pharma-blue hover:bg-pharma-blue/90 text-white rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-lg shadow-pharma-blue/20 flex items-center gap-2"
                 >
                     <Plus size={16} />
                     Add Address
@@ -218,12 +218,12 @@ export default function AddressesPage() {
                     animate={{ opacity: 1, scale: 1 }}
                     className="flex flex-col items-center justify-center py-24 gap-6"
                 >
-                    <div className="w-24 h-24 bg-white rounded-3xl shadow-xl flex items-center justify-center border border-slate-100 text-slate-300">
+                    <div className="w-24 h-24 bg-white rounded-3xl  flex items-center justify-center border border-slate-100 text-slate-300">
                         <MapPinOff size={40} />
                     </div>
 
                     <div className="text-center space-y-2">
-                        <h2 className="text-2xl font-black text-slate-900 tracking-tight">
+                        <h2 className="text-2xl font-bold text-slate-900 tracking-tight">
                             No Saved Addresses
                         </h2>
 
@@ -235,7 +235,7 @@ export default function AddressesPage() {
 
                     <Button
                         onClick={openAdd}
-                        className="h-12 px-8 bg-pharma-blue hover:bg-pharma-blue/90 text-white rounded-2xl font-black uppercase tracking-widest text-[10px] shadow-lg shadow-pharma-blue/20"
+                        className="h-12 px-8 bg-pharma-blue hover:bg-pharma-blue/90 text-white rounded-2xl font-bold uppercase tracking-widest text-[10px] shadow-lg shadow-pharma-blue/20"
                     >
                         <Plus size={16} className="mr-2" />
                         Add Your First Address
@@ -280,7 +280,7 @@ export default function AddressesPage() {
                                 <Card
                                     className={`group relative rounded-xl border-2 p-8 transition-all duration-500 overflow-hidden ${
                                         addr.is_default
-                                            ? 'border-pharma-blue bg-white shadow-2xl shadow-pharma-blue/10'
+                                            ? 'border-pharma-blue bg-white  shadow-pharma-blue/10'
                                             : 'border-slate-50 bg-white hover:border-slate-200 shadow-sm'
                                     }`}
                                 >
@@ -297,7 +297,7 @@ export default function AddressesPage() {
                                         </div>
 
                                         {addr.is_default && (
-                                            <span className="text-[9px] font-black uppercase text-pharma-blue bg-pharma-blue/10 px-3 py-1 rounded-full">
+                                            <span className="text-[9px] font-bold uppercase text-pharma-blue bg-pharma-blue/10 px-3 py-1 rounded-full">
                                                 Default
                                             </span>
                                         )}
@@ -305,7 +305,7 @@ export default function AddressesPage() {
 
                                     {/* Content */}
                                     <div className="space-y-2">
-                                        <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">
+                                        <h3 className="text-sm font-bold text-slate-900 uppercase tracking-tight">
                                             {addr.label}
                                         </h3>
 
@@ -324,7 +324,7 @@ export default function AddressesPage() {
                                     <div className="mt-8 flex items-center gap-4 pt-6 border-t border-slate-50">
                                         <button
                                             onClick={() => openEdit(addr)}
-                                            className="text-[10px] font-black uppercase text-pharma-blue hover:underline flex items-center gap-1"
+                                            className="text-[10px] font-bold uppercase text-pharma-blue hover:underline flex items-center gap-1"
                                         >
                                             <Edit3 size={12} />
                                             Edit
@@ -335,7 +335,7 @@ export default function AddressesPage() {
                                                 onClick={() =>
                                                     handleSetDefault(addr.id)
                                                 }
-                                                className="text-[10px] font-black uppercase text-amber-500 hover:underline flex items-center gap-1"
+                                                className="text-[10px] font-bold uppercase text-amber-500 hover:underline flex items-center gap-1"
                                             >
                                                 <Star size={12} />
                                                 Set Default
@@ -347,7 +347,7 @@ export default function AddressesPage() {
                                                 openDeleteDialog(addr.id)
                                             }
                                             disabled={deletingId === addr.id}
-                                            className="text-[10px] font-black uppercase text-rose-500 opacity-0 group-hover:opacity-100 transition-all flex items-center gap-1 ml-auto disabled:opacity-30"
+                                            className="text-[10px] font-bold uppercase text-rose-500 opacity-0 group-hover:opacity-100 transition-all flex items-center gap-1 ml-auto disabled:opacity-30"
                                         >
                                             {deletingId === addr.id ? (
                                                 <Loader2
@@ -401,18 +401,18 @@ export default function AddressesPage() {
                                 stiffness: 400,
                                 damping: 30,
                             }}
-                            className="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden max-h-[90vh] flex flex-col"
+                            className="bg-white rounded-3xl  w-full max-w-lg overflow-hidden max-h-[90vh] flex flex-col"
                         >
                             {/* Header */}
                             <div className="flex items-center justify-between p-8 pb-0">
                                 <div>
-                                    <h2 className="text-xl font-black text-slate-900 tracking-tight">
+                                    <h2 className="text-xl font-bold text-slate-900 tracking-tight">
                                         {editingId
                                             ? 'Edit Address'
                                             : 'New Address'}
                                     </h2>
 
-                                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mt-1">
                                         {editingId
                                             ? 'Update delivery location details'
                                             : 'Add a new delivery destination'}
@@ -431,7 +431,7 @@ export default function AddressesPage() {
                             <div className="p-8 space-y-6 overflow-y-auto flex-1">
                                 {/* Address Type */}
                                 <div className="space-y-3">
-                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">
+                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">
                                         Type
                                     </Label>
 
@@ -475,7 +475,7 @@ export default function AddressesPage() {
                                                     />
 
                                                     <span
-                                                        className={`text-[10px] font-black uppercase tracking-widest ${
+                                                        className={`text-[10px] font-bold uppercase tracking-widest ${
                                                             isActive
                                                                 ? 'text-pharma-blue'
                                                                 : 'text-slate-400'
@@ -491,7 +491,7 @@ export default function AddressesPage() {
 
                                 {/* Label */}
                                 <div className="space-y-2">
-                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">
+                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">
                                         Label
                                     </Label>
 
@@ -510,7 +510,7 @@ export default function AddressesPage() {
 
                                 {/* Address */}
                                 <div className="space-y-2">
-                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">
+                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">
                                         Full Address
                                     </Label>
 
@@ -530,7 +530,7 @@ export default function AddressesPage() {
 
                                 {/* City */}
                                 <div className="space-y-2">
-                                    <Label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-1">
+                                    <Label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 ml-1">
                                         City
                                     </Label>
 
@@ -573,7 +573,7 @@ export default function AddressesPage() {
                                         />
 
                                         <span
-                                            className={`text-[10px] font-black uppercase tracking-widest ${
+                                            className={`text-[10px] font-bold uppercase tracking-widest ${
                                                 form.is_default
                                                     ? 'text-amber-600'
                                                     : 'text-slate-400'
@@ -590,7 +590,7 @@ export default function AddressesPage() {
                                                 : 'bg-slate-200 justify-start'
                                         }`}
                                     >
-                                        <div className="w-5 h-5 bg-white rounded-full shadow-md mx-0.5" />
+                                        <div className="w-5 h-5 bg-white rounded-full  mx-0.5" />
                                     </div>
                                 </button>
                             </div>
@@ -600,7 +600,7 @@ export default function AddressesPage() {
                                 <Button
                                     variant="outline"
                                     onClick={closeForm}
-                                    className="flex-1 h-14 rounded-2xl font-black uppercase tracking-widest text-[10px]"
+                                    className="flex-1 h-14 rounded-2xl font-bold uppercase tracking-widest text-[10px]"
                                 >
                                     Cancel
                                 </Button>
@@ -608,7 +608,7 @@ export default function AddressesPage() {
                                 <Button
                                     onClick={handleSave}
                                     disabled={saving}
-                                    className="flex-1 h-14 rounded-2xl bg-slate-900 hover:bg-pharma-blue text-white font-black uppercase tracking-widest text-[10px]"
+                                    className="flex-1 h-14 rounded-2xl bg-slate-900 hover:bg-pharma-blue text-white font-bold uppercase tracking-widest text-[10px]"
                                 >
                                     {saving ? (
                                         <span className="flex items-center gap-2">
@@ -664,15 +664,15 @@ export default function AddressesPage() {
                                 stiffness: 400,
                                 damping: 30,
                             }}
-                            className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8"
+                            className="w-full max-w-md bg-white rounded-3xl  p-8"
                         >
                             <div className="flex items-center justify-between mb-6">
                                 <div>
-                                    <h2 className="text-xl font-black text-slate-900">
+                                    <h2 className="text-xl font-bold text-slate-900">
                                         Delete Address
                                     </h2>
 
-                                    <p className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mt-1">
+                                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-slate-400 mt-1">
                                         This action cannot be undone
                                     </p>
                                 </div>
@@ -696,7 +696,7 @@ export default function AddressesPage() {
                                 <Button
                                     variant="outline"
                                     onClick={closeDeleteDialog}
-                                    className="flex-1 h-14 rounded-2xl font-black uppercase tracking-widest text-[10px]"
+                                    className="flex-1 h-14 rounded-2xl font-bold uppercase tracking-widest text-[10px]"
                                 >
                                     Cancel
                                 </Button>
@@ -704,7 +704,7 @@ export default function AddressesPage() {
                                 <Button
                                     onClick={handleDelete}
                                     disabled={deletingId !== null}
-                                    className="flex-1 h-14 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white font-black uppercase tracking-widest text-[10px]"
+                                    className="flex-1 h-14 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white font-bold uppercase tracking-widest text-[10px]"
                                 >
                                     {deletingId !== null ? (
                                         <span className="flex items-center gap-2">

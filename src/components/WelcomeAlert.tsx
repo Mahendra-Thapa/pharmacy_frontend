@@ -29,7 +29,7 @@ export function WelcomeAlert() {
           exit={{ opacity: 0, scale: 0.9, y: 20 }}
           className="fixed bottom-8 left-8 z-50 max-w-sm w-full"
         >
-          <div className="bg-slate-950 text-white p-6 rounded-xl shadow-3xl shadow-slate-950/40 border border-white/10 relative overflow-hidden group">
+          <div className="bg-slate-950 text-white p-6 rounded-xl  shadow-slate-950/40 border border-white/10 relative overflow-hidden group">
             <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-green/20 blur-3xl rounded-full"></div>
 
             <button
@@ -45,7 +45,7 @@ export function WelcomeAlert() {
               </div>
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <h4 className="font-black text-sm uppercase tracking-tight">Welcome to Pharmacy</h4>
+                  <h4 className="font-bold text-sm uppercase tracking-tight">Welcome to Pharmacy</h4>
                   <Sparkles size={12} className="text-pharma-green" />
                 </div>
                 <p className="text-[10px] font-bold text-slate-400 leading-relaxed uppercase tracking-wider">
@@ -57,11 +57,11 @@ export function WelcomeAlert() {
             <div className="mt-6 flex items-center justify-between relative z-10 pl-1">
               <div className="flex items-center gap-2">
                 <ShieldCheck size={14} className="text-pharma-green" />
-                <span className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Secured Node</span>
+                <span className="text-[9px] font-bold text-slate-500 uppercase tracking-widest">Secured Node</span>
               </div>
               <button
                 onClick={closeAlert}
-                className="bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest border border-white/10 transition"
+                className="bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl text-[9px] font-bold uppercase tracking-widest border border-white/10 transition"
               >
                 Acknowledge
               </button>

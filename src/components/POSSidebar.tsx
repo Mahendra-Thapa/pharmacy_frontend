@@ -54,7 +54,7 @@ export function POSSidebar({ isOpen, onClose, onOpenLogs, onOpenSettings }: POSS
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
-              className="fixed top-0 left-0 h-full w-[320px] max-w-[calc(100vw-60px)] bg-white z-[110] shadow-2xl border-r border-slate-100 flex flex-col justify-between overflow-hidden"
+              className="fixed top-0 left-0 h-full w-[320px] max-w-[calc(100vw-60px)] bg-white z-[110]  border-r border-slate-100 flex flex-col justify-between overflow-hidden"
             >
               <div className="flex flex-col h-full">
                 {/* Header Banner with Close Button */}
@@ -76,7 +76,7 @@ export function POSSidebar({ isOpen, onClose, onOpenLogs, onOpenSettings }: POSS
                       <UserCircle size={28} className="text-pharma-green" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-sm font-black tracking-tight">
+                      <span className="text-sm font-bold tracking-tight">
                         {user?.first_name} {user?.last_name}
                       </span>
                       <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
@@ -86,7 +86,7 @@ export function POSSidebar({ isOpen, onClose, onOpenLogs, onOpenSettings }: POSS
                   </div>
 
                   {/* On large screen, render a clean header title */}
-                  <div className="hidden lg:block font-black text-xs uppercase tracking-widest text-slate-800">
+                  <div className="hidden lg:block font-bold text-xs uppercase tracking-widest text-slate-800">
                     POS Navigation
                   </div>
                 </div>
@@ -114,7 +114,7 @@ export function POSSidebar({ isOpen, onClose, onOpenLogs, onOpenSettings }: POSS
                             size={18}
                             className={isActive ? 'text-white' : 'text-slate-400 group-hover:text-pharma-blue'}
                           />
-                          <span className="text-xs font-black uppercase tracking-widest">{item.name}</span>
+                          <span className="text-xs font-bold uppercase tracking-widest">{item.name}</span>
                         </div>
                         {isActive && <ChevronRight size={14} />}
                       </Link>
@@ -132,7 +132,7 @@ export function POSSidebar({ isOpen, onClose, onOpenLogs, onOpenSettings }: POSS
                   >
                     <div className="flex items-center gap-4">
                       <Settings size={18} className="text-slate-400 group-hover:text-pharma-blue" />
-                      <span className="text-xs font-black uppercase tracking-widest">Settings</span>
+                      <span className="text-xs font-bold uppercase tracking-widest">Settings</span>
                     </div>
                   </Link>
                 </div>
@@ -143,17 +143,17 @@ export function POSSidebar({ isOpen, onClose, onOpenLogs, onOpenSettings }: POSS
                     <div className="absolute bottom-0 right-0 w-24 h-24 bg-pharma-green/20 blur-2xl"></div>
                     <div className="flex items-center gap-2 mb-2 relative z-10">
                       <div className="w-2 h-2 rounded-full bg-pharma-green animate-pulse" />
-                      <span className="text-[9px] font-black uppercase tracking-widest text-pharma-green">
+                      <span className="text-[9px] font-bold uppercase tracking-widest text-pharma-green">
                         Terminal Active
                       </span>
                     </div>
-                    <h4 className="text-base font-black mb-1 tracking-tight relative z-10">
+                    <h4 className="text-base font-bold mb-1 tracking-tight relative z-10">
                       PharmaPos Terminal
                     </h4>
                     <p className="text-white/60 text-[11px] leading-relaxed relative z-10">
-                      Agent: <span className="text-white font-black">{user?.first_name} {user?.last_name}</span>
+                      Agent: <span className="text-white font-bold">{user?.first_name} {user?.last_name}</span>
                       <br />
-                      Role: <span className="text-pharma-green font-black uppercase">{user?.role}</span>
+                      Role: <span className="text-pharma-green font-bold uppercase">{user?.role}</span>
                     </p>
                   </div>
                 </div>

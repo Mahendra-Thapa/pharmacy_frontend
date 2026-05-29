@@ -71,9 +71,9 @@ export default function OffersPage() {
                   <div className="relative z-10 space-y-8 max-w-2xl text-center lg:text-left">
                      <div className="inline-flex items-center gap-3 px-5 py-2.5 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full">
                         <div className="w-2 h-2 rounded-full bg-pharma-orange animate-ping"></div>
-                        <span className="text-[11px] font-black uppercase tracking-[0.25em] text-pharma-orange">Exclusive Liquidation Event</span>
+                        <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-pharma-orange">Exclusive Liquidation Event</span>
                      </div>
-                     <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-[0.85] text-white">
+                     <h1 className="text-6xl md:text-8xl font-bold tracking-tighter leading-[0.85] text-white">
                         PREMIUM <br />
                         <span className="text-pharma-orange">SAVINGS.</span>
                      </h1>
@@ -83,22 +83,22 @@ export default function OffersPage() {
 
                      <div className="flex flex-wrap items-center justify-center lg:justify-start gap-8 pt-6">
                         <div className="flex flex-col">
-                           <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Ends In</span>
-                           <span className="text-xl font-black text-white font-mono tracking-wider tabular-nums">08 : 42 : 12</span>
+                           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Ends In</span>
+                           <span className="text-xl font-bold text-white font-mono tracking-wider tabular-nums">08 : 42 : 12</span>
                         </div>
                         <div className="w-px h-10 bg-white/10 hidden sm:block"></div>
                         <div className="flex flex-col">
-                           <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1">Inventory</span>
-                           <span className="text-xl font-black text-pharma-green uppercase tracking-tighter">Verified Stock</span>
+                           <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest mb-1">Inventory</span>
+                           <span className="text-xl font-bold text-pharma-green uppercase tracking-tighter">Verified Stock</span>
                         </div>
                      </div>
                   </div>
 
                   <div className="relative z-10 w-full max-w-sm aspect-square bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-3xl rounded-xl border border-white/10 flex flex-col items-center justify-center p-12 text-center group/card">
                      <div className="absolute inset-0 bg-pharma-orange/5 opacity-0 group-hover/card:opacity-100 transition-opacity duration-1000 rounded-xl"></div>
-                     <div className="text-8xl font-black text-transparent bg-clip-text bg-gradient-to-b from-pharma-orange to-orange-400 mb-4 tracking-tighter">25<span className="text-4xl -translate-y-6 inline-block">%</span></div>
-                     <div className="text-sm font-black uppercase tracking-[0.3em] text-slate-300 mb-10 leading-tight">Elite Tier <br /> Rebate Cap</div>
-                     <button className="w-full py-5 bg-white text-slate-950 rounded-3xl font-black text-xs uppercase tracking-[0.2em] shadow-2xl hover:bg-pharma-orange hover:text-white transition-all duration-500 active:scale-95 group/btn">
+                     <div className="text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-b from-pharma-orange to-orange-400 mb-4 tracking-tighter">25<span className="text-4xl -translate-y-6 inline-block">%</span></div>
+                     <div className="text-sm font-bold uppercase tracking-[0.3em] text-slate-300 mb-10 leading-tight">Elite Tier <br /> Rebate Cap</div>
+                     <button className="w-full py-5 bg-white text-slate-950 rounded-3xl font-bold text-xs uppercase tracking-[0.2em]  hover:bg-pharma-orange hover:text-white transition-all duration-500 active:scale-95 group/btn">
                         <span className="flex items-center justify-center gap-3">
                            Initialize Access <ChevronRight size={18} className="translate-x-0 group-hover/btn:translate-x-1 transition-transform" />
                         </span>
@@ -110,10 +110,10 @@ export default function OffersPage() {
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-12 items-start">
                <div className="lg:col-span-1 space-y-10 sticky top-32">
                   <div>
-                     <h3 className="text-xs font-black text-slate-400 uppercase tracking-[0.3em] mb-6">Discovery Filters</h3>
+                     <h3 className="text-xs font-bold text-slate-400 uppercase tracking-[0.3em] mb-6">Discovery Filters</h3>
                      <div className="space-y-3">
                         {['Price: High to Low', 'Max Discount', 'New Arrivals', 'Expiry Near'].map((f, i) => (
-                           <button key={f} className={`w-full text-left px-6 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all ${i === 1 ? 'bg-slate-100 text-slate-950 border border-slate-200' : 'text-slate-500 hover:bg-slate-50'}`}>
+                           <button key={f} className={`w-full text-left px-6 py-4 rounded-2xl text-[11px] font-bold uppercase tracking-widest transition-all ${i === 1 ? 'bg-slate-100 text-slate-950 border border-slate-200' : 'text-slate-500 hover:bg-slate-50'}`}>
                               {f}
                            </button>
                         ))}
@@ -123,7 +123,7 @@ export default function OffersPage() {
                   <div className="p-8 rounded-xl bg-orange-50/50 border border-orange-100 relative overflow-hidden group">
                      <div className="relative z-10">
                         <Tag className="text-pharma-orange mb-4" size={24} />
-                        <h4 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-2">Member Bonus</h4>
+                        <h4 className="text-sm font-bold text-slate-900 uppercase tracking-widest mb-2">Member Bonus</h4>
                         <p className="text-[10px] text-slate-500 font-bold leading-relaxed uppercase tracking-wider">Additional 5% off for verified account holders on selected lines.</p>
                      </div>
                   </div>
@@ -132,12 +132,12 @@ export default function OffersPage() {
                <div className="lg:col-span-3">
                   <div className="flex items-center justify-between mb-12 border-b border-slate-100 pb-8">
                      <div className="flex items-center gap-4">
-                        <div className="p-4 bg-slate-900 text-white rounded-2xl shadow-xl shadow-slate-900/10">
+                        <div className="p-4 bg-slate-900 text-white rounded-2xl  shadow-slate-900/10">
                            <Tag size={24} className="text-pharma-orange" />
                         </div>
                         <div>
-                           <h2 className="text-3xl font-black text-slate-950 tracking-tight uppercase">Discounted Assets</h2>
-                           <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Real-time pricing adjustments based on demand</p>
+                           <h2 className="text-3xl font-bold text-slate-950 tracking-tight uppercase">Discounted Assets</h2>
+                           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em]">Real-time pricing adjustments based on demand</p>
                         </div>
                      </div>
                   </div>
@@ -160,7 +160,7 @@ export default function OffersPage() {
                               <div className="relative group">
                                  <ProductCard medicine={m} onAdd={(med) => addToCart(med)} />
                                  <div className="absolute top-6 right-6 z-20">
-                                    <Badge className="bg-pharma-orange text-white border-2 border-white shadow-lg text-[10px] font-black px-3 py-1 rounded-full">-{m.discount}%</Badge>
+                                    <Badge className="bg-pharma-orange text-white border-2 border-white shadow-lg text-[10px] font-bold px-3 py-1 rounded-full">-{m.discount}%</Badge>
                                  </div>
                               </div>
                            </motion.div>

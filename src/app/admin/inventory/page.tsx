@@ -145,14 +145,14 @@ export default function InventoryPage() {
       animate={{ opacity: 1 }}
       className="space-y-8"
     >
-      <Card className="rounded-xl shadow-2xl border border-slate-100 overflow-hidden bg-white">
+      <Card className="rounded-xl  border border-slate-100 overflow-hidden bg-white">
         <div className="p-10 bg-slate-50/50 border-b border-white flex flex-wrap justify-between items-center gap-6">
           <div className="flex items-center gap-4">
             <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
               <Package size={24} className="text-pharma-green" />
             </div>
             <div>
-              <h3 className="text-2xl font-black text-slate-900 tracking-tight italic uppercase">
+              <h3 className="text-2xl font-bold text-slate-900 tracking-tight italic uppercase">
                 Inventory
               </h3>
               <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">
@@ -179,7 +179,7 @@ export default function InventoryPage() {
             </div>
             <Button
               onClick={openAdd}
-              className="bg-slate-950 hover:bg-pharma-green text-white rounded-xl h-11 px-8 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-900/10"
+              className="bg-slate-950 hover:bg-pharma-green text-white rounded-xl h-11 px-8 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2  shadow-slate-900/10"
             >
               <PlusCircle size={14} /> Add Medicine
             </Button>
@@ -189,19 +189,19 @@ export default function InventoryPage() {
         <Table>
           <TableHeader>
             <TableRow className="bg-slate-50/10 hover:bg-transparent">
-              <TableHead className="px-10 py-6 text-[10px] font-black uppercase text-slate-400 tracking-widest">
+              <TableHead className="px-10 py-6 text-[10px] font-bold uppercase text-slate-400 tracking-widest">
                 Product Details
               </TableHead>
-              <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400 tracking-widest">
+              <TableHead className="py-6 text-[10px] font-bold uppercase text-slate-400 tracking-widest">
                 Category
               </TableHead>
-              <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400 tracking-widest">
+              <TableHead className="py-6 text-[10px] font-bold uppercase text-slate-400 tracking-widest">
                 Stock Level
               </TableHead>
-              <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400 tracking-widest">
+              <TableHead className="py-6 text-[10px] font-bold uppercase text-slate-400 tracking-widest">
                 Unit Price
               </TableHead>
-              <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400 text-right px-10 tracking-widest">
+              <TableHead className="py-6 text-[10px] font-bold uppercase text-slate-400 text-right px-10 tracking-widest">
                 Actions
               </TableHead>
             </TableRow>
@@ -226,7 +226,7 @@ export default function InventoryPage() {
                       )}
                     </div>
                     <div>
-                      <p className="font-black text-slate-950 text-sm tracking-tight">
+                      <p className="font-bold text-slate-950 text-sm tracking-tight">
                         {med.name}
                       </p>
                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mt-1">
@@ -238,7 +238,7 @@ export default function InventoryPage() {
                 <TableCell>
                   <Badge
                     variant="outline"
-                    className="text-[9px] font-black border-slate-100 text-slate-500 px-3 py-1 uppercase tracking-widest rounded-lg"
+                    className="text-[9px] font-bold border-slate-100 text-slate-500 px-3 py-1 uppercase tracking-widest rounded-lg"
                   >
                     {med.category_name || "Unlinked"}
                   </Badge>
@@ -246,7 +246,7 @@ export default function InventoryPage() {
                 <TableCell>
                   <div className="flex flex-col gap-1">
                     <span
-                      className={`text-xs font-black ${med.stock < 10 ? "text-rose-500" : "text-slate-900"}`}
+                      className={`text-xs font-bold ${med.stock < 10 ? "text-rose-500" : "text-slate-900"}`}
                     >
                       {med.stock} Units
                     </span>
@@ -259,7 +259,7 @@ export default function InventoryPage() {
                   </div>
                 </TableCell>
                 <TableCell>
-                  <span className="text-sm font-black text-slate-900 tracking-tight">
+                  <span className="text-sm font-bold text-slate-900 tracking-tight">
                     Rs. {med.price}
                   </span>
                 </TableCell>
@@ -295,11 +295,11 @@ export default function InventoryPage() {
               disabled={page === 1}
               variant="outline"
               size="sm"
-              className="h-10 px-6 rounded-2xl text-[10px] font-black uppercase tracking-widest border-slate-100 font-bold"
+              className="h-10 px-6 rounded-2xl text-[10px] font-bold uppercase tracking-widest border-slate-100 font-bold"
             >
               Previous
             </Button>
-            <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
               Page {page} of {totalPages}
             </span>
             <Button
@@ -307,7 +307,7 @@ export default function InventoryPage() {
               disabled={page === totalPages}
               variant="outline"
               size="sm"
-              className="h-10 px-6 rounded-2xl text-[10px] font-black uppercase tracking-widest border-slate-100 font-bold"
+              className="h-10 px-6 rounded-2xl text-[10px] font-bold uppercase tracking-widest border-slate-100 font-bold"
             >
               Next
             </Button>
@@ -317,19 +317,19 @@ export default function InventoryPage() {
 
       {/* ADD/EDIT DIALOG */}
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-scroll rounded-xl p-0  border-none shadow-3xl bg-white flex flex-col">
+        <DialogContent className="max-w-4xl max-h-[95vh] overflow-y-scroll rounded-xl p-0  border-none  bg-white flex flex-col">
           <form onSubmit={handleSubmit} className="flex flex-col h-full ">
             {/* Fixed Diagnostic Header */}
             <div className="p-8 bg-slate-950 text-white relative shrink-0">
               <div className="absolute top-0 right-0 w-48 h-48 bg-pharma-green/10 blur-[80px]"></div>
               <div className="relative z-10 flex items-center justify-between">
                 <div>
-                  <DialogTitle className="text-2xl font-black italic tracking-tight">
+                  <DialogTitle className="text-2xl font-bold italic tracking-tight">
                     {selectedMed
                       ? "Update Medicine Logic"
                       : "Provision New Medicine"}
                   </DialogTitle>
-                  <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mt-1.5 flex items-center gap-2">
+                  <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1.5 flex items-center gap-2">
                     <Activity size={12} className="text-pharma-green" />{" "}
                     Inventory Management Protocol
                   </p>
@@ -345,13 +345,13 @@ export default function InventoryPage() {
               {/* 1. Primary Classification */}
               <div className="space-y-6">
                 <div className="flex items-center gap-3 border-l-4 border-pharma-green pl-4">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                     Primary Classification
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <Package size={12} className="text-slate-400" /> Trade
                       Name
                     </label>
@@ -366,7 +366,7 @@ export default function InventoryPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <Activity size={12} className="text-slate-400" />{" "}
                       Manufacturer / Brand
                     </label>
@@ -380,7 +380,7 @@ export default function InventoryPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <LayoutGrid size={12} className="text-slate-400" />{" "}
                       Category
                     </label>
@@ -401,7 +401,7 @@ export default function InventoryPage() {
                     </select>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <CreditCard size={12} className="text-slate-400" /> Unit
                       Price (NPR)
                     </label>
@@ -424,13 +424,13 @@ export default function InventoryPage() {
               {/* 2. Stock & Expiry Logistics */}
               <div className="space-y-6">
                 <div className="flex items-center gap-3 border-l-4 border-pharma-blue pl-4">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                     Stock & Expiry Logistics
                   </span>
                 </div>
                 <div className="grid grid-cols-3 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <ShoppingCart size={12} className="text-slate-400" />{" "}
                       Inventory Qty
                     </label>
@@ -448,7 +448,7 @@ export default function InventoryPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <ShieldAlert size={12} className="text-slate-400" />{" "}
                       Reorder Level
                     </label>
@@ -465,7 +465,7 @@ export default function InventoryPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <History size={12} className="text-slate-400" /> Shelf
                       Life (Expiry)
                     </label>
@@ -488,13 +488,13 @@ export default function InventoryPage() {
               {/* 3. Therapeutic Audit */}
               <div className="space-y-6">
                 <div className="flex items-center gap-3 border-l-4 border-slate-900 pl-4">
-                  <span className="text-[10px] font-black uppercase tracking-widest text-slate-400">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
                     Therapeutic Audit
                   </span>
                 </div>
                 <div className="space-y-6">
                   <div className="space-y-2">
-                    <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <PlusCircle size={12} className="text-slate-400" /> Asset
                       Synchronization (Image)
                     </label>
@@ -542,14 +542,14 @@ export default function InventoryPage() {
                             }
                           }}
                         />
-                        <div className="h-12 px-8 rounded-2xl border-2 border-dashed border-slate-200 text-[10px] font-black uppercase tracking-widest flex items-center justify-center cursor-pointer hover:border-slate-950 transition-all bg-white hover:bg-slate-50 shadow-sm">
+                        <div className="h-12 px-8 rounded-2xl border-2 border-dashed border-slate-200 text-[10px] font-bold uppercase tracking-widest flex items-center justify-center cursor-pointer hover:border-slate-950 transition-all bg-white hover:bg-slate-50 shadow-sm">
                           Upload Asset
                         </div>
                       </label>
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                    <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                       <Activity size={12} className="text-slate-400" /> Clinical
                       Description
                     </label>
@@ -567,7 +567,7 @@ export default function InventoryPage() {
                   </div>
                   <div className="grid grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                      <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                         <Zap size={12} className="text-pharma-green" /> Primary
                         Uses
                       </label>
@@ -581,7 +581,7 @@ export default function InventoryPage() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-[9px] font-black text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
+                      <label className="text-[9px] font-bold text-slate-950 uppercase tracking-widest ml-1 flex items-center gap-2">
                         <AlertTriangle size={12} className="text-rose-500" />{" "}
                         Side Effects
                       </label>
@@ -608,14 +608,14 @@ export default function InventoryPage() {
                 type="button"
                 variant="ghost"
                 onClick={() => setIsDialogOpen(false)}
-                className="rounded-2xl h-14 px-8 text-[11px] font-black uppercase tracking-widest text-slate-400 hover:bg-slate-100 transition-all"
+                className="rounded-2xl h-14 px-8 text-[11px] font-bold uppercase tracking-widest text-slate-400 hover:bg-slate-100 transition-all"
               >
                 Cancel
               </Button>
               <Button
                 disabled={submitting}
                 type="submit"
-                className="bg-slate-950 hover:bg-slate-900 text-white rounded-2xl h-14 px-12 text-[11px] font-black uppercase tracking-widest flex items-center gap-3 shadow-2xl shadow-indigo-200 transition-all transform active:scale-95"
+                className="bg-slate-950 hover:bg-slate-900 text-white rounded-2xl h-14 px-12 text-[11px] font-bold uppercase tracking-widest flex items-center gap-3  shadow-indigo-200 transition-all transform active:scale-95"
               >
                 <Save size={18} />{" "}
                 {submitting
@@ -631,12 +631,12 @@ export default function InventoryPage() {
 
       {/* DELETE CONFIRM DIALOG */}
       <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-        <DialogContent className="max-w-[400px] rounded-[3rem] p-10 border-none shadow-3xl bg-white text-center">
+        <DialogContent className="max-w-[400px] rounded-[3rem] p-10 border-none  bg-white text-center">
           <div className="w-20 h-20 bg-rose-50 text-rose-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 border border-rose-100">
             <AlertTriangle size={40} className="animate-pulse" />
           </div>
           <DialogHeader>
-            <DialogTitle className="text-2xl font-black text-slate-950 tracking-tight italic">
+            <DialogTitle className="text-2xl font-bold text-slate-950 tracking-tight italic">
               Delete Medicine?
             </DialogTitle>
             <DialogDescription className="text-slate-400 font-bold text-xs uppercase tracking-widest leading-relaxed mt-2">
@@ -649,14 +649,14 @@ export default function InventoryPage() {
             <Button
               onClick={handleDelete}
               disabled={submitting}
-              className="w-full h-14 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-rose-200"
+              className="w-full h-14 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-bold uppercase tracking-widest  shadow-rose-200"
             >
               {submitting ? "Deleting..." : "Confirm Delete"}
             </Button>
             <Button
               variant="ghost"
               onClick={() => setIsDeleteOpen(false)}
-              className="w-full h-14 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-400"
+              className="w-full h-14 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-slate-400"
             >
               Cancel
             </Button>

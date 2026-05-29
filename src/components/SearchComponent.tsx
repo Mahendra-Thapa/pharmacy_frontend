@@ -64,7 +64,7 @@ const SearchComponent = () => {
             onFocus={() => setIsFocused(true)}
             onBlur={() => setTimeout(() => setIsFocused(false), 200)}
             value={searchQuery}
-            className={`text-sm bg-transparent outline-none font-bold text-slate-700 placeholder:text-slate-400 placeholder:font-medium transition-all ${
+            className={`text-sm bg-transparent outline-none font-bold text-slate-700 placeholder:text-slate-300 placeholder:font-medium transition-all ${
               isFocused ? "w-full" : "w-0 sm:w-full"
             }`}
             onKeyDown={(e) => {
@@ -83,10 +83,10 @@ const SearchComponent = () => {
 
         {isFocused && searchQuery.length > 0 && (
           <Card
-            className="absolute h-max max-h-[60vh] w-full flex flex-col top-full left-0 mt-0 px-2 py-3 rounded-t-none rounded-b-[24px] overflow-y-auto scrollbar-thin shadow-2xl border-t-0 bg-white/95 backdrop-blur-xl z-[60]"
+            className="absolute h-max max-h-[60vh] w-full flex flex-col top-full left-0 mt-0 px-2 py-3 rounded-t-none rounded-b-[24px] overflow-y-auto scrollbar-thin  border-t-0 bg-white/95 backdrop-blur-xl z-[60]"
             onMouseDown={(e) => e.preventDefault()}
           >
-            <div className="px-4 py-2 text-[10px] font-black text-slate-400 uppercase tracking-widest border-b border-slate-50 mb-2 font-sans">
+            <div className="px-4 py-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest border-b border-slate-50 mb-2 font-sans">
                 Found {filteredMedicines.length} matches
             </div>
             {filteredMedicines.length > 0 ? (
@@ -113,10 +113,10 @@ const SearchComponent = () => {
                     )}
                   </div>
                   <div className="flex flex-col text-sm leading-tight space-y-0.5 flex-1 min-w-0">
-                    <p className="font-black text-slate-800 truncate group-hover/item:text-emerald-600 transition-colors uppercase tracking-tight">
+                    <p className="font-bold text-slate-800 truncate group-hover/item:text-emerald-600 transition-colors uppercase tracking-tight">
                       {med.name}
                     </p>
-                    <p className="text-[10px] font-black text-emerald-600 uppercase tracking-widest">
+                    <p className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
                        Rs. {parseFloat(med.price).toFixed(2)}
                     </p>
                     <p className="text-[10px] text-slate-400 font-bold truncate uppercase">{med.category_name || "General Medicine"}</p>

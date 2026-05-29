@@ -147,7 +147,7 @@ export default function OrdersPage() {
     <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
       <header className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tighter mb-1.5">My Orders</h1>
+          <h1 className="text-2xl font-bold text-slate-900 tracking-tighter mb-1.5">My Orders</h1>
           <p className="text-slate-400 font-bold text-[10px] uppercase tracking-widest">Track all your pharmacy orders</p>
         </div>
         <div className="relative group">
@@ -169,7 +169,7 @@ export default function OrdersPage() {
 
       {/* Mobile Tabs Dropdown */}
       <div className="md:hidden w-full relative mb-4">
-        <label className="text-[9px] font-black uppercase tracking-widest text-slate-400 block mb-1.5 ml-1">Filter by Status</label>
+        <label className="text-[9px] font-bold uppercase tracking-widest text-slate-400 block mb-1.5 ml-1">Filter by Status</label>
         <Select
           value={activeTab}
           onValueChange={(value) => {
@@ -217,7 +217,7 @@ export default function OrdersPage() {
             <button
               key={tab.id}
               onClick={() => { setActiveTab(tab.id as any); setPage(1) }}
-              className={`relative pb-3 text-xs font-black uppercase tracking-widest transition-colors cursor-pointer flex items-center gap-2 shrink-0 ${isActive ? 'text-pharma-blue' : 'text-slate-400 hover:text-slate-700'}`}
+              className={`relative pb-3 text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer flex items-center gap-2 shrink-0 ${isActive ? 'text-pharma-blue' : 'text-slate-400 hover:text-slate-700'}`}
             >
               <span>{tab.label}</span>
               <span className={`text-[9px] px-1.5 py-0.5 rounded-md font-bold ${isActive ? 'bg-pharma-blue/10 text-pharma-blue' : 'bg-slate-100 text-slate-500'}`}>
@@ -246,7 +246,7 @@ export default function OrdersPage() {
           <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
             <Package size={32} className="text-slate-300" />
           </div>
-          <h3 className="text-base font-black text-slate-900 mb-1">No Orders Found</h3>
+          <h3 className="text-base font-bold text-slate-900 mb-1">No Orders Found</h3>
           <p className="text-xs font-bold text-slate-400 max-w-xs uppercase tracking-widest leading-loose">
             {search ? 'No orders match your search.' : 'Place your first order to get started.'}
           </p>
@@ -268,7 +268,7 @@ export default function OrdersPage() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0 }}
                   >
-                    <Card className={`group rounded-xl border border-slate-100 border-l-4 ${statusCfg.borderLeft} shadow-sm hover:shadow-md transition-all duration-300 bg-white overflow-hidden`}>
+                    <Card className={`group rounded-xl border border-slate-100 border-l-4 ${statusCfg.borderLeft} shadow-sm hover: transition-all duration-300 bg-white overflow-hidden`}>
                       <div className="p-5 lg:p-6">
                         {/* Order Header */}
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
@@ -279,7 +279,7 @@ export default function OrdersPage() {
                             <div>
                               <div className="flex items-center gap-1.5 mb-0.5">
                                 <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Order ID:</span>
-                                <span className="text-sm font-black text-slate-900 tracking-tight">{order.order_number || `RX-${order.id.toString().padStart(5, '0')}`}</span>
+                                <span className="text-sm font-bold text-slate-900 tracking-tight">{order.order_number || `RX-${order.id.toString().padStart(5, '0')}`}</span>
                               </div>
                               <div className="flex items-center gap-1.5">
                                 <Clock size={11} className="text-slate-400" />
@@ -291,13 +291,13 @@ export default function OrdersPage() {
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <Badge className={`text-[9px] font-black uppercase tracking-widest border px-2.5 py-0.5 rounded-md ${statusCfg.bg} ${statusCfg.color}`}>
+                            <Badge className={`text-[9px] font-bold uppercase tracking-widest border px-2.5 py-0.5 rounded-md ${statusCfg.bg} ${statusCfg.color}`}>
                               {statusCfg.label}
                             </Badge>
                             {editable && timeLeft && (
                               <button
                                 onClick={() => handleStartEdit(order)}
-                                className="text-[9px] bg-amber-50 border border-amber-200 text-amber-600 font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md flex items-center gap-1.5 hover:bg-amber-100 transition-colors cursor-pointer"
+                                className="text-[9px] bg-amber-50 border border-amber-200 text-amber-600 font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-md flex items-center gap-1.5 hover:bg-amber-100 transition-colors cursor-pointer"
                               >
                                 <Edit3 size={10} /> Edit: {timeLeft}
                               </button>
@@ -314,19 +314,19 @@ export default function OrdersPage() {
                         {/* Order Summary Grid */}
                         <div className="bg-slate-50/60 p-4 rounded-xl grid grid-cols-2 md:grid-cols-4 gap-4 border border-slate-100">
                           <div className="space-y-0.5">
-                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Items</span>
-                            <p className="text-xs font-black text-slate-850">{order.items?.length || 0} Products</p>
+                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Items</span>
+                            <p className="text-xs font-bold text-slate-850">{order.items?.length || 0} Products</p>
                           </div>
                           <div className="space-y-0.5">
-                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Total Valuation</span>
-                            <p className="text-xs font-black text-pharma-green">Rs. {parseFloat(order.total_amount).toFixed(2)}</p>
+                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Total Valuation</span>
+                            <p className="text-xs font-bold text-pharma-green">Rs. {parseFloat(order.total_amount).toFixed(2)}</p>
                           </div>
                           <div className="space-y-0.5">
-                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Payment Mode</span>
+                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Payment Mode</span>
                             <p className="text-xs font-bold text-slate-600">{order.payment?.method || 'N/A'}</p>
                           </div>
                           <div className="space-y-0.5">
-                            <span className="text-[9px] font-black text-slate-400 uppercase tracking-widest">Handler</span>
+                            <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Handler</span>
                             <p className="text-xs font-bold text-slate-600">{order.handled_by_name || 'Online'}</p>
                           </div>
                         </div>
@@ -343,19 +343,19 @@ export default function OrdersPage() {
                               <div className="pt-5 mt-4 border-t border-slate-100 space-y-5">
                                 {/* Items */}
                                 <div>
-                                  <h4 className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-1.5">
+                                  <h4 className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-3 flex items-center gap-1.5">
                                     <ShoppingBag size={11} /> Order Items
                                   </h4>
                                   <div className="space-y-2">
                                     {order.items?.map((item: any) => (
                                       <div key={item.id} className="flex justify-between items-center p-3.5 bg-white border border-slate-100 rounded-xl hover:bg-slate-50 transition-colors">
                                         <div>
-                                          <p className="text-xs font-black text-slate-850">{item.medicine_name}</p>
+                                          <p className="text-xs font-bold text-slate-850">{item.medicine_name}</p>
                                           <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Rs. {parseFloat(item.price).toFixed(2)} / unit</p>
                                         </div>
                                         <div className="text-right">
                                           <p className="text-xs font-bold text-slate-500">×{item.quantity}</p>
-                                          <p className="text-xs font-black text-pharma-green">Rs. {parseFloat(item.total).toFixed(2)}</p>
+                                          <p className="text-xs font-bold text-pharma-green">Rs. {parseFloat(item.total).toFixed(2)}</p>
                                         </div>
                                       </div>
                                     ))}
@@ -365,7 +365,7 @@ export default function OrdersPage() {
                                 {/* Status Timeline */}
                                 {order.status_history && order.status_history.length > 0 && (
                                   <div>
-                                    <h4 className="text-[9px] font-black uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-1.5">
+                                    <h4 className="text-[9px] font-bold uppercase tracking-widest text-slate-400 mb-4 flex items-center gap-1.5">
                                       <Activity size={11} /> Status Timeline
                                     </h4>
                                     <div className="relative pl-5 space-y-4 border-l border-slate-100 ml-2">
@@ -375,7 +375,7 @@ export default function OrdersPage() {
                                           <div className="absolute -left-[27px] top-1 w-3.5 h-3.5 rounded-full bg-white border-2 border-pharma-blue flex items-center justify-center shadow-xs">
                                             <div className="w-1.5 h-1.5 rounded-full bg-pharma-blue" />
                                           </div>
-                                          <span className="font-black text-slate-900 uppercase text-[9px] tracking-wider">{hist.new_status}</span>
+                                          <span className="font-bold text-slate-900 uppercase text-[9px] tracking-wider">{hist.new_status}</span>
                                           <span className="text-slate-400 font-bold">Updated by {hist.changed_by_name || 'System'}</span>
                                           <span className="text-slate-350 font-bold sm:ml-auto">
                                             {new Date(hist.changed_at).toLocaleString()}
@@ -392,7 +392,7 @@ export default function OrdersPage() {
                                     <div className="flex items-start gap-2.5">
                                       <Edit3 size={16} className="text-amber-600 shrink-0 mt-0.5" />
                                       <div>
-                                        <p className="text-xs font-black text-amber-850 uppercase tracking-tight">Order Modification Window Open</p>
+                                        <p className="text-xs font-bold text-amber-850 uppercase tracking-tight">Order Modification Window Open</p>
                                         <p className="text-[9px] font-bold text-amber-600 max-w-sm uppercase tracking-widest leading-relaxed">
                                           You have {timeLeft} remaining to adjust this protocol before it is finalized.
                                         </p>
@@ -400,7 +400,7 @@ export default function OrdersPage() {
                                     </div>
                                     <Button
                                       onClick={() => handleStartEdit(order)}
-                                      className="bg-amber-600 hover:bg-amber-700 text-white rounded-lg h-9 px-4 font-black uppercase tracking-widest text-[9px] shadow-sm w-full sm:w-auto mt-2 sm:mt-0 cursor-pointer"
+                                      className="bg-amber-600 hover:bg-amber-700 text-white rounded-lg h-9 px-4 font-bold uppercase tracking-widest text-[9px] shadow-sm w-full sm:w-auto mt-2 sm:mt-0 cursor-pointer"
                                     >
                                       Modify Protocol
                                     </Button>
@@ -435,7 +435,7 @@ export default function OrdersPage() {
                   const pg = page <= 3 ? i + 1 : page + i - 2
                   if (pg < 1 || pg > totalPages) return null
                   return (
-                    <Button key={pg} variant={pg === page ? 'default' : 'outline'} size="sm" onClick={() => setPage(pg)} className={`rounded-lg h-8 w-8 p-0 text-[11px] font-black shadow-xs cursor-pointer ${pg === page ? 'bg-pharma-blue text-white border-pharma-blue' : ''}`}>{pg}</Button>
+                    <Button key={pg} variant={pg === page ? 'default' : 'outline'} size="sm" onClick={() => setPage(pg)} className={`rounded-lg h-8 w-8 p-0 text-[11px] font-bold shadow-xs cursor-pointer ${pg === page ? 'bg-pharma-blue text-white border-pharma-blue' : ''}`}>{pg}</Button>
                   )
                 })}
                 <Button variant="outline" size="sm" onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} className="rounded-lg h-8 w-8 p-0 shadow-xs cursor-pointer"><ChevronRight size={14} /></Button>
@@ -447,12 +447,12 @@ export default function OrdersPage() {
 
       {/* Edit Order Dialog */}
       <Dialog open={!!editingOrder} onOpenChange={() => setEditingOrder(null)}>
-        <DialogContent className="sm:max-w-[500px] rounded-xl p-8 border border-slate-100 shadow-3xl bg-white overflow-hidden">
+        <DialogContent className="sm:max-w-[500px] rounded-xl p-8 border border-slate-100  bg-white overflow-hidden">
           <DialogHeader>
             <div className="w-12 h-12 bg-pharma-blue/10 rounded-xl flex items-center justify-center mb-4 border border-pharma-blue/10">
               <Edit3 size={24} className="text-pharma-blue" />
             </div>
-            <DialogTitle className="text-xl font-black text-slate-900 tracking-tighter mb-1">Modify Protocol</DialogTitle>
+            <DialogTitle className="text-xl font-bold text-slate-900 tracking-tighter mb-1">Modify Protocol</DialogTitle>
             <DialogDescription className="text-slate-400 font-bold uppercase tracking-widest text-[9px]">
               Adjusting Order {editingOrder?.order_number}
             </DialogDescription>
@@ -462,7 +462,7 @@ export default function OrdersPage() {
             {editItems.map((item) => (
               <div key={item.id} className="group p-4 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-between hover:bg-white hover:border-pharma-blue/20 transition-all duration-300">
                 <div className="space-y-0.5">
-                  <p className="text-xs font-black text-slate-900 leading-tight">{item.medicine_name}</p>
+                  <p className="text-xs font-bold text-slate-900 leading-tight">{item.medicine_name}</p>
                   <p className="text-[9px] font-bold text-pharma-green uppercase tracking-widest">
                     Rs. {parseFloat(item.price).toFixed(2)} / unit
                   </p>
@@ -475,7 +475,7 @@ export default function OrdersPage() {
                   >
                     {item.quantity === 1 ? <Trash2 size={14} /> : <Minus size={14} />}
                   </button>
-                  <span className="w-5 text-center text-xs font-black text-slate-900">{item.quantity}</span>
+                  <span className="w-5 text-center text-xs font-bold text-slate-900">{item.quantity}</span>
                   <button
                     onClick={() => handleUpdateItemQty(item.medicine, 1)}
                     className="w-7 h-7 rounded-lg flex items-center justify-center text-slate-400 hover:bg-pharma-blue/10 hover:text-pharma-blue transition-colors cursor-pointer"
@@ -498,8 +498,8 @@ export default function OrdersPage() {
 
           <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 mb-6 flex justify-between items-center">
             <div>
-              <p className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-0.5">New Valuation</p>
-              <p className="text-base font-black text-pharma-green">
+              <p className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-0.5">New Valuation</p>
+              <p className="text-base font-bold text-pharma-green">
                 Rs. {editItems.reduce((acc, curr) => acc + (parseFloat(curr.price) * curr.quantity), 0).toFixed(2)}
               </p>
             </div>
@@ -512,14 +512,14 @@ export default function OrdersPage() {
             <Button
               variant="outline"
               onClick={() => setEditingOrder(null)}
-              className="flex-1 h-12 rounded-xl font-black uppercase tracking-widest text-[9px] border-slate-200 cursor-pointer"
+              className="flex-1 h-12 rounded-xl font-bold uppercase tracking-widest text-[9px] border-slate-200 cursor-pointer"
             >
               Discard Changes
             </Button>
             <Button
               onClick={handleSaveOrderChanges}
               disabled={isUpdatingOrder || editItems.length === 0}
-              className="flex-1 h-12 rounded-xl font-black uppercase tracking-widest text-[9px] bg-pharma-blue hover:bg-pharma-blue/90 text-white shadow-lg shadow-pharma-blue/20 cursor-pointer"
+              className="flex-1 h-12 rounded-xl font-bold uppercase tracking-widest text-[9px] bg-pharma-blue hover:bg-pharma-blue/90 text-white shadow-lg shadow-pharma-blue/20 cursor-pointer"
             >
               {isUpdatingOrder ? 'Transmitting...' : 'Commit Changes'}
             </Button>

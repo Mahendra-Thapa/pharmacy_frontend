@@ -24,13 +24,13 @@ export function POSAuth({
       <motion.div
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
-        className="bg-white/5 backdrop-blur-2xl border border-white/10 p-12 rounded-[40px] shadow-2xl w-full max-w-md relative z-10"
+        className="bg-white/5 backdrop-blur-2xl border border-white/10 p-12 rounded-[40px]  w-full max-w-md relative z-10"
       >
         <div className="text-center mb-10">
-          <div className="inline-flex p-5 bg-pharma-green text-white rounded-2xl shadow-2xl shadow-pharma-green/20 mb-6">
+          <div className="inline-flex p-5 bg-pharma-green text-white rounded-2xl  shadow-pharma-green/20 mb-6">
             <QrCode size={40} className="stroke-[2.5px]" />
           </div>
-          <h1 className="text-2xl font-black text-white tracking-widest uppercase mb-1">
+          <h1 className="text-2xl font-bold text-white tracking-widest uppercase mb-1">
             POS Terminal
           </h1>
           <p className="text-pharma-blue/60 text-xs font-bold uppercase tracking-widest px-8">
@@ -69,7 +69,7 @@ export function POSAuth({
           </div>
           <button
             type="submit"
-            className="w-full h-14 bg-pharma-green hover:bg-pharma-green/90 text-white font-black uppercase tracking-widest rounded-2xl transition-all duration-500 shadow-2xl shadow-pharma-green/20 active:scale-95 flex items-center justify-center gap-3"
+            className="w-full h-14 bg-pharma-green hover:bg-pharma-green/90 text-white font-bold uppercase tracking-widest rounded-2xl transition-all duration-500  shadow-pharma-green/20 active:scale-95 flex items-center justify-center gap-3"
           >
             Unlock Terminal <Activity size={18} />
           </button>

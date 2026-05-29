@@ -1,130 +1,197 @@
 'use client'
 
-import { Activity, Heart, Mail, MapPin, Phone, ShieldCheck } from 'lucide-react';
-import { FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa6';
+import Link from 'next/link'
+import {
+  Mail,
+  MapPin,
+  Phone,
+  ShieldCheck,
+} from 'lucide-react'
+
+import {
+  FaFacebookF,
+  FaInstagram,
+  FaTwitter,
+} from 'react-icons/fa6'
 
 export function ModernFooter() {
   return (
-    <footer className="relative mt-24 pt-20 pb-12 bg-slate-900 overflow-hidden group">
-      {/* Decorative Gradients */}
-      <div className="absolute top-0 left-0 w-1/3 h-1/3 bg-pharma-green/10 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-pharma-blue/10 blur-[150px] rounded-full translate-x-1/4 translate-y-1/4"></div>
+    <footer className="mt-20 border-t bg-gray-100">
+      <div className="max-w-7xl mx-auto px-4 lg:px-8 py-14">
+        {/* Top */}
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+          {/* Brand */}
+          <div>
+            <img
+              src="/logo.png"
+              alt="Logo"
+              className="h-12 w-auto object-contain"
+            />
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 pb-16 border-b border-slate-800">
-          
-          {/* Logo & Info */}
-          <div className="space-y-6">
-            <div className="flex items-center gap-3">
-               <img src="/logo.png" alt="Pharmalogic" className="h-16 w-auto object-contain drop-shadow-sm brightness-200 contrast-100" style={{filter: 'brightness(0) invert(1)'}} />
-            </div>
-            <p className="text-white text-sm leading-relaxed max-w-xs font-medium">
-              Revolutionizing health security through precision pharmaceuticals and machine learning diagnostics. 
-              Certified by global standards for your health assurance.
+            <p className="mt-5 text-sm leading-7 text-gray-500">
+              Trusted healthcare and pharmacy services with
+              fast delivery and quality medicines for your
+              daily needs.
             </p>
-            <div className="flex gap-4">
-              {[FaInstagram, FaTwitter, FaFacebookF].map((Icon, i) => (
-                <div key={i} className="p-3 bg-slate-800 text-white/80 hover:bg-pharma-blue hover:text-white rounded-2xl transition cursor-pointer shadow-lg active:scale-90">
-                  <Icon size={18} />
-                </div>
-              ))}
+
+            <div className="mt-6 flex items-center gap-3">
+              {[FaFacebookF, FaInstagram, FaTwitter].map(
+                (Icon, i) => (
+                  <button
+                    key={i}
+                    className="flex h-10 w-10 items-center justify-center rounded-xl border border-gray-200 text-gray-600 transition hover:bg-gray-100"
+                  >
+                    <Icon size={16} />
+                  </button>
+                )
+              )}
             </div>
           </div>
 
           {/* Quick Links */}
-          <div className="space-y-6">
-            <h4 className="text-white font-black text-sm uppercase tracking-widest flex items-center gap-2">
-               Services <div className="h-1 w-8 bg-pharma-orange rounded-full"></div>
-            </h4>
-            <ul className="space-y-4">
-               {['Emergency 24/7', 'Health Checkups', 'Home Delivery', 'Consultation'].map((link) => (
-                 <li key={link}>
-                    <a href="#" className="text-white/80 hover:text-pharma-orange text-sm font-bold transition group/link flex items-center gap-2">
-                       <div className="w-0 group-hover/link:w-2 h-0.5 bg-pharma-orange transition-all rounded-full opacity-0 group-hover/link:opacity-100"></div>
-                       {link}
-                    </a>
-                 </li>
-               ))}
-            </ul>
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900">
+              Quick Links
+            </h3>
+
+            <div className="mt-5 flex flex-col gap-3">
+              {[
+                'Home',
+                'Categories',
+                'About',
+                'Contact',
+              ].map((item) => (
+                <Link
+                  key={item}
+                  href="#"
+                  className="text-sm text-gray-500 transition hover:text-black"
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
           </div>
 
-          {/* Support */}
-          <div className="space-y-6">
-            <h4 className="text-white font-black text-sm uppercase tracking-widest flex items-center gap-2">
-               Patient Care <div className="h-1 w-8 bg-pharma-orange rounded-full"></div>
-            </h4>
-            <ul className="space-y-4">
-               {['Help Center', 'Track Order', 'Return Policy', 'Safety Portal'].map((link) => (
-                 <li key={link}>
-                    <a href="#" className="text-white/80 hover:text-pharma-orange text-sm font-bold transition group/link flex items-center gap-2">
-                       <div className="w-0 group-hover/link:w-2 h-0.5 bg-pharma-orange transition-all rounded-full opacity-0 group-hover/link:opacity-100"></div>
-                       {link}
-                    </a>
-                 </li>
-               ))}
-            </ul>
+          {/* Services */}
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900">
+              Services
+            </h3>
+
+            <div className="mt-5 flex flex-col gap-3">
+              {[
+                'Home Delivery',
+                '24/7 Support',
+                'Health Checkup',
+                'Online Consultation',
+              ].map((item) => (
+                <Link
+                  key={item}
+                  href="#"
+                  className="text-sm text-gray-500 transition hover:text-black"
+                >
+                  {item}
+                </Link>
+              ))}
+            </div>
           </div>
 
           {/* Contact */}
-          <div className="space-y-6">
-             <h4 className="text-white font-black text-sm uppercase tracking-widest flex items-center gap-2">
-               Get In Touch <div className="h-1 w-8 bg-pharma-orange rounded-full"></div>
-            </h4>
-            <div className="space-y-4 p-5 bg-white/5 border border-white/5 rounded-3xl backdrop-blur-sm">
-                <div className="flex items-start gap-4">
-                   <div className="p-2 bg-pharma-green/20 text-pharma-green rounded-xl">
-                      <Phone size={16} />
-                   </div>
-                   <div className="flex flex-col">
-                      <span className="text-[10px] text-pharma-green font-bold uppercase tracking-wider">Call Hub</span>
-                      <span className="text-white font-black text-sm tracking-tight">+977-9800000000</span>
-                   </div>
+          <div>
+            <h3 className="text-sm font-semibold text-gray-900">
+              Contact
+            </h3>
+
+            <div className="mt-5 space-y-4">
+              <div className="flex items-start gap-3">
+                <Phone
+                  size={18}
+                  className="mt-0.5 text-emerald-600"
+                />
+
+                <div>
+                  <p className="text-sm font-medium text-gray-900">
+                    +977-9800000000
+                  </p>
+
+                  <p className="text-xs text-gray-500">
+                    Call anytime
+                  </p>
                 </div>
-                <div className="flex items-start gap-4">
-                   <div className="p-2 bg-blue-500/20 text-blue-400 rounded-xl">
-                      <Mail size={16} />
-                   </div>
-                   <div className="flex flex-col">
-                      <span className="text-[10px] text-blue-500/60 font-bold uppercase tracking-wider">Email Us</span>
-                      <span className="text-white font-black text-sm tracking-tight">care@smartpharma.com</span>
-                   </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <Mail
+                  size={18}
+                  className="mt-0.5 text-emerald-600"
+                />
+
+                <div>
+                  <p className="text-sm font-medium text-gray-900">
+                    care@smartpharma.com
+                  </p>
+
+                  <p className="text-xs text-gray-500">
+                    Email support
+                  </p>
                 </div>
-                <div className="flex items-start gap-4">
-                   <div className="p-2 bg-rose-500/20 text-rose-400 rounded-xl">
-                      <MapPin size={16} />
-                   </div>
-                   <div className="flex flex-col">
-                      <span className="text-[10px] text-rose-500/60 font-bold uppercase tracking-wider">Location</span>
-                      <span className="text-white font-black text-sm tracking-tight">Kathmandu, Nepal</span>
-                   </div>
+              </div>
+
+              <div className="flex items-start gap-3">
+                <MapPin
+                  size={18}
+                  className="mt-0.5 text-emerald-600"
+                />
+
+                <div>
+                  <p className="text-sm font-medium text-gray-900">
+                    Kathmandu, Nepal
+                  </p>
+
+                  <p className="text-xs text-gray-500">
+                    Our location
+                  </p>
                 </div>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Footer Bottom */}
-        <div className="pt-12 flex flex-col md:flex-row justify-between items-center gap-8">
-            <p className="text-white/80 text-xs font-bold uppercase tracking-widest">
-               © {new Date().getFullYear()} Pharmalogic Systems INC. All Rights Reserved.
-            </p>
-            
-            <div className="flex items-center gap-8">
-                <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/5 rounded-2xl">
-                   <ShieldCheck size={16} className="text-pharma-green" />
-                   <span className="text-white/80 text-[10px] font-black uppercase tracking-widest">Secured Payment Gateway</span>
-                </div>
-                 <div className="flex items-center gap-2 px-4 py-2 bg-white/5 border border-white/5 rounded-2xl">
-                   <Heart size={16} className="text-rose-500 fill-rose-500/20" />
-                   <span className="text-white/80 text-[10px] font-black uppercase tracking-widest">Patient Focus First</span>
-                </div>
+        {/* Bottom */}
+        <div className="mt-12 flex flex-col gap-4 border-t pt-6 md:flex-row md:items-center md:justify-between">
+          <p className="text-sm text-gray-500">
+            © {new Date().getFullYear()} Smart Pharma. All
+            rights reserved.
+          </p>
+
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 rounded-xl border px-3 py-2">
+              <ShieldCheck
+                size={16}
+                className="text-emerald-600"
+              />
+
+              <span className="text-xs text-gray-600">
+                Secure Payments
+              </span>
             </div>
-            
-            <div className="flex gap-6">
-               <a href="#" className="text-white/80 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition">Privacy</a>
-               <a href="#" className="text-white/80 hover:text-white text-[10px] font-black uppercase tracking-[0.2em] transition">Terms</a>
-            </div>
+
+            <Link
+              href="#"
+              className="text-sm text-gray-500 hover:text-black"
+            >
+              Privacy Policy
+            </Link>
+
+            <Link
+              href="#"
+              className="text-sm text-gray-500 hover:text-black"
+            >
+              Terms
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
-  );
+  )
 }

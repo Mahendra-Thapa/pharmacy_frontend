@@ -41,7 +41,7 @@ export function UserSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () 
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'tween', duration: 0.3, ease: 'easeInOut' }}
-              className="fixed top-0 left-0 h-full w-[320px] max-w-[calc(100vw-60px)] bg-white z-[110] shadow-2xl border-r border-slate-100 flex flex-col justify-between overflow-hidden"
+              className="fixed top-0 left-0 h-full w-[320px] max-w-[calc(100vw-60px)] bg-white z-[110]  border-r border-slate-100 flex flex-col justify-between overflow-hidden"
             >
               <div className="flex flex-col h-full">
                 {/* User Profile Banner with Close Button */}
@@ -63,13 +63,13 @@ export function UserSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                       <User size={28} className="text-pharma-green" />
                     </div>
                     <div className="flex flex-col">
-                      <span className="text-sm font-black tracking-tight">{user?.first_name} {user?.last_name}</span>
+                      <span className="text-sm font-bold tracking-tight">{user?.first_name} {user?.last_name}</span>
                       <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">Level 1 Patient</span>
                     </div>
                   </div>
 
                   {/* On large screen, render a clean header title instead of profile info */}
-                  <div className="hidden lg:block font-black text-xs uppercase tracking-widest text-slate-800">
+                  <div className="hidden lg:block font-bold text-xs uppercase tracking-widest text-slate-800">
                     Navigation Menu
                   </div>
                 </div>
@@ -87,7 +87,7 @@ export function UserSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                       >
                         <div className="flex items-center gap-4">
                           <item.icon size={18} className={isActive ? 'text-white' : 'text-slate-400 group-hover:text-pharma-blue'} />
-                          <span className="text-xs font-black uppercase tracking-widest">{item.name}</span>
+                          <span className="text-xs font-bold uppercase tracking-widest">{item.name}</span>
                         </div>
                         {isActive && <ChevronRight size={14} />}
                       </Link>
@@ -99,7 +99,7 @@ export function UserSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                     className="flex items-center gap-4 p-4 rounded-2xl text-rose-500 hover:bg-rose-50 transition-all group mt-4 border border-transparent hover:border-rose-100"
                   >
                     <LogOut size={18} />
-                    <span className="text-xs font-black uppercase tracking-widest">Logout</span>
+                    <span className="text-xs font-bold uppercase tracking-widest">Logout</span>
                   </button> */}
                 </div>
 
@@ -109,7 +109,7 @@ export function UserSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () 
 
                     <div className="absolute bottom-0 right-0 w-24 h-24 bg-white/10 blur-2xl"></div>
 
-                    <h4 className="text-lg font-black mb-2 tracking-tight">
+                    <h4 className="text-lg font-bold mb-2 tracking-tight">
                       Need Health Consultation?
                     </h4>
 
@@ -124,7 +124,7 @@ export function UserSidebar({ isOpen, onClose }: { isOpen: boolean; onClose: () 
                       rel="noopener noreferrer"
                       className="block"
                     >
-                      <button className="w-full py-3 bg-white text-indigo-600 rounded-2xl font-bold text-xs uppercase tracking-wider shadow-xl shadow-indigo-900/20 hover:bg-indigo-50 transition-all duration-300 active:scale-95">
+                      <button className="w-full py-3 bg-white text-indigo-600 rounded-2xl font-bold text-xs uppercase tracking-wider  shadow-indigo-900/20 hover:bg-indigo-50 transition-all duration-300 active:scale-95">
                         Chat on WhatsApp
                       </button>
                     </a>

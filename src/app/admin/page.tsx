@@ -37,10 +37,10 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-10">
-        <Card className="rounded-xl border-transparent shadow-xl xl:col-span-2 overflow-hidden bg-white">
+        <Card className="rounded-xl border-transparent  xl:col-span-2 overflow-hidden bg-white">
           <CardHeader className="p-10 pb-6">
-            <CardTitle className="text-xl font-black text-slate-900 tracking-tight italic">Revenue Graph</CardTitle>
-            <CardDescription className="text-[10px] font-black uppercase tracking-widest text-slate-400">Monthly Performance Overview</CardDescription>
+            <CardTitle className="text-xl font-bold text-slate-900 tracking-tight italic">Revenue Graph</CardTitle>
+            <CardDescription className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Monthly Performance Overview</CardDescription>
           </CardHeader>
           <CardContent className="p-0 px-10 pb-10 h-[400px]">
             <ResponsiveContainer width="100%" height="100%">
@@ -62,23 +62,23 @@ export default function AdminDashboard() {
         </Card>
 
         <div className="space-y-8">
-          <Card className="rounded-xl bg-slate-950 border-transparent shadow-2xl text-white p-10 relative overflow-hidden group">
+          <Card className="rounded-xl bg-slate-950 border-transparent  text-white p-10 relative overflow-hidden group">
             <div className="relative z-10">
                <div className="w-14 h-14 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
                   <Package size={24} className="text-pharma-blue" />
                </div>
-               <h3 className="text-xl font-black tracking-tight mb-2 italic">Add New Stock</h3>
+               <h3 className="text-xl font-bold tracking-tight mb-2 italic">Add New Stock</h3>
                <p className="text-xs text-slate-400 font-bold leading-relaxed mb-8">Quickly update your medicine inventory to ensure availability for your customers.</p>
                <Link href="/admin/inventory">
-                 <Button className="w-full h-12 bg-pharma-blue hover:bg-white hover:text-slate-950 text-white rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">
+                 <Button className="w-full h-12 bg-pharma-blue hover:bg-white hover:text-slate-950 text-white rounded-xl text-[10px] font-bold uppercase tracking-widest transition-all">
                     Go to Inventory
                  </Button>
                </Link>
             </div>
           </Card>
 
-          <Card className="rounded-xl border-transparent shadow-xl p-10 bg-white">
-            <h3 className="font-black text-slate-900 tracking-tight mb-8 flex items-center gap-2 italic">
+          <Card className="rounded-xl border-transparent  p-10 bg-white">
+            <h3 className="font-bold text-slate-900 tracking-tight mb-8 flex items-center gap-2 italic">
                <CreditCard size={18} className="text-indigo-500" /> Recent Activity
             </h3>
             <div className="space-y-5">
@@ -89,11 +89,11 @@ export default function AdminDashboard() {
                         <Check size={18} />
                      </div>
                      <div className="flex flex-col">
-                        <span className="text-xs font-black text-slate-900 tracking-tight">Rs. {tx.amount}</span>
+                        <span className="text-xs font-bold text-slate-900 tracking-tight">Rs. {tx.amount}</span>
                         <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">{tx.method} Payment</span>
                      </div>
                   </div>
-                  <span className="text-[10px] font-black text-slate-300">#{tx.id}</span>
+                  <span className="text-[10px] font-bold text-slate-300">#{tx.id}</span>
                 </div>
               ))}
             </div>
@@ -113,13 +113,13 @@ function KPIItem({ title, value, icon: Icon, color }: any) {
   };
 
   return (
-    <Card className="rounded-xl border-transparent shadow-lg p-8 flex items-center gap-6 bg-white group hover:shadow-2xl transition-all">
+    <Card className="rounded-xl border-transparent shadow-lg p-8 flex items-center gap-6 bg-white group hover: transition-all">
       <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${colorMap[color] || 'bg-slate-50'}`}>
         <Icon size={24} />
       </div>
       <div>
-        <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">{title}</p>
-        <h3 className="text-2xl font-black text-slate-900 tracking-tight">{value}</h3>
+        <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{title}</p>
+        <h3 className="text-2xl font-bold text-slate-900 tracking-tight">{value}</h3>
       </div>
     </Card>
   );

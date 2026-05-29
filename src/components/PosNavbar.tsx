@@ -115,7 +115,7 @@ export function PosNavbar() {
                     : "opacity-0 invisible -translate-y-2"
                 }`}
               >
-                <div className="bg-white border border-slate-200 shadow-2xl rounded-3xl overflow-hidden p-2">
+                <div className="bg-white border border-slate-200  rounded-3xl overflow-hidden p-2">
                   {/* User Info */}
                   <div className="px-4 py-3 border-b border-slate-100">
                     <p className="font-semibold text-slate-800 text-sm">

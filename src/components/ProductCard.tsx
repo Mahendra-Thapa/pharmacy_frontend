@@ -4,6 +4,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Star, Plus, Info } from 'lucide-react'
 import Link from 'next/link'
+import { FiShoppingCart } from "react-icons/fi";
 
 interface Medicine {
   id: number
@@ -36,7 +37,7 @@ export function ProductCard({
     <motion.div
       whileHover={{ y: -4 }}
       transition={{ type: 'spring', stiffness: 300, damping: 24 }}
-      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white transition-shadow duration-300 hover:shadow-xl hover:shadow-slate-200/60"
+      className="group relative flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white transition-shadow duration-300 hover: hover:shadow-slate-200/60"
     >
       {/* Image area */}
       <Link href={`/medicine/${medicine.id}`} className="flex flex-col flex-1">
@@ -85,9 +86,7 @@ export function ProductCard({
           {/* Footer */}
           <div className="mt-auto flex items-end justify-between border-t border-slate-100 pt-4">
             <div>
-              <span className="mb-0.5 block text-[10px] font-semibold uppercase tracking-widest text-slate-400">
-                Retail price
-              </span>
+            
               <span className="flex items-baseline gap-0.5 text-2xl font-bold text-slate-900">
                 <span className="text-sm font-semibold text-emerald-500">Rs.</span>
                 {Number(medicine.price)?.toFixed(0)}
@@ -100,10 +99,10 @@ export function ProductCard({
       {/* Add button — outside Link to avoid nested interactive elements */}
       <button
         onClick={() => onAdd(medicine)}
-        className="absolute bottom-5 right-5 flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white shadow-md transition-colors duration-200 hover:bg-emerald-500 active:scale-95"
+        className="absolute bottom-5 right-5 flex h-9 w-9 items-center justify-center rounded-xl bg-slate-900 text-white  transition-colors duration-200 hover:bg-emerald-500 active:scale-95"
         aria-label={`Add ${medicine.name} to cart`}
       >
-        <Plus size={18} />
+        <FiShoppingCart   size={18} />
       </button>
     </motion.div>
   )

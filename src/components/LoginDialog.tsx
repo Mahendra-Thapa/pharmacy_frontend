@@ -62,22 +62,22 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px] rounded-[2rem] p-8 bg-white border-transparent shadow-2xl">
+      <DialogContent className="sm:max-w-[425px] rounded-[2rem] p-8 bg-white border-transparent ">
         <DialogHeader className="mb-6">
           <div className="w-12 h-12 bg-pharma-green text-white rounded-2xl flex items-center justify-center shadow-lg shadow-pharma-green/20 mb-4">
             <Activity size={24} className="stroke-[2.5px]" />
           </div>
-          <DialogTitle className="text-2xl font-black text-slate-900 tracking-tight">
+          <DialogTitle className="text-2xl font-bold text-slate-900 tracking-tight">
             {isSignup ? 'Create Account' : 'Login'}
           </DialogTitle>
-          <DialogDescription className="text-xs font-bold uppercase tracking-widest text-slate-400">
+          <DialogDescription className="text-xs  uppercase tracking-widest text-slate-400">
             {isSignup ? 'Enter your details to sign up' : 'Enter your credentials to login'}
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {error && (
-            <div className="p-3 bg-rose-50 text-rose-600 rounded-xl text-xs font-bold border border-rose-100">
+            <div className="p-3 bg-rose-50 text-rose-600 rounded-xl text-xs  border border-rose-100">
               {error}
             </div>
           )}
@@ -85,20 +85,20 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
             {isSignup && (
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
-                  <Label className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 ml-1">First Name</Label>
+                  <Label className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1">First Name</Label>
                   <Input
                     value={credentials.first_name}
                     onChange={(e) => setCredentials({ ...credentials, first_name: e.target.value })}
-                    className="h-12 bg-slate-50 rounded-2xl border-transparent focus:bg-white focus:ring-pharma-blue/20 font-bold text-sm"
+                    className="h-12 bg-slate-50 rounded-2xl border-transparent focus:bg-white focus:ring-pharma-blue/20  text-sm"
                     required={isSignup}
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 ml-1">Last Name</Label>
+                  <Label className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1">Last Name</Label>
                   <Input
                     value={credentials.last_name}
                     onChange={(e) => setCredentials({ ...credentials, last_name: e.target.value })}
-                    className="h-12 bg-slate-50 rounded-2xl border-transparent focus:bg-white focus:ring-pharma-blue/20 font-bold text-sm"
+                    className="h-12 bg-slate-50 rounded-2xl border-transparent focus:bg-white focus:ring-pharma-blue/20  text-sm"
                     required={isSignup}
                   />
                 </div>
@@ -107,35 +107,35 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
 
             {isSignup && (
               <div className="space-y-2">
-                <Label className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 ml-1">Email Address</Label>
+                <Label className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1">Email Address</Label>
                 <Input
                   type="email"
                   value={credentials.email}
                   onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
-                  className="h-12 bg-slate-50 rounded-2xl border-transparent focus:bg-white focus:ring-pharma-blue/20 font-bold text-sm"
+                  className="h-12 bg-slate-50 rounded-2xl border-transparent focus:bg-white focus:ring-pharma-blue/20  text-sm"
                   required={isSignup}
                 />
               </div>
             )}
 
             <div className="space-y-2">
-              <Label className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 ml-1">Username or Email</Label>
+              <Label className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1">Username or Email</Label>
               <Input
                 value={credentials.username}
                 onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-                className="h-12 bg-slate-50 rounded-2xl border-transparent focus:bg-white focus:ring-pharma-blue/20 font-bold text-sm"
+                className="h-12 bg-slate-50 rounded-2xl border-transparent focus:bg-white focus:ring-pharma-blue/20  text-sm"
                 required
               />
             </div>
 
             <div className="space-y-2 relative pb-2">
-              <Label className="text-[10px] font-black uppercase tracking-[0.15em] text-slate-400 ml-1">Password</Label>
+              <Label className="text-[10px] font-bold uppercase tracking-[0.15em] text-slate-400 ml-1">Password</Label>
               <div className="relative">
                 <Input
                   type={showPassword ? "text" : "password"}
                   value={credentials.password}
                   onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-                  className="h-12 bg-slate-50 rounded-2xl border-transparent focus:bg-white focus:ring-pharma-blue/20 font-bold text-sm pr-10"
+                  className="h-12 bg-slate-50 rounded-2xl border-transparent focus:bg-white focus:ring-pharma-blue/20  text-sm pr-10"
                   required
                 />
                 <button
@@ -152,12 +152,12 @@ export function LoginDialog({ open, onOpenChange }: LoginDialogProps) {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="w-full h-14 bg-slate-900 hover:bg-pharma-green text-white font-black uppercase tracking-[0.15em] rounded-2xl shadow-xl shadow-slate-900/20 transition-all active:scale-[0.98]"
+            className="w-full h-14 bg-slate-900 hover:bg-pharma-green text-white font-bold uppercase tracking-[0.15em] rounded-2xl  shadow-slate-900/20 transition-all active:scale-[0.98]"
           >
             {isSubmitting ? 'Signing...' : (isSignup ? 'Sign up' : 'Login')}
           </Button>
 
-          <p className="text-center text-[10px] font-black uppercase tracking-widest text-slate-400">
+          <p className="text-center text-[10px] font-bold uppercase tracking-widest text-slate-400">
             {isSignup ? "Already registered?" : "Don't have any Account?"}{' '}
             <button
               type="button"

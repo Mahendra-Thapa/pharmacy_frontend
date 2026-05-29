@@ -88,14 +88,14 @@ export default function DeliveryManagementPage() {
 
   return (
     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="space-y-8">
-       <Card className="rounded-xl shadow-2xl border border-slate-100 overflow-hidden bg-white">
+       <Card className="rounded-xl  border border-slate-100 overflow-hidden bg-white">
           <div className="p-10 bg-slate-50/50 border-b border-white flex flex-wrap justify-between items-center gap-6">
             <div className="flex items-center gap-4">
-               <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center shadow-sm">
+               <div className="w-12 h-12 bg-white rounded-2xl flex items-center justify-center">
                   <Truck size={24} className="text-pharma-blue" />
                </div>
                <div>
-                  <h3 className="text-2xl font-black text-slate-900 tracking-tight italic uppercase">Delivery</h3>
+                  <h3 className="text-2xl font-bold text-slate-900 tracking-tight italic uppercase">Delivery</h3>
                   <p className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mt-1">Manage Delivery Zones & Pricing</p>
                </div>
             </div>
@@ -110,7 +110,7 @@ export default function DeliveryManagementPage() {
                     onChange={(e) => { setSearch(e.target.value); setPage(1); }}
                   />
                </div>
-               <Button onClick={openAdd} className="bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl h-11 px-8 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-xl shadow-slate-900/10">
+               <Button onClick={openAdd} className="bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl h-11 px-8 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2 ">
                   <PlusCircle size={14} /> Add Delivery
                </Button>
             </div>
@@ -119,11 +119,11 @@ export default function DeliveryManagementPage() {
           <Table>
             <TableHeader>
               <TableRow className="bg-slate-50/10 hover:bg-transparent">
-                <TableHead className="px-10 py-6 text-[10px] font-black uppercase text-slate-400">Zone Name</TableHead>
-                <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400">Delivery Price</TableHead>
-                <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400">Per KM Charge</TableHead>
-                <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400">Estimated Days</TableHead>
-                <TableHead className="py-6 text-[10px] font-black uppercase text-slate-400 text-right px-10">Actions</TableHead>
+                <TableHead className="px-10 py-6 text-[10px] font-bold uppercase text-slate-400">Zone Name</TableHead>
+                <TableHead className="py-6 text-[10px] font-bold uppercase text-slate-400">Delivery Price</TableHead>
+                <TableHead className="py-6 text-[10px] font-bold uppercase text-slate-400">Per KM Charge</TableHead>
+                <TableHead className="py-6 text-[10px] font-bold uppercase text-slate-400">Estimated Days</TableHead>
+                <TableHead className="py-6 text-[10px] font-bold uppercase text-slate-400 text-right px-10">Actions</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -132,17 +132,17 @@ export default function DeliveryManagementPage() {
                   <TableCell className="pl-10 py-6">
                     <div className="flex items-center gap-3">
                        <MapPin size={16} className="text-pharma-blue" />
-                       <span className="font-black text-slate-950 text-sm tracking-tight">{zone.name}</span>
+                       <span className="font-bold text-slate-950 text-sm tracking-tight">{zone.name}</span>
                     </div>
                   </TableCell>
                   <TableCell>
-                    <span className="text-sm font-black text-emerald-600">Rs. {Math.round(Number(zone.base_charge))}</span>
+                    <span className="text-sm font-bold text-emerald-600">Rs. {Math.round(Number(zone.base_charge))}</span>
                   </TableCell>
                   <TableCell>
-                    <span className="text-sm font-black text-emerald-600">Rs. {Math.round(Number(zone.per_km_charge))}</span>
+                    <span className="text-sm font-bold text-emerald-600">Rs. {Math.round(Number(zone.per_km_charge))}</span>
                   </TableCell>
                   <TableCell>
-                    <Badge variant="outline" className="text-[9px] font-black bg-slate-100 border-transparent px-3 py-1 uppercase tracking-widest text-slate-500">
+                    <Badge variant="outline" className="text-[9px] font-bold bg-slate-100 border-transparent px-3 py-1 uppercase tracking-widest text-slate-500">
                       {zone.estimated_days} Days
                     </Badge>
                   </TableCell>
@@ -159,44 +159,44 @@ export default function DeliveryManagementPage() {
 
           {totalPages > 1 && (
             <div className="p-8 border-t border-slate-50 flex items-center justify-between bg-slate-50/10">
-               <Button onClick={() => setPage(p => Math.max(1, p-1))} disabled={page === 1} variant="outline" size="sm" className="h-10 px-6 rounded-2xl text-[10px] font-black uppercase tracking-widest">Previous</Button>
-               <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Page {page} of {totalPages}</span>
-               <Button onClick={() => setPage(p => Math.min(totalPages, p+1))} disabled={page === totalPages} variant="outline" size="sm" className="h-10 px-6 rounded-2xl text-[10px] font-black uppercase tracking-widest">Next</Button>
+               <Button onClick={() => setPage(p => Math.max(1, p-1))} disabled={page === 1} variant="outline" size="sm" className="h-10 px-6 rounded-2xl text-[10px] font-bold uppercase tracking-widest">Previous</Button>
+               <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Page {page} of {totalPages}</span>
+               <Button onClick={() => setPage(p => Math.min(totalPages, p+1))} disabled={page === totalPages} variant="outline" size="sm" className="h-10 px-6 rounded-2xl text-[10px] font-bold uppercase tracking-widest">Next</Button>
             </div>
           )}
        </Card>
 
        {/* ADD/EDIT DIALOG */}
        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="max-w-xl rounded-xl max-h-[570px] overflow-y-scroll p-0 border-none shadow-3xl bg-white">
+          <DialogContent className="max-w-xl rounded-xl max-h-[570px] overflow-y-scroll p-0 border-none  bg-white">
              <form onSubmit={handleSubmit}>
                 <div className="p-8 bg-slate-950 text-white relative text-center">
                    <div className="absolute top-0 right-0 w-32 h-32 bg-pharma-blue/20 blur-3xl"></div>
-                   <DialogTitle className="text-xl font-black italic tracking-tight">{selectedZone ? 'Edit Option' : 'Add New Option'}</DialogTitle>
+                   <DialogTitle className="text-xl font-bold italic tracking-tight">{selectedZone ? 'Edit Option' : 'Add New Option'}</DialogTitle>
                 </div>
                 
                 <div className="p-10 space-y-6">
                    <div className="space-y-2">
-                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Delivery Option</label>
+                      <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-1">Delivery Option</label>
                       <Input value={formData.name || ''} onChange={e => setFormData({...formData, name: e.target.value})} placeholder="e.g. Kathmandu Valley" className="h-12 rounded-2xl border-slate-100 font-bold" required />
                    </div>
                    <div className="space-y-2">
-                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Delivery Price (Rs.)</label>
+                      <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-1">Delivery Price (Rs.)</label>
                       <Input type="number" value={formData.base_charge !== undefined ? formData.base_charge : ''} onChange={e => setFormData({...formData, base_charge: e.target.value === '' ? '' : parseFloat(e.target.value)})} className="h-12 rounded-2xl border-slate-100 font-bold" required />
                    </div>
                     <div className="space-y-2">
-                       <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Per KM Charge (Rs.)</label>
+                       <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-1">Per KM Charge (Rs.)</label>
                        <Input type="number" value={formData.per_km_charge !== undefined ? formData.per_km_charge : ''} onChange={e => setFormData({...formData, per_km_charge: e.target.value === '' ? '' : parseFloat(e.target.value)})} className="h-12 rounded-2xl border-slate-100 font-bold" required />
                     </div>
                    <div className="space-y-2">
-                      <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest ml-1">Estimated Time (Days)</label>
+                      <label className="text-[9px] font-bold text-slate-400 uppercase tracking-widest ml-1">Estimated Time (Days)</label>
                       <Input type="number" value={formData.estimated_days !== undefined ? formData.estimated_days : ''} onChange={e => setFormData({...formData, estimated_days: e.target.value === '' ? '' : parseInt(e.target.value)})} className="h-12 rounded-2xl border-slate-100 font-bold" required />
                    </div>
                 </div>
 
                 <div className="p-8 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
-                   <Button type="button" variant="ghost" onClick={() => setIsDialogOpen(false)} className="rounded-2xl h-12 px-8 text-[10px] font-black uppercase tracking-widest">Cancel</Button>
-                   <Button disabled={submitting} type="submit" className="bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl h-12 px-10 text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-2xl shadow-slate-900/20">
+                   <Button type="button" variant="ghost" onClick={() => setIsDialogOpen(false)} className="rounded-2xl h-12 px-8 text-[10px] font-bold uppercase tracking-widest">Cancel</Button>
+                   <Button disabled={submitting} type="submit" className="bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl h-12 px-10 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2  shadow-slate-900/20">
                       <Save size={16} /> {submitting ? 'Saving...' : 'Save Changes'}
                    </Button>
                 </div>
@@ -206,21 +206,21 @@ export default function DeliveryManagementPage() {
 
        {/* DELETE CONFIRM DIALOG */}
        <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
-          <DialogContent className="max-w-[400px] rounded-[3rem] p-10 border-none shadow-3xl bg-white text-center">
+          <DialogContent className="max-w-[400px] rounded-[3rem] p-10 border-none  bg-white text-center">
              <div className="w-20 h-20 bg-rose-50 text-rose-500 rounded-[2rem] flex items-center justify-center mx-auto mb-6 border border-rose-100">
                 <AlertTriangle size={40} className="animate-pulse" />
              </div>
              <DialogHeader>
-                <DialogTitle className="text-2xl font-black text-slate-950 tracking-tight italic">Delete Zone?</DialogTitle>
+                <DialogTitle className="text-2xl font-bold text-slate-950 tracking-tight italic">Delete Zone?</DialogTitle>
                 <DialogDescription className="text-slate-400 font-bold text-xs uppercase tracking-widest leading-relaxed mt-2">
-                   Are you sure you want to delete <span className="text-rose-500 font-black">{selectedZone?.name}</span>? This will affect existing delivery estimations.
+                   Are you sure you want to delete <span className="text-rose-500 font-bold">{selectedZone?.name}</span>? This will affect existing delivery estimations.
                 </DialogDescription>
              </DialogHeader>
              <div className="flex flex-col gap-3 mt-10">
-                <Button onClick={handleDelete} disabled={submitting} className="w-full h-14 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-black uppercase tracking-widest shadow-xl shadow-rose-200">
+                <Button onClick={handleDelete} disabled={submitting} className="w-full h-14 bg-rose-500 hover:bg-rose-600 text-white rounded-2xl font-bold uppercase tracking-widest  shadow-rose-200">
                    {submitting ? 'Deleting...' : 'Confirm Delete'}
                 </Button>
-                <Button variant="ghost" onClick={() => setIsDeleteOpen(false)} className="w-full h-14 rounded-2xl text-[10px] font-black uppercase tracking-widest text-slate-400">
+                <Button variant="ghost" onClick={() => setIsDeleteOpen(false)} className="w-full h-14 rounded-2xl text-[10px] font-bold uppercase tracking-widest text-slate-400">
                    Cancel
                 </Button>
              </div>

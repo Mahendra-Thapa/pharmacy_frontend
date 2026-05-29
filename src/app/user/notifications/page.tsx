@@ -15,11 +15,11 @@ export default function NotificationsPage() {
   return (
     <motion.div initial={{ opacity: 0, scale: 1.05 }} animate={{ opacity: 1, scale: 1 }} className="space-y-8">
         <header>
-            <h1 className="text-4xl font-black text-slate-900 tracking-tighter mb-2">Notifications</h1>
+            <h1 className="text-4xl font-bold text-slate-900 tracking-tighter mb-2">Notifications</h1>
             <p className="text-slate-400 font-bold text-xs uppercase tracking-widest">Real-time Environmental Notifications</p>
         </header>
 
-        <Card className="rounded-[3rem] border-transparent shadow-xl bg-white overflow-hidden divide-y divide-slate-50">
+        <Card className="rounded-[3rem] border-transparent  bg-white overflow-hidden divide-y divide-slate-50">
             {alerts.map(alert => (
                 <div key={alert.id} className="p-8 hover:bg-slate-50/50 transition-all flex items-start gap-6 group">
                     <div className={`p-4 rounded-2xl flex items-center justify-center transition-all ${
@@ -32,7 +32,7 @@ export default function NotificationsPage() {
 
                     <div className="flex-1 space-y-1">
                         <div className="flex items-center justify-between">
-                            <h3 className="text-sm font-black text-slate-900 uppercase tracking-tight">{alert.title}</h3>
+                            <h3 className="text-sm font-bold text-slate-900 uppercase tracking-tight">{alert.title}</h3>
                             <span className="text-[10px] font-bold text-slate-300 uppercase tracking-widest">{alert.time}</span>
                         </div>
                         <p className="text-xs font-bold text-slate-500 uppercase tracking-widest leading-relaxed opacity-70">{alert.desc}</p>

@@ -109,7 +109,7 @@ export default function QRManagerPage() {
     return (
       <div className="flex h-[60vh] items-center justify-center px-4">
         <div className="flex flex-col items-center gap-5">
-          <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-900 shadow-xl">
+          <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-slate-900 ">
             <RefreshCcw className="h-7 w-7 animate-spin text-white" />
           </div>
 
@@ -150,7 +150,7 @@ export default function QRManagerPage() {
               </span>
             </div>
 
-            <h1 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+            <h1 className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
               QR Management
             </h1>
 
@@ -198,7 +198,7 @@ export default function QRManagerPage() {
                   </span>
                 </div>
 
-                <h2 className="text-2xl font-black tracking-tight text-slate-900">
+                <h2 className="text-2xl font-bold tracking-tight text-slate-900">
                   Secure QR Access
                 </h2>
 
@@ -208,7 +208,7 @@ export default function QRManagerPage() {
                 </p>
               </div>
 
-              <div className="hidden h-16 w-16 items-center justify-center rounded-3xl bg-slate-950 shadow-xl sm:flex">
+              <div className="hidden h-16 w-16 items-center justify-center rounded-3xl bg-slate-950  sm:flex">
                 <ScanLine className="h-7 w-7 text-white" />
               </div>
             </div>
@@ -217,12 +217,12 @@ export default function QRManagerPage() {
             <div className="mx-auto flex w-full max-w-md flex-col items-center">
               <div className="w-full mb-6 space-y-4">
                 <div>
-                  <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">Upload QR Code Image</label>
+                  <label className="text-[10px] font-bold uppercase tracking-widest text-slate-400 mb-2 block">Upload QR Code Image</label>
                   <Input 
                     type="file"
                     accept="image/*"
                     onChange={handleFileUpload}
-                    className="w-full h-14 rounded-2xl bg-slate-50 border-slate-200 focus:bg-white text-sm font-bold transition-all file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-[10px] file:font-black file:uppercase file:bg-slate-900 file:text-white hover:file:bg-pharma-green pt-2"
+                    className="w-full h-14 rounded-2xl bg-slate-50 border-slate-200 focus:bg-white text-sm font-bold transition-all file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-[10px] file:font-bold file:uppercase file:bg-slate-900 file:text-white hover:file:bg-pharma-green pt-2"
                   />
                 </div>
                 
@@ -307,7 +307,7 @@ export default function QRManagerPage() {
         {/* Side Cards */}
         <div className="space-y-6">
           {/* Security */}
-          <Card className="relative overflow-hidden rounded-[2rem] border-0 bg-slate-950 p-6 text-white shadow-2xl sm:p-8">
+          <Card className="relative overflow-hidden rounded-[2rem] border-0 bg-slate-950 p-6 text-white  sm:p-8">
             <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-blue-500/20 blur-3xl" />
 
             <div className="relative z-10">
@@ -315,7 +315,7 @@ export default function QRManagerPage() {
                 <ShieldCheck className="h-8 w-8 text-blue-400" />
               </div>
 
-              <h3 className="text-2xl font-black tracking-tight">
+              <h3 className="text-2xl font-bold tracking-tight">
                 Security Layer
               </h3>
 
@@ -351,7 +351,7 @@ export default function QRManagerPage() {
               </div>
 
               <div>
-                <h3 className="text-lg font-black tracking-tight text-slate-900">
+                <h3 className="text-lg font-bold tracking-tight text-slate-900">
                   Node Configuration
                 </h3>
 
