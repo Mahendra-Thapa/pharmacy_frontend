@@ -327,70 +327,7 @@ const PAYMENT_STATUS_CONFIG: Record<string, { bg: string; color: string }> = {
                 </div>
               </CardContent>
             </Card>
-            {/* Status History */}
-            <Card className="rounded-xl border-0 shadow-sm overflow-hidden">
-              <CardContent className="p-0">
-
-                <div className="p-6 border-b bg-white">
-                  <div className="flex items-center gap-3">
-                    <Clock3 className="text-slate-700" size={20} />
-                    <h2 className="text-md font-semibold text-slate-900">
-                      Status History
-                    </h2>
-                  </div>
-                </div>
-
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader>
-                      <TableRow className="bg-slate-100 hover:bg-slate-100">
-                        <TableHead>Changed At</TableHead>
-                        <TableHead>From</TableHead>
-                        <TableHead>To</TableHead>
-                        <TableHead className="text-right">
-                          Changed By
-                        </TableHead>
-                      </TableRow>
-                    </TableHeader>
-
-                    <TableBody>
-                      {order.status_history?.length > 0 ? (
-                        order.status_history.map((h: any, idx: number) => (
-                          <TableRow key={idx}>
-                            <TableCell className="whitespace-nowrap">
-                              {new Date(h.changed_at).toLocaleString()}
-                            </TableCell>
-
-                            <TableCell>
-                              {h.old_status || "-"}
-                            </TableCell>
-
-                            <TableCell>
-                              <Badge className="bg-slate-100 text-slate-700 border border-slate-200">
-                                {h.new_status}
-                              </Badge>
-                            </TableCell>
-
-                            <TableCell className="text-right whitespace-nowrap">
-                              {h.changed_by_name} ({h.changed_by_role})
-                            </TableCell>
-                          </TableRow>
-                        ))
-                      ) : (
-                        <TableRow>
-                          <TableCell
-                            colSpan={4}
-                            className="text-center py-10 text-slate-500"
-                          >
-                            No status history available
-                          </TableCell>
-                        </TableRow>
-                      )}
-                    </TableBody>
-                  </Table>
-                </div>
-              </CardContent>
-            </Card>
+          
 
 
           </div>
@@ -479,6 +416,7 @@ const PAYMENT_STATUS_CONFIG: Record<string, { bg: string; color: string }> = {
               </Card>
 
               {/* Payment Details */}
+                {/* Payment Details */}
               <Card className="rounded-xl border-0 shadow-sm h-full">
                 <CardContent className="p-6">
 

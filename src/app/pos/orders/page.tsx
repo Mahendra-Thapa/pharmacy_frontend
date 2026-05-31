@@ -181,13 +181,6 @@ export default function POSOrdersPage() {
     setNewPaymentStatus(order.payment_status || "PENDING");
   };
 
-  if (!user || (user.role !== "POS" && user.role !== "ADMIN")) {
-    return (
-      <div className="min-h-screen bg-slate-950 flex items-center justify-center">
-        <p className="text-white font-bold">Access denied. POS/Admin only.</p>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-[#F8FAFC] font-sans">
@@ -217,7 +210,7 @@ export default function POSOrdersPage() {
                 setPage(1);
               }}
               placeholder="Search by username, order#, status..."
-              className="h-12 pl-11 pr-10 bg-white border border-slate-200 rounded-2xl outline-none focus:border-pharma-green/50 focus:ring-4 focus:ring-pharma-green/5 transition text-sm font-medium w-72"
+              className="h-12 pl-11 pr-10 bg-white border border-slate-200 rounded-xl outline-none focus:border-pharma-green/50 focus:ring-4 focus:ring-pharma-green/5 transition text-sm font-medium w-72"
             />
             {search && (
               <button
@@ -237,7 +230,7 @@ export default function POSOrdersPage() {
               {[1, 2, 3, 4].map(i => (
                 <div
                   key={i}
-                  className="h-16 bg-slate-50 rounded-2xl animate-pulse"
+                  className="h-16 bg-slate-50 rounded-xl animate-pulse"
                 />
               ))}
             </div>
@@ -318,7 +311,7 @@ export default function POSOrdersPage() {
                             </div>
                           </TableCell>
                           <TableCell className="py-6 font-bold text-pharma-green">
-                            Rs. {parseFloat(order.total_amount).toFixed(2)}
+                            Rs. {order.total_amount}
                           </TableCell>
                           <TableCell className="py-6">
                             <Badge
@@ -368,7 +361,7 @@ export default function POSOrdersPage() {
                                           />{" "}
                                           Order Matrix
                                         </p>
-                                        <div className="p-6 bg-white rounded-[2rem] border border-slate-100  shadow-slate-200/40 space-y-5">
+                                        <div className="p-6 bg-white rounded-xl border border-slate-100  shadow-slate-200/40 space-y-5">
                                           <div className="flex flex-col">
                                             <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest mb-1">
                                               Time Designation
@@ -423,7 +416,7 @@ export default function POSOrdersPage() {
                                             className="flex justify-between items-center p-5 bg-white rounded-3xl border border-slate-100 shadow-sm group/item hover:border-pharma-blue/20 transition-all"
                                           >
                                             <div className="flex items-center gap-4">
-                                              <div className="w-12 h-12 bg-slate-50 rounded-2xl flex items-center justify-center font-bold text-pharma-green text-xs border border-slate-100 group-hover/item:bg-pharma-blue/5 transition-colors">
+                                              <div className="w-12 h-12 bg-slate-50 rounded-xl flex items-center justify-center font-bold text-pharma-green text-xs border border-slate-100 group-hover/item:bg-pharma-blue/5 transition-colors">
                                                 {item.quantity}×
                                               </div>
                                               <div>
@@ -452,7 +445,7 @@ export default function POSOrdersPage() {
                                           </div>
                                         ))}
 
-                                        <div className="mt-8 p-6 bg-slate-950 rounded-[2rem] flex justify-between items-center  shadow-slate-900/20">
+                                        <div className="mt-8 p-6 bg-slate-950 rounded-xl flex justify-between items-center  shadow-slate-900/20">
                                           <div className="flex flex-col">
                                             <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">
                                               Aggregate Valuation
@@ -581,7 +574,7 @@ export default function POSOrdersPage() {
                 <select
                   value={newStatus}
                   onChange={e => setNewStatus(e.target.value)}
-                  className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 pr-10 text-sm font-bold text-slate-900 focus:outline-none focus:border-pharma-blue/40 focus:bg-white transition-all uppercase tracking-wider appearance-none cursor-pointer shadow-sm"
+                  className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-xl px-5 pr-10 text-sm font-bold text-slate-900 focus:outline-none focus:border-pharma-blue/40 focus:bg-white transition-all uppercase tracking-wider appearance-none cursor-pointer shadow-sm"
                 >
                   {Object.entries(STATUS_CONFIG).map(([key, cfg]) => (
                     <option key={key} value={key}>
@@ -611,7 +604,7 @@ export default function POSOrdersPage() {
                 <select
                   value={newPaymentStatus}
                   onChange={e => setNewPaymentStatus(e.target.value)}
-                  className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-2xl px-5 pr-10 text-sm font-bold text-slate-900 focus:outline-none focus:border-pharma-green/40 focus:bg-white transition-all uppercase tracking-wider appearance-none cursor-pointer shadow-sm"
+                  className="w-full h-14 bg-slate-50 border-2 border-slate-100 rounded-xl px-5 pr-10 text-sm font-bold text-slate-900 focus:outline-none focus:border-pharma-green/40 focus:bg-white transition-all uppercase tracking-wider appearance-none cursor-pointer shadow-sm"
                 >
                   <option value="PENDING">Pending</option>
                   <option value="COMPLETED">Completed</option>
@@ -634,7 +627,7 @@ export default function POSOrdersPage() {
             <Button
               onClick={handleStatusUpdate}
               disabled={updating}
-              className="w-full h-14 bg-slate-950 hover:bg-pharma-blue text-white rounded-2xl font-bold uppercase tracking-widest  shadow-slate-900/20 active:scale-95 transition-all flex items-center justify-center gap-3 text-[11px]"
+              className="w-full h-14 bg-slate-950 hover:bg-pharma-blue text-white rounded-xl font-bold uppercase tracking-widest  shadow-slate-900/20 active:scale-95 transition-all flex items-center justify-center gap-3 text-[11px]"
             >
               {updating ? (
                 <><Activity size={16} className="animate-spin" /> Synchronizing...</>
@@ -645,7 +638,7 @@ export default function POSOrdersPage() {
             <Button
               variant="ghost"
               onClick={() => setOrderToUpdateStatus(null)}
-              className="w-full h-11 text-[10px] font-bold uppercase tracking-widest text-slate-300 hover:text-slate-600 hover:bg-slate-50 rounded-2xl transition-all"
+              className="w-full h-11 text-[10px] font-bold uppercase tracking-widest text-slate-300 hover:text-slate-600 hover:bg-slate-50 rounded-xl transition-all"
             >
               Cancel Operation
             </Button>
@@ -660,7 +653,7 @@ export default function POSOrdersPage() {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className={`fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 rounded-[2rem]  font-bold uppercase tracking-widest text-xs z-[200] ${toast.type === "error" ? "bg-rose-600 text-white" : "bg-slate-900 text-white"}`}
+            className={`fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 rounded-xl  font-bold uppercase tracking-widest text-xs z-[200] ${toast.type === "error" ? "bg-rose-600 text-white" : "bg-slate-900 text-white"}`}
           >
             {toast.msg}
           </motion.div>
