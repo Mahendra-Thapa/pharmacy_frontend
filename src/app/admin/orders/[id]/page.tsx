@@ -508,17 +508,6 @@ const PAYMENT_STATUS_CONFIG: Record<string, { bg: string; color: string }> = {
 </Badge>
                     </div>
 
-                    {order.payment?.qr_payment_url && (
-                      <a
-                        href={order.payment.qr_payment_url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex text-sm font-medium text-blue-600 hover:text-blue-700 hover:underl9ne text-sm break-all"
-                      >
-                        View QR Payment Link
-                      </a>
-                    )}
-
                     {order.payment?.payment_screenshot && (
                       <div>
                         <p className="text-xs font-medium text-slate-500 uppercase mb-3">

@@ -9,6 +9,7 @@ import {
   AlertTriangle,
   ChevronDown,
   ChevronUp,
+  LucideEye,
 } from "lucide-react";
 
 import { Card } from "@/components/ui/card";
@@ -35,6 +36,7 @@ import { useAdmin } from "@/lib/admin-context";
 import { useRouter } from "next/navigation";
 import { axiosInstance } from "@/utils/axiosSetup";
 import { toast } from "react-hot-toast";
+import { FiEdit } from "react-icons/fi";
 
 export default function OrdersPage() {
   const { orders, loading, refresh } = useAdmin();
@@ -260,7 +262,16 @@ export default function OrdersPage() {
                             openStatusDialog(e, order)
                           }
                         >
-                          Update
+                          <FiEdit />
+
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline"
+                          className="rounded-lg">
+                          <LucideEye />
+
+
                         </Button>
 
                         <Button

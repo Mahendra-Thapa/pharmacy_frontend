@@ -153,7 +153,6 @@ export default function UsersManagementPage() {
                   <TableCell className="px-10 text-right">
                     <div className="flex items-center justify-end gap-2">
                        <Button variant="ghost" onClick={() => openEdit(u)} size="sm" className="h-9 w-9 p-0 rounded-xl text-slate-300 hover:text-pharma-blue hover:bg-slate-50 transition-all"><Edit3 size={14} /></Button>
-                       <Button variant="ghost" onClick={() => openDelete(u)} size="sm" className="h-9 w-9 p-0 rounded-xl text-slate-300 hover:text-rose-500 hover:bg-rose-50 transition-all"><Trash2 size={14} /></Button>
                     </div>
                   </TableCell>
                 </TableRow>
